@@ -35,6 +35,9 @@ gem "thruster", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
+# json 3 drops the quirks_mode option that ActiveSupport 8.0 still passes to JSON.generate
+gem "json", "~> 2.19"
+
 group :development, :test do
   # Loads .env locally; production reads Render's environment variables
   gem "dotenv"

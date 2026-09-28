@@ -1,4 +1,4 @@
-class MeController < ApplicationController
+class UserController < ApplicationController
   def show
     render json: { user_id: clerk.user_id }
   end
