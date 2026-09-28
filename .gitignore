@@ -30,3 +30,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# The global gitignore ignores *.lock; the lockfile must be committed for reproducible CI and Render builds.
+!/Gemfile.lock
