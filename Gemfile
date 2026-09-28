@@ -36,6 +36,9 @@ gem "thruster", require: false
 gem "rack-cors"
 
 group :development, :test do
+  # Loads .env locally; production reads Render's environment variables
+  gem "dotenv"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
@@ -45,3 +48,5 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 end
+
+gem "clerk-sdk-ruby", "~> 8.0", :require => "clerk"
