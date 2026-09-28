@@ -11,6 +11,6 @@ development:
 test:
   <<: *default
 
+# No cache database yet: production uses :memory_store (see production.rb).
 production:
-  database: cache
   <<: *default
