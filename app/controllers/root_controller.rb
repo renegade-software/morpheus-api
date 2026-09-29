@@ -1,5 +1,5 @@
-# Public landing text for the API root. It inherits from ActionController::API, not
-# ApplicationController, so it never requires a Clerk session.
+# Public landing page for the API root: a Matrix-style page for browsers, the plain banner for curl.
+# It inherits from ActionController::API, not ApplicationController, so it never requires a Clerk session.
 class RootController < ActionController::API
   BANNER = <<~'TEXT'
      __  __  ___  ____  ____  _   _ _____ _   _ ____
@@ -15,7 +15,13 @@ class RootController < ActionController::API
       GET /user    who you are (needs a Clerk session)
   TEXT
 
+  PAGE = Rails.root.join("app/views/root/show.html").read.html_safe
+
   def show
-    render plain: BANNER
+    if request.format.html?
+      render html: PAGE
+    else
+      render plain: BANNER
+    end
   end
 end
