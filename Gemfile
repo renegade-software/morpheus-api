@@ -36,7 +36,7 @@ gem "thruster", require: false
 gem "rack-cors"
 
 # json 3 drops the quirks_mode option that ActiveSupport 8.0 still passes to JSON.generate
-gem "json", "~> 2.19"
+gem "json", "~> 3.0"
 
 group :development, :test do
   # Loads .env locally; production reads Render's environment variables
