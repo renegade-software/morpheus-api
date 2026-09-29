@@ -8,11 +8,7 @@ class RootController < ActionController::API
     | |  | | |_| |  _ <|  __/|  _  | |___| |_| |___) |
     |_|  |_|\___/|_| \_\_|   |_| |_|_____|\___/|____/
 
-           .  *        you are awake.        *  .
-                  the API is too.
-
-      GET /up      health check
-      GET /user    who you are (needs a Clerk session)
+    Wake up, Neo...
   TEXT
 
   PAGE = Rails.root.join("app/views/root/show.html").read.html_safe

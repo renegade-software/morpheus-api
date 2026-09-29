@@ -23,9 +23,8 @@
     text-shadow: 0 0 6px rgba(0, 255, 65, 0.7);
   }
   pre { margin: 0; white-space: pre; overflow-x: auto; }
-  .lines { margin-top: 20px; min-height: 7.5em; white-space: pre-wrap; }
+  .lines { margin-top: 20px; min-height: 1.5em; white-space: pre-wrap; }
   .cursor { display: inline-block; width: 0.6em; height: 1.1em; background: var(--green); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
-  .muted { color: var(--dim); text-shadow: none; }
   @keyframes blink { 50% { opacity: 0; } }
   @media (max-width: 560px) { .terminal { font-size: 9px; padding: 16px; } }
   @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
@@ -41,7 +40,6 @@
 | |  | | |_| |  _ <|  __/|  _  | |___| |_| |___) |
 |_|  |_|\___/|_| \_\_|   |_| |_|_____|\___/|____/</pre>
     <div class="lines"><span id="out"></span><span class="cursor"></span></div>
-    <div class="muted">GET /up · health check &nbsp;&nbsp; GET /user · needs a Clerk session</div>
   </div>
 </main>
 <script>
@@ -74,12 +72,7 @@
   window.addEventListener("resize", resize);
 
   // Typewriter lines, shown instantly for people who prefer reduced motion.
-  const lines = [
-    "> wake up...",
-    "> the API is already awake.",
-    "> follow the white rabbit: GET /up",
-    "> knock, knock.",
-  ];
+  const lines = ["Wake up, Neo..."];
   const out = document.getElementById("out");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
