@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_194003) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_30_025014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "consents", force: :cascade do |t|
+    t.string "pseudonym", null: false
+    t.string "document_version", null: false
+    t.boolean "adult", null: false
+    t.boolean "participate", null: false
+    t.boolean "personal_data", null: false
+    t.boolean "sensitive_data", null: false
+    t.boolean "audio_recording", null: false
+    t.boolean "transcription", null: false
+    t.boolean "receive_results", null: false
+    t.datetime "accepted_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pseudonym"], name: "index_consents_on_pseudonym"
+  end
 
   create_table "participants", force: :cascade do |t|
     t.string "clerk_user_id", null: false
