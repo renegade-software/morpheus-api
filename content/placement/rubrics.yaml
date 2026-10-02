@@ -7,6 +7,7 @@
 #   Interaction is left out because the placement task is a monologue.
 # Writing: CEFR Companion Volume with New Descriptors (Council of Europe, 2018): Overall written production (p. 75),
 #   General linguistic range (p. 131), Grammatical accuracy (p. 133), Coherence and cohesion (p. 142).
+#   Keyed production, range, accuracy and coherence, in that order, to match the level columns on placement_writings.
 #   Plus-level placement was read from the PDF's table layout; check against the printed volume before the thesis cites it.
 
 speaking:
@@ -40,28 +41,28 @@ speaking:
     A1: "Can link words or groups of words with very basic linear connectors like \"and\" or \"then\"."
 
 writing:
-  overall_written_production:
+  production:
     C2: "Can write clear, smoothly flowing, complex texts in an appropriate and effective style and a logical structure which helps the reader to find significant points."
     C1: "Can write clear, well-structured texts of complex subjects, underlining the relevant salient issues, expanding and supporting points of view at some length with subsidiary points, reasons and relevant examples, and rounding off with an appropriate conclusion. Can employ the structure and conventions of a variety of written genres, varying the tone, style and register according to addressee, text type and theme."
     B2: "Can write clear, detailed texts on a variety of subjects related to his/her field of interest, synthesising and evaluating information and arguments from a number of sources."
     B1: "Can write straightforward connected texts on a range of familiar subjects within his/her field of interest, by linking a series of shorter discrete elements into a linear sequence."
     A2: "Can write a series of simple phrases and sentences linked with simple connectors like 'and,' 'but' and 'because'."
     A1: "Can give information in writing about matters of personal relevance (e.g. likes and dislikes, family, pets) using simple words and basic expressions. Can write simple isolated phrases and sentences."
-  general_linguistic_range:
+  range:
     C2: "Can exploit a comprehensive and reliable mastery of a very wide range of language to formulate thoughts precisely, give emphasis, differentiate and eliminate ambiguity. No signs of having to restrict what he/she wants to say."
     C1: "Can use a broad range of complex grammatical structures appropriately and with considerable flexibility. Can select an appropriate formulation from a broad range of language to express him/herself clearly, without having to restrict what he/she wants to say."
     B2: "Upper B2: Can express him/herself clearly and without much sign of having to restrict what he/she wants to say. B2: Has a sufficient range of language to be able to give clear descriptions, express viewpoints and develop arguments without much conspicuous searching for words, using some complex sentence forms to do so."
     B1: "Upper B1: Has a sufficient range of language to describe unpredictable situations, explain the main points in an idea or problem with reasonable precision and express thoughts on abstract or cultural topics such as music and films. B1: Has enough language to get by, with sufficient vocabulary to express him/herself with some hesitation and circumlocutions on topics such as family, hobbies and interests, work, travel, and current events, but lexical limitations cause repetition and even difficulty with formulation at times."
     A2: "Upper A2: Has a repertoire of basic language, which enables him/her to deal with everyday situations with predictable content, though he/she will generally have to compromise the message and search for words. A2: Can produce brief everyday expressions in order to satisfy simple needs of a concrete type: personal details, daily routines, wants and needs, requests for information. Can use basic sentence patterns and communicate with memorised phrases, groups of a few words and formulae about themselves and other people, what they do, places, possessions etc. Has a limited repertoire of short memorised phrases covering predictable survival situations; frequent breakdowns and misunderstandings occur in non-routine situations."
     A1: "Has a very basic range of simple expressions about personal details and needs of a concrete type. Can use some basic structures in one-clause sentences with some omission or reduction of elements."
-  grammatical_accuracy:
+  accuracy:
     C2: "Maintains consistent grammatical control of complex language, even while attention is otherwise engaged (e.g. in forward planning, in monitoring others' reactions)."
     C1: "Consistently maintains a high degree of grammatical accuracy; errors are rare and difficult to spot."
     B2: "Upper B2: Good grammatical control. Occasional 'slips' or non-systematic errors and minor flaws in sentence structure may still occur, but they are rare and can often be corrected in retrospect. B2: Shows a relatively high degree of grammatical control. Does not make mistakes which lead to misunderstanding. Has a good command of simple language structures and some complex grammatical forms, although he/she tends to use complex structures rigidly with some inaccuracy."
     B1: "Upper B1: Communicates with reasonable accuracy in familiar contexts; generally good control though with noticeable mother tongue influence. Errors occur, but it is clear what he/she is trying to express. B1: Uses reasonably accurately a repertoire of frequently used 'routines' and patterns associated with more predictable situations."
     A2: "Uses some simple structures correctly, but still systematically makes basic mistakes – for example tends to mix up tenses and forget to mark agreement; nevertheless, it is usually clear what he/she is trying to say."
     A1: "Shows only limited control of a few simple grammatical structures and sentence patterns in a learnt repertoire."
-  coherence_and_cohesion:
+  coherence:
     C2: "Can create coherent and cohesive text making full and appropriate use of a variety of organisational patterns and a wide range of cohesive devices."
     C1: "Can produce clear, smoothly flowing, well-structured speech, showing controlled use of organisational patterns, connectors and cohesive devices. Can produce well-organised, coherent text, using a variety of cohesive devices and organisational patterns."
     B2: "Upper B2: Can use a variety of linking words efficiently to mark clearly the relationships between ideas. B2: Can use a limited number of cohesive devices to link his/her utterances into clear, coherent discourse. Though there may be some 'jumpiness' in a long contribution. Can produce text that is generally well-organised and coherent, using a range of linking words and cohesive devices."
