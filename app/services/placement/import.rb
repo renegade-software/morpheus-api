@@ -61,7 +61,7 @@ module Placement
       speaking["prompts"].each do |prompt|
         task = form.placement_speaking_tasks.create!(
           tier: prompt["id"], reading_results: prompt["for_reading_result"], prompt: prompt["text"],
-          follow_up: speaking["follow_up"], seconds: speaking["seconds"], scoring_rules: speaking["scoring_rules"]
+          seconds: speaking["seconds"], scoring_rules: speaking["scoring_rules"]
         )
         prompt["anchors"].each do |anchor|
           task.placement_speaking_anchors.create!(

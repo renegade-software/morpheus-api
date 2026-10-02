@@ -56,7 +56,7 @@ module Placement
 
     def speaking
       task = Steps.speaking_task(@attempt)
-      { section: "speaking", seconds: task.seconds, prompt: task.prompt, follow_up: task.follow_up }
+      { section: "speaking", seconds: task.seconds, prompt: task.prompt }
     end
 
     def question(question)

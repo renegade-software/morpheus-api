@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_160400) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -217,7 +217,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_160400) do
     t.string "tier", null: false
     t.integer "reading_results", default: [], null: false, array: true
     t.text "prompt", null: false
-    t.text "follow_up"
     t.integer "seconds", null: false
     t.jsonb "scoring_rules", default: [], null: false
     t.datetime "created_at", null: false
