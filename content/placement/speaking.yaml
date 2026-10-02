@@ -1,0 +1,89 @@
+# Placement test, speaking section: one 60 s task, prompt chosen by the reading result, scored by Claude
+# from A1 = 0 to C2 = 5 against CEFR Table 3 (Range, Accuracy, Fluency, Coherence; Interaction left out
+# because the task is a monologue). Anchors are written for Morpheus (not real learner answers) and go
+# into Claude's scoring prompt; only the anchors for the learner's prompt are sent.
+# Transcripts mark hesitation with "um"/"uh" and pauses over 1 s with "…". Replace with real, consented
+# recordings once there are any.
+
+seconds: 60
+follow_up: "…and tell me anything else you'd like."
+
+scoring_rules:
+  - "Judge only the learner's own language. Ignore words repeated from the prompt."
+  - "Fluency comes from the transcript plus the numbers given: speaking time, word count and pauses over 1 second."
+  - "Saying more is not the same as a higher level. Long, simple speech can still be A2."
+  - "Return a level for each criterion, one overall level, and a short quote from the transcript as evidence for each."
+
+prompts:
+  - id: a
+    for_reading_result: [0, 1]
+    text: "Tell me about your daily routine."
+    anchors:
+      - level: A1
+        note: "Isolated memorised phrases, very limited control, long searches for words, linked only with 'and'."
+        speaking_seconds: 38
+        transcript: "Um… I wake up… seven. And… I eat… breakfast. Um… I go to work… in bus. And… I work… in office. Um… I… go home… six. And… sleep."
+      - level: A2
+        note: "Basic sentence patterns and simple connectors ('and', 'then', 'because'), systematic basic errors, short utterances with evident pauses."
+        speaking_seconds: 52
+        transcript: "OK, um, every day I wake up at six thirty and I take a shower. Then I eat breakfast with my sister, uh, eggs and coffee. I go to the university in the bus, it take one hour… because the traffic is very bad. In the afternoon I study and, um, in the night I watch TV or I play videogames. I go to sleep at eleven."
+      - level: B1
+        note: "Enough language to get by on familiar topics, routines used fairly accurately, a linear sequence of points, keeps going despite clear pauses for planning; uses the follow-up briefly."
+        speaking_seconds: 58
+        transcript: "Well, on weekdays I usually get up around six because I have to be at work at eight. I work in a call centre, so most of the day I'm answering calls from customers, and, um, sometimes it's quite stressful. After work I go to the gym two or three times a week… or if I'm tired I just cook something and watch a series. Um, on weekends it's different, I sleep more and I visit my parents. And… something else… I'm trying to learn English because I want to get a better job, so I practise a little every night."
+      - level: B2
+        note: "Clear description with some complex sentences, relatively high grammatical control with self-correction, fairly even tempo with few long pauses, uses the follow-up to give a viewpoint."
+        speaking_seconds: 60
+        transcript: "Sure. So my routine depends a lot on whether I'm working from home or going into the office. On office days I'm up at half five, which I hate, because the commute takes almost an hour and a half. At home it's much more relaxed. I can start at eight, have proper breaks and actually get through my tasks without being interrupted every five minutes. In the evenings I try to switch off, um, I've started running, which has really helped with stress. And something else I'd add is that I think hybrid work is the best of both worlds, as long as companies don't, uh, didn't… don't use it as an excuse to make people available all the time."
+      - level: C1
+        note: "Broad range with precise, idiomatic choices, consistently high accuracy, fluent and almost effortless, well-structured with controlled connectors; takes the follow-up somewhere new."
+        speaking_seconds: 60
+        transcript: "Honestly, my routine is less of a routine than a series of negotiations. I teach at a language school, so my mornings are mine and my evenings belong to my students, which sounds ideal until you realise you're eating dinner at ten. I've learned to protect the first couple of hours of the day for things that need real concentration, like planning or reading, because by the afternoon my attention is basically gone. What I'd add, since you asked, is that I've become a bit sceptical of the whole morning-routine industry. Everyone's selling the perfect five a.m. schedule, but what actually works for me is far more boring: going to bed at a sensible hour and not checking my phone the moment I wake up."
+  - id: b
+    for_reading_result: [2]
+    text: "Tell me about a problem you solved at work or school."
+    anchors:
+      - level: A1
+        note: "Isolated words and pre-packaged phrases, communication depends on the listener filling gaps, almost no linking."
+        speaking_seconds: 35
+        transcript: "Um… problem… in work. The computer… no work. Um… I call… my boss. He… help. Is OK. Finish."
+      - level: A2
+        note: "Simple structures with systematic errors, short utterances, simple connectors, the story is understandable but thin."
+        speaking_seconds: 50
+        transcript: "Um, one time in my work the printer is broken and we need to print many documents for a meeting. I don't know what to do. So, uh, I go to other office and I ask they can print for us. They say yes. Then I bring the documents to the meeting and my boss is happy. Is a small problem but, um, I solved."
+      - level: B1
+        note: "Can narrate a sequence of events with reasonable accuracy in past tenses, some hesitation and circumlocution, clear but simple structure."
+        speaking_seconds: 58
+        transcript: "OK, so last semester I had a group project at university and one of the members didn't do anything. Um, he never answered the messages and we had only one week before the presentation. At first we were angry, but then I decided to talk to him directly after class. He told me he had problems at home and he was working at night, so, um, he didn't have time. So we changed the tasks and he did the slides, which he could do at night, and we did the research. In the end we got a good grade, and I learned that it's better to talk to people instead of just complaining."
+      - level: B2
+        note: "Clear account with explanation of causes and choices, good control with occasional slips, some complex sentences, cohesive though slightly 'jumpy' in places."
+        speaking_seconds: 60
+        transcript: "Right, so at my last job we kept losing customer orders because the sales team and the warehouse were using two different spreadsheets, and nobody knew which one was up to date. I suggested we move everything into one shared system, which, um, wasn't popular at first, because people were used to their own way of doing things. What I did was run a two-week trial with just one team, so they could see the difference without committing. The number of lost orders dropped almost to zero, and after that the other teams were actually asking to switch. I think the key was showing results instead of trying to convince everyone in a meeting."
+      - level: C1
+        note: "Wide range, precise and natural expression, errors rare and self-corrected, smooth flow, well-structured account that weighs the solution rather than just reporting it."
+        speaking_seconds: 60
+        transcript: "The one that comes to mind is from my previous job in logistics. We had a client threatening to walk away because deliveries kept arriving late, and the obvious explanation, that the drivers were slow, turned out to be completely wrong. When I actually dug into the data, the delays all traced back to a single loading bay that was double-booked on Monday mornings. So the fix was almost embarrassingly simple: we staggered the slots. Deliveries were back on time within a fortnight. What stayed with me, though, is how close we came to solving the wrong problem. Everyone had already decided who was to blame, and it took someone willing to look at the boring details to see what was really going on."
+  - id: c
+    for_reading_result: [3]
+    text: "Do you think technology helps or hurts creativity? Why?"
+    anchors:
+      - level: A1
+        note: "Very basic repertoire, isolated phrases, cannot express an opinion beyond single words."
+        speaking_seconds: 30
+        transcript: "Um… technology… is good. I like… phone. Um… is… help. Yes. Good."
+      - level: A2
+        note: "Memorised phrases and simple patterns, opinion stated with 'because' but no development, basic errors."
+        speaking_seconds: 45
+        transcript: "I think technology is good for creativity, um, because you can see many ideas in internet. For example, I like draw and I see videos in YouTube for learn. But also, uh, people use the phone all the time and they don't think. So is good and is bad."
+      - level: B1
+        note: "Can give a simple opinion with reasons and an example, linear structure, noticeable pauses for planning, reasonable accuracy on familiar language."
+        speaking_seconds: 58
+        transcript: "Um, I think it helps more than it hurts. For example, my cousin makes music on his computer and he doesn't need an expensive studio, so technology gives more people the opportunity to be creative. But on the other hand, I think that sometimes we copy what we see on social media and we don't have our own ideas. Um, also AI can make pictures now, so maybe people will be lazy. In my opinion it depends on how you use it. If you use it like a tool it's good, but if it does everything for you, it's not creative."
+      - level: B2
+        note: "Expresses a viewpoint with clear supporting reasons and contrast, some complex forms, good control, fairly even tempo, limited cohesive devices with some jumpiness."
+        speaking_seconds: 60
+        transcript: "I'd say it does both, but overall it helps. The biggest change is access: twenty years ago if you wanted to make a film you needed equipment that cost a fortune, and now you can shoot something decent on your phone. That said, I do think the constant flow of content makes it harder to come up with original ideas, because you're always seeing what everyone else is doing, so you end up, um, copying trends without realising. With AI it gets even more complicated. It's useful for getting started, but if people rely on it too much, I'm worried we'll all start producing the same kind of thing."
+      - level: C1
+        note: "Broad, precise range, nuanced argument with concession and a clear conclusion, consistently accurate, fluent and spontaneous, well-organised discourse."
+        speaking_seconds: 60
+        transcript: "I think the question assumes creativity is one thing, and I'm not sure it is. Technology has made the craft side of creativity enormously more accessible: anyone can edit video or produce music now, which is genuinely democratising. But the part that's harder to automate, deciding what's worth making in the first place, may actually be getting weaker, because we're constantly fed other people's ideas before we've had a chance to form our own. So I'd put it this way: technology has lowered the cost of making things while quietly raising the cost of thinking for yourself. Whether that's a net loss probably depends on whether people treat these tools as instruments or as substitutes for judgement."

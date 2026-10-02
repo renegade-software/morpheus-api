@@ -1,0 +1,86 @@
+# Placement test, reading section: 3 texts, one per tier, 2 questions each, 3 options per question.
+# Each tier targets the top of its band (A → A2, B → B2, C → C1). Passing a text means both answers right.
+# Written for Morpheus against the spec sheet in the thesis build guide. Descriptors are quoted from the
+# CEFR Companion Volume (Council of Europe, 2018). `answer` is the 0-based index of the key; never send it to the browser.
+
+- tier: a
+  level: A2
+  seconds: 60
+  scale: "Reading for orientation"
+  descriptor: "Can find specific, predictable information in simple everyday material such as advertisements, prospectuses, menus, reference lists and timetables."
+  text: |
+    CITY GYM: NEW OPENING HOURS
+    From Monday 6 October, we open at 7:00 instead of 6:00 on weekdays. Weekend hours do not change.
+    The swimming pool is closed for cleaning until Friday. Please use the changing rooms on the first floor.
+  questions:
+    - targets: "A specific fact (a time)"
+      prompt: "From 6 October, what time does the gym open on weekdays?"
+      options:
+        - "At 6:00"
+        - "At 7:00"
+        - "At the same time as at weekends"
+      answer: 1
+    - targets: "The main message"
+      prompt: "What is the notice mainly about?"
+      options:
+        - "A new swimming class"
+        - "Moving the changing rooms"
+        - "Changes at the gym"
+      answer: 2
+
+- tier: b
+  level: B2
+  seconds: 90
+  scale: "Reading correspondence"
+  descriptor: "Can read correspondence relating to his/her field of interest and readily grasp the essential meaning."
+  text: |
+    Subject: Friday's client visit
+
+    Hi team,
+
+    Norland Foods have brought their visit forward to this Friday, which leaves us considerably less time than we anticipated. Rather than rehearsing the full presentation, which runs well over an hour, I'd like each of you to prepare two slides outlining the outcome of your part of the project: results, not process. Please send me a draft by Thursday at noon, so that I can compile everything and go over it with Sam before it reaches the client. If any of this is unclear, drop by my desk tomorrow morning.
+
+    Thanks,
+    Martín
+  questions:
+    - targets: "The purpose of the email"
+      prompt: "Why is Martín writing to the team?"
+      options:
+        - "To ask them to get ready for a client visit that is now earlier"
+        - "To tell them the presentation for Norland Foods is cancelled"
+        - "To invite them to a meeting tomorrow morning"
+      answer: 0
+    - targets: "A detail the reader must act on"
+      prompt: "What should each person send to Martín?"
+      options:
+        - "Two slides about the process, by Friday"
+        - "The full presentation, by Thursday morning"
+        - "Two slides about the results, by Thursday at noon"
+      answer: 2
+
+- tier: c
+  level: C1
+  seconds: 120
+  scale: "Reading for information and argument"
+  descriptor: "Can understand in detail a wide range of lengthy, complex texts likely to be encountered in social, professional or academic life, identifying finer points of detail including attitudes and implied as well as stated opinions."
+  text: |
+    There was a time when a to-do list was a scrap of paper you lost by lunchtime. Now it is an ecosystem. My phone holds three apps ostensibly devoted to organising my day, each of which sends cheerful reminders about tasks I had, until then, conscientiously forgotten. I am told this makes me more productive. Perhaps it does. Yet I notice that I now spend a remarkable amount of time arranging my work, and rather less doing it.
+
+    The apps are not to blame, exactly. They do what they promise: they make every obligation visible. The trouble is that visibility is not the same as importance. A list that treats "reply to Sam" and "finish the report" as equal items, each with its own neat checkbox, quietly flattens the difference between them. Ticking boxes becomes oddly reassuring, whatever the boxes contain, and a tedious clutter of small tasks starts to look like a full day's work.
+
+    None of this means we should go back to paper. But it might be worth asking, now and then, whether the system is serving the work, or the work has started serving the system.
+  questions:
+    - targets: "The writer's attitude"
+      prompt: "What is the writer's attitude towards productivity apps?"
+      options:
+        - "Positive, because they make every task visible"
+        - "Doubtful about how much they help, without rejecting them"
+        - "Strongly against them, and keen to return to paper lists"
+      answer: 1
+    - targets: "Something implied, not stated"
+      prompt: "What does the writer suggest with \"visibility is not the same as importance\"?"
+      options:
+        - "Seeing every task listed the same way can make small tasks feel as important as big ones"
+        - "The apps tend to hide the most important tasks"
+        - "The apps show too few tasks to be really useful"
+      answer: 0
