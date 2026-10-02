@@ -7,7 +7,6 @@ class PlacementWriting < ApplicationRecord
   belongs_to :evaluation_trace, optional: true
 
   validates :placement_attempt_id, uniqueness: true
-  validates :submitted_at, presence: true
   validates(*LEVEL_COLUMNS, inclusion: { in: CefrLevel::RANGE }, allow_nil: true)
 
   def rated?
