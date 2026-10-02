@@ -21,11 +21,11 @@ module Placement
     end
 
     def self.writing_task(attempt)
-      attempt.placement_form.placement_tasks.writing.first!
+      PlacementWritingTask.find_by!(placement_form: attempt.placement_form)
     end
 
     def self.speaking_task(attempt)
-      attempt.placement_form.placement_tasks.for_reading_result(attempt.reading_result)
+      attempt.placement_form.placement_speaking_tasks.for_reading_result(attempt.reading_result)
     end
 
     # Called after the current step's responses are saved; moves the attempt on and records section results.

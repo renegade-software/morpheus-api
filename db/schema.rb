@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_090700) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_160400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -86,18 +86,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_090700) do
     t.integer "current_level"
     t.index ["clerk_user_id"], name: "index_participants_on_clerk_user_id", unique: true
     t.index ["pseudonym"], name: "index_participants_on_pseudonym", unique: true
-  end
-
-  create_table "placement_anchors", force: :cascade do |t|
-    t.bigint "placement_task_id", null: false
-    t.integer "level", null: false
-    t.text "text", null: false
-    t.text "note", null: false
-    t.integer "speaking_seconds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["placement_task_id", "level"], name: "index_placement_anchors_on_placement_task_id_and_level", unique: true
-    t.index ["placement_task_id"], name: "index_placement_anchors_on_placement_task_id"
   end
 
   create_table "placement_attempts", force: :cascade do |t|
@@ -179,10 +167,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_090700) do
     t.jsonb "evidence"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "placement_task_id", null: false
+    t.bigint "placement_speaking_task_id", null: false
     t.index ["evaluation_trace_id"], name: "index_placement_recordings_on_evaluation_trace_id"
     t.index ["placement_attempt_id"], name: "index_placement_recordings_on_placement_attempt_id", unique: true
-    t.index ["placement_task_id"], name: "index_placement_recordings_on_placement_task_id"
+    t.index ["placement_speaking_task_id"], name: "index_placement_recordings_on_placement_speaking_task_id"
   end
 
   create_table "placement_responses", force: :cascade do |t|
@@ -212,20 +200,52 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_090700) do
     t.index ["placement_form_id"], name: "index_placement_rubric_descriptors_on_placement_form_id"
   end
 
-  create_table "placement_tasks", force: :cascade do |t|
+  create_table "placement_speaking_anchors", force: :cascade do |t|
+    t.bigint "placement_speaking_task_id", null: false
+    t.integer "level", null: false
+    t.text "transcript", null: false
+    t.text "note", null: false
+    t.integer "speaking_seconds", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["placement_speaking_task_id", "level"], name: "idx_on_placement_speaking_task_id_level_fd5cf47812", unique: true
+    t.index ["placement_speaking_task_id"], name: "index_placement_speaking_anchors_on_placement_speaking_task_id"
+  end
+
+  create_table "placement_speaking_tasks", force: :cascade do |t|
     t.bigint "placement_form_id", null: false
-    t.string "kind", null: false
-    t.string "tier"
+    t.string "tier", null: false
     t.integer "reading_results", default: [], null: false, array: true
     t.text "prompt", null: false
-    t.jsonb "bullets", default: [], null: false
     t.text "follow_up"
     t.integer "seconds", null: false
     t.jsonb "scoring_rules", default: [], null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["placement_form_id", "kind", "tier"], name: "index_placement_tasks_on_placement_form_id_and_kind_and_tier", unique: true
-    t.index ["placement_form_id"], name: "index_placement_tasks_on_placement_form_id"
+    t.index ["placement_form_id", "tier"], name: "index_placement_speaking_tasks_on_placement_form_id_and_tier", unique: true
+    t.index ["placement_form_id"], name: "index_placement_speaking_tasks_on_placement_form_id"
+  end
+
+  create_table "placement_writing_anchors", force: :cascade do |t|
+    t.bigint "placement_writing_task_id", null: false
+    t.integer "level", null: false
+    t.text "text", null: false
+    t.text "note", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["placement_writing_task_id", "level"], name: "idx_on_placement_writing_task_id_level_99def15e72", unique: true
+    t.index ["placement_writing_task_id"], name: "index_placement_writing_anchors_on_placement_writing_task_id"
+  end
+
+  create_table "placement_writing_tasks", force: :cascade do |t|
+    t.bigint "placement_form_id", null: false
+    t.text "prompt", null: false
+    t.jsonb "bullets", default: [], null: false
+    t.integer "seconds", null: false
+    t.jsonb "scoring_rules", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["placement_form_id"], name: "index_placement_writing_tasks_on_placement_form_id", unique: true
   end
 
   create_table "placement_writings", force: :cascade do |t|
@@ -242,28 +262,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_090700) do
     t.jsonb "evidence"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "placement_task_id", null: false
+    t.bigint "placement_writing_task_id", null: false
     t.index ["evaluation_trace_id"], name: "index_placement_writings_on_evaluation_trace_id"
     t.index ["placement_attempt_id"], name: "index_placement_writings_on_placement_attempt_id", unique: true
-    t.index ["placement_task_id"], name: "index_placement_writings_on_placement_task_id"
+    t.index ["placement_writing_task_id"], name: "index_placement_writings_on_placement_writing_task_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "evaluation_traces", "participants"
-  add_foreign_key "placement_anchors", "placement_tasks"
   add_foreign_key "placement_attempts", "participants"
   add_foreign_key "placement_attempts", "placement_forms"
   add_foreign_key "placement_passages", "placement_forms"
   add_foreign_key "placement_questions", "placement_passages"
   add_foreign_key "placement_recordings", "evaluation_traces"
   add_foreign_key "placement_recordings", "placement_attempts"
-  add_foreign_key "placement_recordings", "placement_tasks"
+  add_foreign_key "placement_recordings", "placement_speaking_tasks"
   add_foreign_key "placement_responses", "placement_attempts"
   add_foreign_key "placement_responses", "placement_questions"
   add_foreign_key "placement_rubric_descriptors", "placement_forms"
-  add_foreign_key "placement_tasks", "placement_forms"
+  add_foreign_key "placement_speaking_anchors", "placement_speaking_tasks"
+  add_foreign_key "placement_speaking_tasks", "placement_forms"
+  add_foreign_key "placement_writing_anchors", "placement_writing_tasks"
+  add_foreign_key "placement_writing_tasks", "placement_forms"
   add_foreign_key "placement_writings", "evaluation_traces"
   add_foreign_key "placement_writings", "placement_attempts"
-  add_foreign_key "placement_writings", "placement_tasks"
+  add_foreign_key "placement_writings", "placement_writing_tasks"
 end
