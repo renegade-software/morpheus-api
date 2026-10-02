@@ -18,6 +18,9 @@ task:
 scoring_rules:
   - "Judge only the learner's own language. Ignore words and phrases copied from the task or the bullets."
   - "How far down the bullets the learner gets is evidence, but the quality of the language decides the level."
+  - "Bullet 1 is aimed at A2: simple sentences about a familiar topic, linked with 'and', 'but' or 'because'. Isolated phrases without linking are A1."
+  - "Bullet 2 is aimed at B1: a short connected account of what happened and what the learner did, in a clear order, with past tenses mostly under control. A list of events with frequent tense errors is A2."
+  - "Bullet 3 is aimed at B2–C1: a viewpoint developed with reasons, ideally weighing both sides. Stating an opinion with a simple reason is B1 at most."
   - "Return a level for each scale, one overall level, and a short quote from the answer as evidence for each."
 
 anchors:
