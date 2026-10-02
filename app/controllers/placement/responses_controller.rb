@@ -10,7 +10,7 @@ module Placement
       # A stale tab submitting a step that's already done would otherwise overwrite nothing and confuse the sequence.
       return head :conflict unless params.expect(:step) == attempt.current_step
 
-      answers = params.expect(answers: [ [ :question_id, :selected_option, :shown_at, :answered_at ] ])
+      answers = params.expect(answers: [ [ :question_id, :selected_option ] ])
       questions = Steps.questions(attempt).index_by(&:id)
       unless answers.map { Integer(_1[:question_id]) }.sort == questions.keys.sort
         return render json: { errors: [ "answers must cover questions #{questions.keys.join(', ')}" ] },
@@ -33,9 +33,7 @@ module Placement
       attempt.placement_responses.create!(
         placement_question: question,
         selected_option: selected_option,
-        correct: selected_option == question.correct_option,
-        shown_at: answer[:shown_at],
-        answered_at: answer[:answered_at]
+        correct: selected_option == question.correct_option
       )
     end
   end
