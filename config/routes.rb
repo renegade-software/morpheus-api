@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resource :user, only: :show
   resource :consent, only: :create
 
+  namespace :placement do
+    resource :attempt, only: %i[create show]
+    resources :responses, only: :create
+  end
+
   root "root#show"
 
   # Defines the root path route ("/")

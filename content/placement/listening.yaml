@@ -1,0 +1,69 @@
+# Placement test, listening section: 3 clips for everyone, easiest first, 1 question each, 3 options per question.
+# Each clip plays twice after the learner presses play; the 30 s answer timer starts after the second play.
+# Each tier targets the top of its band (A → A2, B → B2, C → C1). Descriptors are quoted from the
+# CEFR Companion Volume (Council of Europe, 2018). Clips get recorded once with Cartesia TTS; Tom is the app's voice.
+# `answer` is the 0-based index of the key. This file is the authoring source: bin/rails placement:import loads it
+# into the item bank, and the clips go in content/placement/audio/listening-<tier>.mp3.
+
+- tier: a
+  level: A2
+  scale: "Listening to announcements and instructions"
+  descriptor: "Can catch the main point in short, clear, simple messages and announcements."
+  delivery: "One speaker, slow and clear (about 100 words a minute)"
+  lines:
+    - speaker: Tom
+      text: "Hi, this is Tom from Riverside Dental. I'm calling about your appointment tomorrow. The dentist is ill, so we need to move it to Thursday at ten. If that time is OK for you, you don't need to call back. Thanks, bye."
+  question:
+    targets: "The main point of the message"
+    prompt: "Why is Tom calling?"
+    options:
+      - "To tell you the dentist is closed this week"
+      - "To move your appointment to Thursday"
+      - "To ask you to call back tomorrow"
+    answer: 1
+
+- tier: b
+  level: B2
+  scale: "Understanding conversation between other speakers"
+  descriptor: "Can identify the main reasons for and against an argument or idea in a discussion conducted in clear standard speech."
+  delivery: "Two speakers, clear standard speech at normal speed (about 150 words a minute)"
+  lines:
+    - speaker: Priya
+      text: "So, for the end-of-year dinner, I was thinking of the Italian place by the river. Everyone loved it last time."
+    - speaker: Tom
+      text: "It's lovely, but it only seats thirty, and there are nearly forty of us now. I'd rather go with the hotel downtown. It's a bit pricier, but they've got a private room, so nobody gets left out."
+    - speaker: Priya
+      text: "Fair enough. Although the hotel's quite a trek for the people in the north office."
+    - speaker: Tom
+      text: "True, but we could book a minibus. Space is the bigger problem."
+  question:
+    targets: "The main reason one speaker gives"
+    prompt: "Why does Tom prefer the hotel?"
+    options:
+      - "It's cheaper than the Italian restaurant"
+      - "It's easier to get to from the north office"
+      - "It has room for the whole team"
+    answer: 2
+
+- tier: c
+  level: C1
+  scale: "Listening to audio media and recordings"
+  descriptor: "Can understand a wide range of recorded and broadcast audio material, including some non-standard usage, and identify finer points of detail including implicit attitudes and relationships between speakers."
+  delivery: "Two speakers, radio interview at natural speed (about 160 words a minute)"
+  lines:
+    - speaker: Host
+      text: "The council says the new cycle lanes have been a great success. Dr Marsh, you've been studying them. Would you agree?"
+    - speaker: Dr Marsh
+      text: "Well, the numbers certainly look impressive on paper. More people are cycling on the main roads, and the council has been very quick to put that on every poster in town. What the posters don't mention is that most of those cyclists were already cycling, just on quieter streets. So, a success? I suppose it depends on what you were hoping to achieve. If the aim was to get people out of their cars, I'd want to see rather more evidence before celebrating."
+    - speaker: Host
+      text: "So you think it's been a waste of money?"
+    - speaker: Dr Marsh
+      text: "I wouldn't go that far. The lanes are safer, and that matters. I just think the council is enjoying the headlines a little more than the data justifies."
+  question:
+    targets: "A speaker's implicit attitude"
+    prompt: "How does Dr Marsh feel about the council's claims?"
+    options:
+      - "She thinks they go further than the evidence, although the lanes have some value"
+      - "She agrees that the lanes have been a great success"
+      - "She thinks the lanes have been a waste of money"
+    answer: 0

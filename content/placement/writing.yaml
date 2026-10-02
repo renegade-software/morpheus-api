@@ -1,0 +1,57 @@
+# Placement test, writing section: one task, 5 minutes, scored by Claude from A1 = 0 to C2 = 5.
+# Scales from the CEFR Companion Volume (Council of Europe, 2018): Overall written production (p. 75),
+# General linguistic range (p. 131), Grammatical accuracy (p. 133), Coherence and cohesion (p. 142).
+# The anchors are written for Morpheus (not real learner answers) and go into Claude's scoring prompt.
+# Replace them with real, consented answers once there are any.
+
+task:
+  seconds: 300
+  situation: "You have just started a new job or course. Write a message to an English-speaking friend about it."
+  bullets:
+    - aims_at: A2
+      text: "Say where it is and what you do there."
+    - aims_at: B1
+      text: "Describe a problem you had in your first week and what you did about it."
+    - aims_at: B2–C1
+      text: "Some people say it's better to stay in the same job or course for many years. Do you agree? Explain why."
+
+scoring_rules:
+  - "Judge only the learner's own language. Ignore words and phrases copied from the task or the bullets."
+  - "How far down the bullets the learner gets is evidence, but the quality of the language decides the level."
+  - "Return a level for each scale, one overall level, and a short quote from the answer as evidence for each."
+
+anchors:
+  - level: A1
+    note: "Isolated simple sentences about personal matters, basic errors (missing subject, 'the people is'), bullet 1 only."
+    text: |
+      Hi Ana! I have new job. Is in a office in the centre. I work with computers. The people is nice. I like very much my job. Bye
+
+  - level: A2
+    note: "Simple sentences linked with 'and' and 'because', systematic basic errors (tenses, 'more easy'), bullets 1 and 2 in simple form, no opinion."
+    text: |
+      Hi Ana,
+      I started a new job in a bank in the city centre. I work in the office and I answer the phone and write emails. The first week was difficult because I don't know how to use the computer program. I asked my boss and he help me. Now is more easy. I like my job because my colleagues are friendly.
+
+  - level: B1
+    note: "Connected text in a linear sequence, all three bullets, good control of routine past tenses; the opinion is stated with simple reasons but not developed; some awkward phrasing."
+    text: |
+      Hi Ana,
+      How are you? I have some news: two weeks ago I started a new job at a travel agency near my house. I help customers to plan their holidays and I book flights and hotels for them.
+      In my first week I had a problem with a customer who was very angry because his flight was cancelled. I was nervous because I didn't know what to do, but I stayed calm, I called the airline and finally I found him another flight for the same day. He was very happy at the end.
+      About staying in the same job for many years, I think it is good because you can learn a lot, but also it can be boring. For me, maybe five years is enough.
+
+  - level: B2
+    note: "Clear, detailed text covering every bullet, a good range of everyday idiom ('sorted it out', 'in the long run'), an argument with contrast that is not deeply developed, few errors."
+    text: |
+      Hi Ana,
+      Guess what? I've finally started my master's in data science! The course is at a university downtown, and so far we've mostly been revising statistics and learning to program in Python.
+      My first week wasn't exactly smooth. The online platform kept rejecting my registration, so I couldn't access any of the materials. Instead of waiting for IT to reply, I went to the admissions office in person, and they sorted it out in ten minutes. Lesson learned: sometimes it's faster to just show up.
+      As for staying in the same job or course for years, I'm not sure I agree. Although it gives you stability and deep knowledge, it can also make you too comfortable. In my opinion, changing every few years forces you to keep learning, which is more valuable in the long run, even if it's riskier.
+
+  - level: C1
+    note: "Well-structured and flexible in style, natural idiom ('threw me in at the deep end', 'staying put'), complex sentences under control, an argument developed with concession and a clear conclusion, virtually no errors."
+    text: |
+      Hi Ana,
+      I've just started a new role as a product designer at a fintech start-up: small team, chaotic office, excellent coffee. Most of my time goes on interviewing users and turning their complaints into something the engineers can actually build.
+      The first week threw me in at the deep end. Two days in, the lead designer resigned, leaving a client presentation with no owner. Rather than panic, I pieced together her notes, asked the engineers which features were genuinely ready, and presented a scaled-back version. The client was surprisingly receptive, presumably because we didn't promise anything we couldn't deliver.
+      As for staying put for years, I'd argue it depends less on time than on whether you're still growing. Loyalty can build real expertise and trust, which job-hoppers rarely enjoy; staying out of habit, though, is another matter entirely. If I stop learning here, I'll leave, not because a certain number of years has passed, but because standing still is the bigger risk.
