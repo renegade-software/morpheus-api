@@ -6,6 +6,7 @@
 
 - tier: a
   level: A2
+  audio: "/placement/listening-a.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Listening to announcements and instructions"
   descriptor: "Can catch the main point in short, clear, simple messages and announcements."
   delivery: "One speaker, slow and clear (about 100 words a minute)"
@@ -23,6 +24,7 @@
 
 - tier: b
   level: B2
+  audio: "/placement/listening-b.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Understanding conversation between other speakers"
   descriptor: "Can identify the main reasons for and against an argument or idea in a discussion conducted in clear standard speech."
   delivery: "Two speakers, clear standard speech at normal speed (about 150 words a minute)"
@@ -46,6 +48,7 @@
 
 - tier: c
   level: C1
+  audio: "/placement/listening-c.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Listening to audio media and recordings"
   descriptor: "Can understand a wide range of recorded and broadcast audio material, including some non-standard usage, and identify finer points of detail including implicit attitudes and relationships between speakers."
   delivery: "Two speakers, radio interview at natural speed (about 160 words a minute)"
