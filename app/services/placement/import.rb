@@ -47,21 +47,28 @@ module Placement
 
     def self.import_writing(form)
       writing = read("writing.yaml")
-      task = form.placement_tasks.create!(
-        kind: "writing", prompt: writing.dig("task", "situation"), seconds: writing.dig("task", "seconds"),
+      task = form.create_placement_writing_task!(
+        prompt: writing.dig("task", "situation"), seconds: writing.dig("task", "seconds"),
         bullets: writing.dig("task", "bullets"), scoring_rules: writing["scoring_rules"]
       )
-      writing["anchors"].each { |anchor| create_anchor(task, anchor) }
+      writing["anchors"].each do |anchor|
+        task.placement_writing_anchors.create!(level: level(anchor["level"]), text: anchor["text"], note: anchor["note"])
+      end
     end
 
     def self.import_speaking(form)
       speaking = read("speaking.yaml")
       speaking["prompts"].each do |prompt|
-        task = form.placement_tasks.create!(
-          kind: "speaking", tier: prompt["id"], reading_results: prompt["for_reading_result"], prompt: prompt["text"],
+        task = form.placement_speaking_tasks.create!(
+          tier: prompt["id"], reading_results: prompt["for_reading_result"], prompt: prompt["text"],
           follow_up: speaking["follow_up"], seconds: speaking["seconds"], scoring_rules: speaking["scoring_rules"]
         )
-        prompt["anchors"].each { |anchor| create_anchor(task, anchor) }
+        prompt["anchors"].each do |anchor|
+          task.placement_speaking_anchors.create!(
+            level: level(anchor["level"]), transcript: anchor["transcript"], note: anchor["note"],
+            speaking_seconds: anchor["speaking_seconds"]
+          )
+        end
       end
     end
 
@@ -84,13 +91,6 @@ module Placement
       )
     end
 
-    def self.create_anchor(task, anchor)
-      task.placement_anchors.create!(
-        level: level(anchor["level"]), text: anchor["text"] || anchor["transcript"], note: anchor["note"],
-        speaking_seconds: anchor["speaking_seconds"]
-      )
-    end
-
     def self.level(label)
       CefrLevel::LABELS.index(label) || raise(ArgumentError, "unknown CEFR level #{label.inspect}")
     end
@@ -100,6 +100,6 @@ module Placement
     end
 
     private_class_method :import_reading, :import_listening, :import_writing, :import_speaking, :import_rubrics,
-      :create_question, :create_anchor, :level, :read
+      :create_question, :level, :read
   end
 end

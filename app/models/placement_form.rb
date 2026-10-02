@@ -3,8 +3,10 @@ class PlacementForm < ApplicationRecord
 
   has_many :placement_passages, dependent: :destroy
   has_many :placement_questions, through: :placement_passages
-  has_many :placement_tasks, dependent: :destroy
-  has_many :placement_anchors, through: :placement_tasks
+  has_one :placement_writing_task, dependent: :destroy
+  has_many :placement_writing_anchors, through: :placement_writing_task
+  has_many :placement_speaking_tasks, -> { order(:tier) }, dependent: :destroy
+  has_many :placement_speaking_anchors, through: :placement_speaking_tasks
   has_many :placement_rubric_descriptors, dependent: :destroy
   has_many :placement_attempts, dependent: :restrict_with_exception
 

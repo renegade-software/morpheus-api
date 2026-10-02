@@ -2,7 +2,7 @@ class PlacementRecording < ApplicationRecord
   LEVEL_COLUMNS = %i[range_level accuracy_level fluency_level coherence_level overall_level].freeze
 
   belongs_to :placement_attempt
-  belongs_to :placement_task
+  belongs_to :placement_speaking_task
 
   # Points at the call whose rating was accepted; nil until the recording is rated.
   belongs_to :evaluation_trace, optional: true

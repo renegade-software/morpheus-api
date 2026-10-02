@@ -4,7 +4,8 @@ namespace :placement do
     form = Placement::Import.call(name: args.fetch(:name))
     missing = form.placement_passages.where(section: "listening").reject { _1.audio.attached? }.map(&:tier)
     puts "Draft form ##{form.id} \"#{form.name}\": #{form.placement_questions.count} questions, " \
-         "#{form.placement_tasks.count} tasks, #{form.placement_anchors.count} anchors, " \
+         "1 writing task with #{form.placement_writing_anchors.count} anchors, " \
+         "#{form.placement_speaking_tasks.count} speaking tasks with #{form.placement_speaking_anchors.count} anchors, " \
          "#{form.placement_rubric_descriptors.count} rubric descriptors"
     puts "Listening audio missing for tiers #{missing.join(', ')}: add content/placement/audio/listening-<tier>.mp3 " \
          "and re-import before activating" if missing.any?
