@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_200000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_210000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -203,9 +203,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_200000) do
     t.integer "level", null: false
     t.text "transcript", null: false
     t.text "note", null: false
-    t.integer "speaking_seconds", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "speaking_ms", null: false
+    t.integer "word_count", null: false
+    t.integer "long_pauses", null: false
     t.index ["placement_speaking_task_id", "level"], name: "idx_on_placement_speaking_task_id_level_fd5cf47812", unique: true
     t.index ["placement_speaking_task_id"], name: "index_placement_speaking_anchors_on_placement_speaking_task_id"
   end

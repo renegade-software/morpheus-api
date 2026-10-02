@@ -67,7 +67,9 @@ module Placement
         prompt["anchors"].each do |anchor|
           task.placement_speaking_anchors.create!(
             level: level(anchor["level"]), transcript: anchor["transcript"], note: anchor["note"],
-            speaking_seconds: anchor["speaking_seconds"]
+            speaking_ms: anchor["speaking_seconds"] * 1000,
+            word_count: TranscriptStats.word_count(anchor["transcript"]),
+            long_pauses: TranscriptStats.long_pauses(anchor["transcript"])
           )
         end
       end
