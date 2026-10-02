@@ -36,6 +36,7 @@ module Placement
         passage = form.placement_passages.create!(
           section: "listening", tier: clip["tier"], level: level(clip["level"]),
           cefr_scale: clip["scale"], cefr_descriptor: clip["descriptor"], delivery: clip["delivery"],
+          plays: clip["plays"], seconds: clip["seconds"],
           transcript: clip["lines"].map { "#{_1['speaker']}: #{_1['text']}" }.join("\n")
         )
         create_question(passage, clip["question"], 1)

@@ -43,8 +43,8 @@ module Placement
         section: "listening",
         tier: passage.tier,
         audio_path: rails_blob_path(passage.audio, only_path: true),
-        plays: Steps::LISTENING_PLAYS,
-        answer_seconds: Steps::LISTENING_ANSWER_SECONDS,
+        plays: passage.plays,
+        answer_seconds: passage.seconds,
         question: question(passage.placement_questions.first)
       }
     end

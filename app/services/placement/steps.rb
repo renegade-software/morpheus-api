@@ -4,8 +4,6 @@ module Placement
   module Steps
     FIRST = "reading.a".freeze
     TIERS = PlacementPassage::TIERS
-    LISTENING_PLAYS = 2
-    LISTENING_ANSWER_SECONDS = 30
 
     def self.passage(attempt, step = attempt.current_step)
       section, tier = step.split(".")
