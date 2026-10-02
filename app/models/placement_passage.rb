@@ -13,6 +13,7 @@ class PlacementPassage < ApplicationRecord
   validates :tier, inclusion: { in: TIERS }, uniqueness: { scope: [ :placement_form_id, :section ] }
   validates :level, inclusion: { in: CefrLevel::RANGE }
   validates :cefr_scale, :cefr_descriptor, presence: true
-  validates :body, :seconds, presence: true, if: -> { section == "reading" }
-  validates :transcript, presence: true, if: -> { section == "listening" }
+  validates :seconds, presence: true
+  validates :body, presence: true, if: -> { section == "reading" }
+  validates :transcript, :plays, presence: true, if: -> { section == "listening" }
 end
