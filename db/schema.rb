@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_200000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -158,7 +158,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_180000) do
     t.integer "word_count"
     t.integer "long_pauses"
     t.boolean "timed_out", default: false, null: false
-    t.datetime "submitted_at", null: false
     t.bigint "evaluation_trace_id"
     t.integer "range_level"
     t.integer "accuracy_level"
@@ -178,8 +177,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_180000) do
     t.bigint "placement_attempt_id", null: false
     t.integer "selected_option"
     t.boolean "correct", null: false
-    t.datetime "shown_at", null: false
-    t.datetime "answered_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "placement_question_id", null: false
@@ -252,7 +249,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_180000) do
     t.bigint "placement_attempt_id", null: false
     t.text "text"
     t.boolean "timed_out", default: false, null: false
-    t.datetime "submitted_at", null: false
     t.bigint "evaluation_trace_id"
     t.integer "production_level"
     t.integer "range_level"
