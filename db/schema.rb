@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_170000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_180000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -130,6 +130,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_170000) do
     t.integer "seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "plays"
     t.index ["placement_form_id", "section", "tier"], name: "idx_on_placement_form_id_section_tier_8b7a795014", unique: true
     t.index ["placement_form_id"], name: "index_placement_passages_on_placement_form_id"
   end
