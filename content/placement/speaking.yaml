@@ -6,12 +6,12 @@
 # recordings once there are any.
 
 seconds: 60
-follow_up: "…and tell me anything else you'd like."
 
 scoring_rules:
   - "Judge only the learner's own language. Ignore words repeated from the prompt."
   - "Fluency comes from the transcript plus the numbers given: speaking time, word count and pauses over 1 second."
   - "Saying more is not the same as a higher level. Long, simple speech can still be A2."
+  - "The prompt does not limit the level. Judge the language the learner actually produces: a learner can show B2 or C1 on the easiest prompt."
   - "Return a level for each criterion, one overall level, and a short quote from the transcript as evidence for each."
 
 prompts:
@@ -28,17 +28,17 @@ prompts:
         speaking_seconds: 52
         transcript: "OK, um, every day I wake up at six thirty and I take a shower. Then I eat breakfast with my sister, uh, eggs and coffee. I go to the university in the bus, it take one hour… because the traffic is very bad. In the afternoon I study and, um, in the night I watch TV or I play videogames. I go to sleep at eleven."
       - level: B1
-        note: "Enough language to get by on familiar topics, routines used fairly accurately, a linear sequence of points, keeps going despite clear pauses for planning; uses the follow-up briefly."
+        note: "Enough language to get by on familiar topics, routines used fairly accurately, a linear sequence of points, keeps going despite clear pauses for planning; adds a related point of its own."
         speaking_seconds: 58
-        transcript: "Well, on weekdays I usually get up around six because I have to be at work at eight. I work in a call centre, so most of the day I'm answering calls from customers, and, um, sometimes it's quite stressful. After work I go to the gym two or three times a week… or if I'm tired I just cook something and watch a series. Um, on weekends it's different, I sleep more and I visit my parents. And… something else… I'm trying to learn English because I want to get a better job, so I practise a little every night."
+        transcript: "Well, on weekdays I usually get up around six because I have to be at work at eight. I work in a call centre, so most of the day I'm answering calls from customers, and, um, sometimes it's quite stressful. After work I go to the gym two or three times a week… or if I'm tired I just cook something and watch a series. Um, on weekends it's different, I sleep more and I visit my parents. And, um… also, I'm trying to learn English because I want to get a better job, so I practise a little every night."
       - level: B2
-        note: "Clear description with some complex sentences, relatively high grammatical control with self-correction, fairly even tempo with few long pauses, uses the follow-up to give a viewpoint."
+        note: "Clear description with some complex sentences, relatively high grammatical control with self-correction, fairly even tempo with few long pauses, moves from description to a viewpoint unprompted."
         speaking_seconds: 60
-        transcript: "Sure. So my routine depends a lot on whether I'm working from home or going into the office. On office days I'm up at half five, which I hate, because the commute takes almost an hour and a half. At home it's much more relaxed. I can start at eight, have proper breaks and actually get through my tasks without being interrupted every five minutes. In the evenings I try to switch off, um, I've started running, which has really helped with stress. And something else I'd add is that I think hybrid work is the best of both worlds, as long as companies don't, uh, didn't… don't use it as an excuse to make people available all the time."
+        transcript: "Sure. So my routine depends a lot on whether I'm working from home or going into the office. On office days I'm up at half five, which I hate, because the commute takes almost an hour and a half. At home it's much more relaxed. I can start at eight, have proper breaks and actually get through my tasks without being interrupted every five minutes. In the evenings I try to switch off, um, I've started running, which has really helped with stress. Honestly, I think hybrid work is the best of both worlds, as long as companies don't, uh, didn't… don't use it as an excuse to make people available all the time."
       - level: C1
-        note: "Broad range with precise, idiomatic choices, consistently high accuracy, fluent and almost effortless, well-structured with controlled connectors; takes the follow-up somewhere new."
+        note: "Broad range with precise, idiomatic choices, consistently high accuracy, fluent and almost effortless, well-structured with controlled connectors; goes beyond the routine to a reflective point of its own."
         speaking_seconds: 60
-        transcript: "Honestly, my routine is less of a routine than a series of negotiations. I teach at a language school, so my mornings are mine and my evenings belong to my students, which sounds ideal until you realise you're eating dinner at ten. I've learned to protect the first couple of hours of the day for things that need real concentration, like planning or reading, because by the afternoon my attention is basically gone. What I'd add, since you asked, is that I've become a bit sceptical of the whole morning-routine industry. Everyone's selling the perfect five a.m. schedule, but what actually works for me is far more boring: going to bed at a sensible hour and not checking my phone the moment I wake up."
+        transcript: "Honestly, my routine is less of a routine than a series of negotiations. I teach at a language school, so my mornings are mine and my evenings belong to my students, which sounds ideal until you realise you're eating dinner at ten. I've learned to protect the first couple of hours of the day for things that need real concentration, like planning or reading, because by the afternoon my attention is basically gone. If anything, I've become a bit sceptical of the whole morning-routine industry. Everyone's selling the perfect five a.m. schedule, but what actually works for me is far more boring: going to bed at a sensible hour and not checking my phone the moment I wake up."
   - id: b
     for_reading_result: [2]
     text: "Tell me about a problem you solved at work or school."
