@@ -9,11 +9,11 @@ task:
   situation: "You have just started a new job or course. Write a message to an English-speaking friend about it."
   bullets:
     - aims_at: A2
-      text: "Say where it is and what you do there."
+      text: "say where it is and what you do there"
     - aims_at: B1
-      text: "Describe a problem you had in your first week and what you did about it."
+      text: "describe a problem you had in your first week and what you did about it"
     - aims_at: B2–C1
-      text: "Some people say it's better to stay in the same job or course for many years. Do you agree? Explain why."
+      text: "say whether you agree that it's better to stay in the same job or course for many years, and why"
 
 scoring_rules:
   - "Judge only the learner's own language. Ignore words and phrases copied from the task or the bullets."
