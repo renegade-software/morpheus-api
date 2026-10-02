@@ -13,6 +13,6 @@ class CreatePlacementResponses < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :placement_responses, [:placement_attempt_id, :item_key], unique: true
+    add_index :placement_responses, [ :placement_attempt_id, :item_key ], unique: true
   end
 end

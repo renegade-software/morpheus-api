@@ -3,17 +3,29 @@ module Placement
   # everyone, then writing and speaking. Also works out the reading and listening results as each section ends.
   module Steps
     FIRST = "reading.a".freeze
-    TIERS = %w[a b c].freeze
+    TIERS = PlacementPassage::TIERS
     LISTENING_PLAYS = 2
     LISTENING_ANSWER_SECONDS = 30
 
-    def self.item_keys(step)
+    def self.passage(attempt, step = attempt.current_step)
       section, tier = step.split(".")
-      case section
-      when "reading" then [ "reading.#{tier}.q1", "reading.#{tier}.q2" ]
-      when "listening" then [ "listening.#{tier}" ]
-      else []
-      end
+      attempt.placement_form.placement_passages.find_by!(section: section, tier: tier)
+    end
+
+    # The questions the current step must answer: both questions of a reading text, or the one listening question.
+    def self.questions(attempt)
+      section = attempt.current_step.split(".").first
+      return PlacementQuestion.none unless PlacementPassage::SECTIONS.include?(section)
+
+      passage(attempt).placement_questions
+    end
+
+    def self.writing_task(attempt)
+      attempt.placement_form.placement_tasks.writing.first!
+    end
+
+    def self.speaking_task(attempt)
+      attempt.placement_form.placement_tasks.for_reading_result(attempt.reading_result)
     end
 
     # Called after the current step's responses are saved; moves the attempt on and records section results.
@@ -27,9 +39,7 @@ module Placement
     end
 
     def self.advance_reading(attempt, tier)
-      passed = attempt.placement_responses.where(section: "reading", item_key: item_keys("reading.#{tier}")).all?(&:correct)
-
-      if passed && tier != TIERS.last
+      if passed?(attempt, passage(attempt)) && tier != TIERS.last
         attempt.current_step = "reading.#{next_tier(tier)}"
       else
         attempt.reading_result = reading_result(attempt)
@@ -48,22 +58,27 @@ module Placement
 
     # Texts passed in a row: 0 means the A text was failed, 3 means all three were passed.
     def self.reading_result(attempt)
-      TIERS.take_while { |tier|
-        responses = attempt.placement_responses.where(section: "reading", item_key: item_keys("reading.#{tier}"))
-        responses.size == 2 && responses.all?(&:correct)
-      }.size
+      TIERS.take_while { |tier| passed?(attempt, passage(attempt, "reading.#{tier}")) }.size
     end
 
     # The hardest clip answered correctly: 0 for none, 1 for A, 2 for B, 3 for C.
     def self.listening_result(attempt)
-      correct_tiers = attempt.placement_responses.where(section: "listening", correct: true).map { _1.item_key.split(".").last }
+      correct_tiers = attempt.placement_responses
+        .joins(placement_question: :placement_passage)
+        .where(correct: true, placement_passages: { section: "listening" })
+        .pluck("placement_passages.tier")
       correct_tiers.map { TIERS.index(_1) + 1 }.max || 0
+    end
+
+    def self.passed?(attempt, passage)
+      responses = attempt.placement_responses.where(placement_question: passage.placement_questions)
+      responses.size == passage.placement_questions.size && responses.all?(&:correct)
     end
 
     def self.next_tier(tier)
       TIERS.fetch(TIERS.index(tier) + 1)
     end
 
-    private_class_method :advance_reading, :advance_listening, :next_tier
+    private_class_method :advance_reading, :advance_listening, :passed?, :next_tier
   end
 end

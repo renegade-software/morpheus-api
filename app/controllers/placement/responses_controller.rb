@@ -10,30 +10,30 @@ module Placement
       # A stale tab submitting a step that's already done would otherwise overwrite nothing and confuse the sequence.
       return head :conflict unless params.expect(:step) == attempt.current_step
 
-      answers = params.expect(answers: [ [ :item_key, :selected_option, :shown_at, :answered_at ] ])
-      expected_keys = Steps.item_keys(attempt.current_step)
-      unless answers.map { _1[:item_key] }.sort == expected_keys.sort
-        return render json: { errors: [ "answers must cover #{expected_keys.join(', ')}" ] }, status: :unprocessable_content
+      answers = params.expect(answers: [ [ :question_id, :selected_option, :shown_at, :answered_at ] ])
+      questions = Steps.questions(attempt).index_by(&:id)
+      unless answers.map { Integer(_1[:question_id]) }.sort == questions.keys.sort
+        return render json: { errors: [ "answers must cover questions #{questions.keys.join(', ')}" ] },
+                      status: :unprocessable_content
       end
 
       PlacementAttempt.transaction do
-        answers.each { |answer| record_response(attempt, answer) }
+        answers.each { |answer| record_response(attempt, questions.fetch(Integer(answer[:question_id])), answer) }
         Steps.advance!(attempt)
         attempt.save!
       end
 
-      render json: StepPresenter.new(attempt)
+      render json: StepSerializer.new(attempt)
     end
 
     private
 
-    def record_response(attempt, answer)
+    def record_response(attempt, question, answer)
       selected_option = answer[:selected_option].presence&.then { Integer(_1) }
       attempt.placement_responses.create!(
-        section: answer[:item_key].split(".").first,
-        item_key: answer[:item_key],
+        placement_question: question,
         selected_option: selected_option,
-        correct: selected_option == Content.question(answer[:item_key]).fetch("answer"),
+        correct: selected_option == question.correct_option,
         shown_at: answer[:shown_at],
         answered_at: answer[:answered_at]
       )

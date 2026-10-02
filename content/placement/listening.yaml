@@ -2,11 +2,11 @@
 # Each clip plays twice after the learner presses play; the 30 s answer timer starts after the second play.
 # Each tier targets the top of its band (A → A2, B → B2, C → C1). Descriptors are quoted from the
 # CEFR Companion Volume (Council of Europe, 2018). Clips get recorded once with Cartesia TTS; Tom is the app's voice.
-# `answer` is the 0-based index of the key; never send it to the browser.
+# `answer` is the 0-based index of the key. This file is the authoring source: bin/rails placement:import loads it
+# into the item bank, and the clips go in content/placement/audio/listening-<tier>.mp3.
 
 - tier: a
   level: A2
-  audio: "/placement/listening-a.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Listening to announcements and instructions"
   descriptor: "Can catch the main point in short, clear, simple messages and announcements."
   delivery: "One speaker, slow and clear (about 100 words a minute)"
@@ -24,7 +24,6 @@
 
 - tier: b
   level: B2
-  audio: "/placement/listening-b.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Understanding conversation between other speakers"
   descriptor: "Can identify the main reasons for and against an argument or idea in a discussion conducted in clear standard speech."
   delivery: "Two speakers, clear standard speech at normal speed (about 150 words a minute)"
@@ -48,7 +47,6 @@
 
 - tier: c
   level: C1
-  audio: "/placement/listening-c.mp3"   # served by morpheus-ui from public/; recorded once with Cartesia
   scale: "Listening to audio media and recordings"
   descriptor: "Can understand a wide range of recorded and broadcast audio material, including some non-standard usage, and identify finer points of detail including implicit attitudes and relationships between speakers."
   delivery: "Two speakers, radio interview at natural speed (about 160 words a minute)"
