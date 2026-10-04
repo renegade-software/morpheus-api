@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resource :consent, only: :create
 
   namespace :placement do
-    resource :attempt, only: %i[create show]
+    resource :attempt, only: %i[create show] do
+      post :start
+    end
     resources :responses, only: :create
   end
 

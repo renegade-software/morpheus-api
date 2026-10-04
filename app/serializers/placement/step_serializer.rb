@@ -31,9 +31,18 @@ module Placement
         section: "reading",
         tier: passage.tier,
         seconds: passage.seconds,
+        seconds_left: seconds_left(passage.seconds),
         text: passage.body,
         questions: passage.placement_questions.map { question(_1) }
       }
+    end
+
+    # Worked out here from when the learner pressed Empezar, so neither a refresh nor the device's clock changes it.
+    # nil until the step has started; 0 once its time is up.
+    def seconds_left(seconds)
+      return if @attempt.step_started_at.nil?
+
+      [ seconds - (Time.current - @attempt.step_started_at), 0 ].max.round(1)
     end
 
     # The audio path is relative to the API; Active Storage redirects it to the file.

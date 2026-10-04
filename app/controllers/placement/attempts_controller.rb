@@ -24,5 +24,16 @@ module Placement
 
       render json: StepSerializer.new(attempt)
     end
+
+    # The learner pressed Empezar on the current step. Stamped once, by the server: a second call (a refresh, a double
+    # click) keeps the first stamp, so the clock can't be restarted.
+    def start
+      attempt = current_participant.placement_attempt
+      return head :not_found unless attempt
+      return head :conflict unless params.expect(:step) == attempt.current_step
+
+      attempt.update!(step_started_at: Time.current) if attempt.step_started_at.nil?
+      render json: StepSerializer.new(attempt)
+    end
   end
 end
