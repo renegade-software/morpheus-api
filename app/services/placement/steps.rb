@@ -17,6 +17,12 @@ module Placement::Steps
     passage(attempt).placement_questions
   end
 
+  # The current step's questions with no response yet, in order. Answers are saved one at a time, so after a refresh
+  # this is where the learner picks up.
+  def self.unanswered_questions(attempt)
+    questions(attempt).where.not(id: attempt.placement_responses.select(:placement_question_id))
+  end
+
   def self.writing_task(attempt)
     PlacementWritingTask.find_by!(placement_form: attempt.placement_form)
   end

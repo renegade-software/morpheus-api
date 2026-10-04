@@ -2,8 +2,10 @@ module Placement
   class ResponsesController < ApplicationController
     before_action :require_eligible_consent!
 
-    # Saves one step's answers (both questions of a reading text, or one listening question), grades them against
-    # the key and returns the next step. The browser runs the timers; a timed-out question arrives with no option.
+    # Saves answers as the learner gives them, usually one question at a time (or every question left, when time runs
+    # out), grades them against the key and returns the step. The step only moves on once all its questions have an
+    # answer, so a refresh picks up at the next unanswered one. The browser runs the timers; a timed-out question
+    # arrives with no option.
     def create
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt
@@ -11,16 +13,19 @@ module Placement
       return head :conflict unless params.expect(:step) == attempt.current_step
 
       answers = params.expect(answers: [ [ :question_id, :selected_option ] ])
-      questions = Steps.questions(attempt).index_by(&:id)
-      unless answers.map { Integer(_1[:question_id]) }.sort == questions.keys.sort
-        return render json: { errors: [ "answers must cover questions #{questions.keys.join(', ')}" ] },
+      open_questions = Steps.unanswered_questions(attempt).index_by(&:id)
+      question_ids = answers.map { Integer(_1[:question_id]) }
+      if question_ids.empty? || question_ids.uniq.size < question_ids.size || (question_ids - open_questions.keys).any?
+        return render json: { errors: [ "answers must be for unanswered questions #{open_questions.keys.join(', ')}" ] },
                       status: :unprocessable_content
       end
 
       PlacementAttempt.transaction do
-        answers.each { |answer| record_response(attempt, questions.fetch(Integer(answer[:question_id])), answer) }
-        Steps.advance!(attempt)
-        attempt.save!
+        answers.each { |answer| record_response(attempt, open_questions.fetch(Integer(answer[:question_id])), answer) }
+        if Steps.unanswered_questions(attempt).none?
+          Steps.advance!(attempt)
+          attempt.save!
+        end
       end
 
       render json: StepSerializer.new(attempt)

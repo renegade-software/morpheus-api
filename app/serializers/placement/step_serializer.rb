@@ -59,8 +59,14 @@ module Placement
       { section: "speaking", seconds: task.seconds, prompt: task.prompt }
     end
 
+    # `answered` says whether the learner already answered it (never what they chose or whether it was right), so the
+    # browser can resume at the next unanswered question.
     def question(question)
-      { id: question.id, prompt: question.prompt, options: question.options }
+      { id: question.id, prompt: question.prompt, options: question.options, answered: answered_ids.include?(question.id) }
+    end
+
+    def answered_ids
+      @answered_ids ||= @attempt.placement_responses.pluck(:placement_question_id).to_set
     end
   end
 end
