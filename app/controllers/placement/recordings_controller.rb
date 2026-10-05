@@ -19,6 +19,9 @@ module Placement
           timed_out: ActiveModel::Type::Boolean.new.cast(params[:timed_out]) || false,
           capture_metadata: capture_metadata
         )
+
+        Rails.logger.debug "#################### recording.audio.inspect #{recording.audio.inspect}"
+
         recording.audio.attach(params[:audio]) if params[:audio].present?
         Steps.advance!(attempt)
         attempt.save!
