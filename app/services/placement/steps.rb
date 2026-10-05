@@ -31,17 +31,40 @@ module Placement::Steps
     attempt.placement_form.placement_speaking_tasks.for_reading_result(attempt.reading_result)
   end
 
-  # Called after the current step's responses are saved; moves the attempt on and records section results.
+  # Called after the current step's responses (or the writing) are saved; moves the attempt on and records section
+  # results.
   def self.advance!(attempt)
     section, tier = attempt.current_step.split(".")
 
     case section
     when "reading" then advance_reading(attempt, tier)
     when "listening" then advance_listening(attempt, tier)
+    when "writing" then advance_writing(attempt)
+    when "speaking" then finish(attempt)
     end
     # The next step's clock hasn't started (it starts with Empezar, or the first play), and none of its plays are used.
     attempt.step_started_at = nil
     attempt.plays_used = 0
+  end
+
+  def self.advance_writing(attempt)
+    if voice_allowed?(attempt)
+      attempt.current_step = "speaking"
+    else
+      finish(attempt)
+    end
+  end
+
+  # Learners who didn't allow voice recording in the consent skip speaking (decided 2026-10-04): their range comes
+  # from reading, listening and writing.
+  def self.voice_allowed?(attempt)
+    attempt.participant.current_consent&.voice_allowed? || false
+  end
+
+  # No more steps: the writing and speaking are waiting to be rated.
+  def self.finish(attempt)
+    attempt.current_step = nil
+    attempt.status = "scoring"
   end
 
   def self.advance_reading(attempt, tier)
@@ -85,5 +108,5 @@ module Placement::Steps
     TIERS.fetch(TIERS.index(tier) + 1)
   end
 
-  private_class_method :advance_reading, :advance_listening, :passed?, :next_tier
+  private_class_method :advance_reading, :advance_listening, :advance_writing, :voice_allowed?, :finish, :passed?, :next_tier
 end

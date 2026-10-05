@@ -56,5 +56,24 @@ module Placement
 
       render json: StepSerializer.new(attempt)
     end
+
+    # The learner threw away their spoken answer to record it again. Each retake gets a fresh minute, starting now:
+    # the step's clock is moved back by the thinking time, so it reads as "thinking time over, recording from now".
+    # Counted here, under a row lock, so a refresh can't win an extra one.
+    def retake
+      attempt = current_participant.placement_attempt
+      return head :not_found unless attempt
+      return head :conflict unless attempt.current_step == "speaking" && params.expect(:step) == attempt.current_step
+
+      task = Steps.speaking_task(attempt)
+      counted = attempt.with_lock do
+        next false if attempt.retakes_used >= task.retakes
+
+        attempt.update!(retakes_used: attempt.retakes_used + 1, step_started_at: Time.current - task.prep_seconds)
+      end
+      return head :unprocessable_content unless counted
+
+      render json: StepSerializer.new(attempt)
+    end
   end
 end

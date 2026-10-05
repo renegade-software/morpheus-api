@@ -62,7 +62,7 @@ module Placement
       }
     end
 
-    # nil until the first play.
+    # Seconds since the step started (the first play, or Empezar); nil before that.
     def elapsed_seconds
       return if @attempt.step_started_at.nil?
 
@@ -71,12 +71,25 @@ module Placement
 
     def writing
       task = Steps.writing_task(@attempt)
-      { section: "writing", seconds: task.seconds, situation: task.prompt, bullets: task.bullets.map { _1["text"] } }
+      {
+        section: "writing",
+        seconds: task.seconds,
+        seconds_left: seconds_left(task.seconds),
+        situation: task.prompt,
+        bullets: task.bullets.map { _1["text"] }
+      }
     end
 
     def speaking
       task = Steps.speaking_task(@attempt)
-      { section: "speaking", seconds: task.seconds, prompt: task.prompt }
+      {
+        section: "speaking",
+        prep_seconds: task.prep_seconds,
+        seconds: task.seconds,
+        retakes_left: task.retakes - @attempt.retakes_used,
+        prompt: task.prompt,
+        elapsed_seconds: elapsed_seconds
+      }
     end
 
     # `answered` says whether the learner already answered it (never what they chose or whether it was right), so the

@@ -6,6 +6,10 @@
 # recordings once there are any.
 
 seconds: 60
+# Thinking time after the question appears and before the recording starts on its own (the learner can start early).
+prep_seconds: 15
+# How many times the learner may throw a take away and record again before sending; each retake gets a fresh minute.
+retakes: 1
 
 scoring_rules:
   - "Judge only the learner's own language. Ignore words repeated from the prompt."
