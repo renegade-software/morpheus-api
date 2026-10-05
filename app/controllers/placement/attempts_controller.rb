@@ -25,8 +25,6 @@ module Placement
       render json: StepSerializer.new(attempt)
     end
 
-    # The learner pressed Empezar on the current step. Stamped once, by the server: a second call (a refresh, a double
-    # click) keeps the first stamp, so the clock can't be restarted.
     def start
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt
@@ -36,9 +34,6 @@ module Placement
       render json: StepSerializer.new(attempt)
     end
 
-    # The learner pressed play on the current listening clip. Each press uses one of the clip's plays, and the first
-    # also starts the step's clock. Counted here, under a row lock, so neither a refresh nor a double click gives a
-    # play back.
     def play
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt
@@ -57,9 +52,6 @@ module Placement
       render json: StepSerializer.new(attempt)
     end
 
-    # The learner threw away their spoken answer to record it again. Each retake gets a fresh minute, starting now:
-    # the step's clock is moved back by the thinking time, so it reads as "thinking time over, recording from now".
-    # Counted here, under a row lock, so a refresh can't win an extra one.
     def retake
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt

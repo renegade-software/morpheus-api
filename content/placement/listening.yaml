@@ -1,6 +1,4 @@
 # Placement test, listening section: 3 clips for everyone, easiest first, 1 question each, 3 options per question.
-# `plays` is how many times the learner may play the clip (each press of play uses one; the server counts them). The
-# first play starts one clock of `plays` × the clip's length + `seconds`, and the question can be answered at any time.
 # Each tier targets the top of its band (A → A2, B → B2, C → C1). Descriptors are quoted from the
 # CEFR Companion Volume (Council of Europe, 2018). Clips get recorded once with Cartesia TTS; Tom is the app's voice.
 # `answer` is the 0-based index of the key. This file is the authoring source: bin/rails placement:import loads it

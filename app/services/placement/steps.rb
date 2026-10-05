@@ -17,8 +17,6 @@ module Placement::Steps
     passage(attempt).placement_questions
   end
 
-  # The current step's questions with no response yet, in order. Answers are saved one at a time, so after a refresh
-  # this is where the learner picks up.
   def self.unanswered_questions(attempt)
     questions(attempt).where.not(id: attempt.placement_responses.select(:placement_question_id))
   end
@@ -31,8 +29,6 @@ module Placement::Steps
     attempt.placement_form.placement_speaking_tasks.for_reading_result(attempt.reading_result)
   end
 
-  # Called after the current step's responses (or the writing) are saved; moves the attempt on and records section
-  # results.
   def self.advance!(attempt)
     section, tier = attempt.current_step.split(".")
 
@@ -42,7 +38,6 @@ module Placement::Steps
     when "writing" then advance_writing(attempt)
     when "speaking" then finish(attempt)
     end
-    # The next step's clock hasn't started (it starts with Empezar, or the first play), and none of its plays are used.
     attempt.step_started_at = nil
     attempt.plays_used = 0
   end
@@ -55,13 +50,10 @@ module Placement::Steps
     end
   end
 
-  # Learners who didn't allow voice recording in the consent skip speaking (decided 2026-10-04): their range comes
-  # from reading, listening and writing.
   def self.voice_allowed?(attempt)
     attempt.participant.current_consent&.voice_allowed? || false
   end
 
-  # No more steps: the writing and speaking are waiting to be rated.
   def self.finish(attempt)
     attempt.current_step = nil
     attempt.status = "scoring"

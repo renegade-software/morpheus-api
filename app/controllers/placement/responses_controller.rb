@@ -2,10 +2,6 @@ module Placement
   class ResponsesController < ApplicationController
     before_action :require_eligible_consent!
 
-    # Saves answers as the learner gives them, usually one question at a time (or every question left, when time runs
-    # out), grades them against the key and returns the step. The step only moves on once all its questions have an
-    # answer, so a refresh picks up at the next unanswered one. The browser runs the timers; a timed-out question
-    # arrives with no option.
     def create
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt
