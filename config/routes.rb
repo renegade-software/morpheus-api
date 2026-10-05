@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :placement do
     resource :attempt, only: %i[create show] do
       post :start
+      post :play
     end
     resources :responses, only: :create
   end

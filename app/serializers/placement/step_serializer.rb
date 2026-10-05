@@ -45,7 +45,9 @@ module Placement
       [ seconds - (Time.current - @attempt.step_started_at), 0 ].max.round(1)
     end
 
-    # The audio path is relative to the API; Active Storage redirects it to the file.
+    # The audio path is relative to the API; Active Storage redirects it to the file. The clip's clock is its plays
+    # times its length plus the answer time; only the browser knows the length (from the file), so the server sends how
+    # long ago the first play was and the browser works out what's left.
     def listening
       passage = Steps.passage(@attempt)
       {
@@ -53,9 +55,18 @@ module Placement
         tier: passage.tier,
         audio_path: rails_blob_path(passage.audio, only_path: true),
         plays: passage.plays,
+        plays_left: passage.plays - @attempt.plays_used,
         answer_seconds: passage.seconds,
+        elapsed_seconds: elapsed_seconds,
         question: question(passage.placement_questions.first)
       }
+    end
+
+    # nil until the first play.
+    def elapsed_seconds
+      return if @attempt.step_started_at.nil?
+
+      (Time.current - @attempt.step_started_at).round(1)
     end
 
     def writing

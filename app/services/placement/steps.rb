@@ -39,8 +39,9 @@ module Placement::Steps
     when "reading" then advance_reading(attempt, tier)
     when "listening" then advance_listening(attempt, tier)
     end
-    # The next step's clock hasn't started: it starts when the learner presses Empezar there.
+    # The next step's clock hasn't started (it starts with Empezar, or the first play), and none of its plays are used.
     attempt.step_started_at = nil
+    attempt.plays_used = 0
   end
 
   def self.advance_reading(attempt, tier)

@@ -35,5 +35,26 @@ module Placement
       attempt.update!(step_started_at: Time.current) if attempt.step_started_at.nil?
       render json: StepSerializer.new(attempt)
     end
+
+    # The learner pressed play on the current listening clip. Each press uses one of the clip's plays, and the first
+    # also starts the step's clock. Counted here, under a row lock, so neither a refresh nor a double click gives a
+    # play back.
+    def play
+      attempt = current_participant.placement_attempt
+      return head :not_found unless attempt
+      return head :conflict unless params.expect(:step) == attempt.current_step
+
+      passage = Steps.passage(attempt)
+      return head :unprocessable_content unless passage.section == "listening"
+
+      counted = attempt.with_lock do
+        next false if attempt.plays_used >= passage.plays
+
+        attempt.update!(plays_used: attempt.plays_used + 1, step_started_at: attempt.step_started_at || Time.current)
+      end
+      return head :unprocessable_content unless counted
+
+      render json: StepSerializer.new(attempt)
+    end
   end
 end
