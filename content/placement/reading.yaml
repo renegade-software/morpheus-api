@@ -10,21 +10,21 @@
   descriptor: "Can find specific, predictable information in simple everyday material such as advertisements, prospectuses, menus, reference lists and timetables."
   text: |
     CITY GYM: NEW OPENING HOURS
-    From Monday 6 October, we open at 7:00 instead of 6:00 on weekdays. Weekend hours do not change.
+    Starting December 6th, 2026, we open at 7:00 instead of 6:00 on weekdays. Weekend hours stay the same.
     The swimming pool is closed for cleaning until Friday. Please use the changing rooms on the first floor.
   questions:
     - targets: "A specific fact (a time)"
-      prompt: "From 6 October, what time does the gym open on weekdays?"
+      prompt: "Starting December 6th, what time does the gym open on weekdays?"
       options:
         - "At 6:00"
         - "At 7:00"
-        - "At the same time as at weekends"
+        - "At the same time as on weekends"
       answer: 1
     - targets: "The main message"
       prompt: "What is the notice mainly about?"
       options:
         - "A new swimming class"
-        - "Moving the changing rooms"
+        - "Closing the gym on weekends"
         - "Changes at the gym"
       answer: 2
 
