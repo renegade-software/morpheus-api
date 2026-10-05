@@ -31,12 +31,18 @@ module Placement
         section: "reading",
         tier: passage.tier,
         seconds: passage.seconds,
+        seconds_left: seconds_left(passage.seconds),
         text: passage.body,
         questions: passage.placement_questions.map { question(_1) }
       }
     end
 
-    # The audio path is relative to the API; Active Storage redirects it to the file.
+    def seconds_left(seconds)
+      return if @attempt.step_started_at.nil?
+
+      [ seconds - (Time.current - @attempt.step_started_at), 0 ].max.round(1)
+    end
+
     def listening
       passage = Steps.passage(@attempt)
       {
@@ -44,23 +50,48 @@ module Placement
         tier: passage.tier,
         audio_path: rails_blob_path(passage.audio, only_path: true),
         plays: passage.plays,
+        plays_left: passage.plays - @attempt.plays_used,
         answer_seconds: passage.seconds,
+        elapsed_seconds: elapsed_seconds,
         question: question(passage.placement_questions.first)
       }
     end
 
+    def elapsed_seconds
+      return if @attempt.step_started_at.nil?
+
+      (Time.current - @attempt.step_started_at).round(1)
+    end
+
     def writing
       task = Steps.writing_task(@attempt)
-      { section: "writing", seconds: task.seconds, situation: task.prompt, bullets: task.bullets.map { _1["text"] } }
+      {
+        section: "writing",
+        seconds: task.seconds,
+        seconds_left: seconds_left(task.seconds),
+        situation: task.prompt,
+        bullets: task.bullets.map { _1["text"] }
+      }
     end
 
     def speaking
       task = Steps.speaking_task(@attempt)
-      { section: "speaking", seconds: task.seconds, prompt: task.prompt }
+      {
+        section: "speaking",
+        prep_seconds: task.prep_seconds,
+        seconds: task.seconds,
+        retakes_left: task.retakes - @attempt.retakes_used,
+        prompt: task.prompt,
+        elapsed_seconds: elapsed_seconds
+      }
     end
 
     def question(question)
-      { id: question.id, prompt: question.prompt, options: question.options }
+      { id: question.id, prompt: question.prompt, options: question.options, answered: answered_ids.include?(question.id) }
+    end
+
+    def answered_ids
+      @answered_ids ||= @attempt.placement_responses.pluck(:placement_question_id).to_set
     end
   end
 end

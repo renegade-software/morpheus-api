@@ -5,8 +5,14 @@ Rails.application.routes.draw do
   resource :consent, only: :create
 
   namespace :placement do
-    resource :attempt, only: %i[create show]
+    resource :attempt, only: %i[create show] do
+      post :start
+      post :play
+      post :retake
+    end
     resources :responses, only: :create
+    resource :writing, only: :create
+    resource :recording, only: :create
   end
 
   root "root#show"

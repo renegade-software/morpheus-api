@@ -6,6 +6,8 @@
 # recordings once there are any.
 
 seconds: 60
+prep_seconds: 15
+retakes: 1
 
 scoring_rules:
   - "Judge only the learner's own language. Ignore words repeated from the prompt."

@@ -97,6 +97,8 @@ module Placement::Import
         reading_results: prompt["for_reading_result"],
         prompt: prompt["text"],
         seconds: speaking["seconds"],
+        prep_seconds: speaking.fetch("prep_seconds"),
+        retakes: speaking.fetch("retakes"),
         scoring_rules: speaking["scoring_rules"]
       )
 
