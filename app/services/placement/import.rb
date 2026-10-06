@@ -10,8 +10,8 @@ module Placement::Import
   }.freeze
 
   def self.call(name:)
-    PlacementForm.transaction do
-      form = PlacementForm.create!(name: name)
+    Placement::Form.transaction do
+      form = Placement::Form.create!(name: name)
       import_reading(form)
       import_listening(form)
       import_writing(form)
@@ -23,7 +23,7 @@ module Placement::Import
 
   def self.import_reading(form)
     read("reading.yaml").each do |text|
-      passage = form.placement_passages.create!(
+      passage = form.passages.create!(
         section: "reading",
         tier: text["tier"],
         level: level(text["level"]),
@@ -41,7 +41,7 @@ module Placement::Import
 
   def self.import_listening(form)
     read("listening.yaml").each do |clip|
-      passage = form.placement_passages.create!(
+      passage = form.passages.create!(
         section: "listening",
         tier: clip["tier"],
         level: level(clip["level"]),
@@ -72,7 +72,7 @@ module Placement::Import
   def self.import_writing(form)
     writing = read("writing.yaml")
 
-    task = form.create_placement_writing_task!(
+    task = form.create_writing_task!(
       prompt: writing.dig("task", "situation"),
       seconds: writing.dig("task", "seconds"),
       bullets: writing.dig("task", "bullets"),
@@ -80,7 +80,7 @@ module Placement::Import
     )
 
     writing["anchors"].each do |anchor|
-      task.placement_writing_anchors.create!(
+      task.writing_anchors.create!(
         level: level(anchor["level"]),
         text: anchor["text"],
         note: anchor["note"]
@@ -92,7 +92,7 @@ module Placement::Import
     speaking = read("speaking.yaml")
 
     speaking["prompts"].each do |prompt|
-      task = form.placement_speaking_tasks.create!(
+      task = form.speaking_tasks.create!(
         tier: prompt["id"],
         reading_results: prompt["for_reading_result"],
         prompt: prompt["text"],
@@ -103,7 +103,7 @@ module Placement::Import
       )
 
       prompt["anchors"].each do |anchor|
-        task.placement_speaking_anchors.create!(
+        task.speaking_anchors.create!(
           level: level(anchor["level"]),
           transcript: anchor["transcript"],
           note: anchor["note"],
@@ -119,7 +119,7 @@ module Placement::Import
     read("rubrics.yaml").each do |skill, criteria|
       criteria.each do |criterion, levels|
         levels.each do |label, text|
-          form.placement_rubric_descriptors.create!(
+          form.rubric_descriptors.create!(
             skill: skill,
             criterion: criterion,
             level: level(label),
@@ -132,7 +132,7 @@ module Placement::Import
   end
 
   def self.create_question(passage, question, position)
-    passage.placement_questions.create!(
+    passage.questions.create!(
       position: position,
       prompt: question["prompt"],
       options: question["options"],

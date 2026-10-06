@@ -33,7 +33,7 @@ module Placement
         seconds: passage.seconds,
         seconds_left: seconds_left(passage.seconds),
         text: passage.body,
-        questions: passage.placement_questions.map { question(_1) }
+        questions: passage.questions.map { question(_1) }
       }
     end
 
@@ -53,7 +53,7 @@ module Placement
         plays_left: passage.plays - @attempt.plays_used,
         answer_seconds: passage.seconds,
         elapsed_seconds: elapsed_seconds,
-        question: question(passage.placement_questions.first)
+        question: question(passage.questions.first)
       }
     end
 
@@ -91,7 +91,7 @@ module Placement
     end
 
     def answered_ids
-      @answered_ids ||= @attempt.placement_responses.pluck(:placement_question_id).to_set
+      @answered_ids ||= @attempt.responses.pluck(:placement_question_id).to_set
     end
   end
 end

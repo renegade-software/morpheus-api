@@ -2,31 +2,31 @@ module Placement::Steps
   # The order of the test: reading A → B → C (stopping at the first text with a wrong answer), listening A → B → C for
   # everyone, then writing and speaking. Also works out the reading and listening results as each section ends.
   FIRST = "reading.a".freeze
-  TIERS = PlacementPassage::TIERS
+  TIERS = Placement::Passage::TIERS
 
   def self.passage(attempt, step = attempt.current_step)
     section, tier = step.split(".")
-    attempt.placement_form.placement_passages.find_by!(section: section, tier: tier)
+    attempt.form.passages.find_by!(section: section, tier: tier)
   end
 
   # The questions the current step must answer: both questions of a reading text, or the one listening question.
   def self.questions(attempt)
     section = attempt.current_step.split(".").first
-    return PlacementQuestion.none unless PlacementPassage::SECTIONS.include?(section)
+    return Placement::Question.none unless Placement::Passage::SECTIONS.include?(section)
 
-    passage(attempt).placement_questions
+    passage(attempt).questions
   end
 
   def self.unanswered_questions(attempt)
-    questions(attempt).where.not(id: attempt.placement_responses.select(:placement_question_id))
+    questions(attempt).where.not(id: attempt.responses.select(:placement_question_id))
   end
 
   def self.writing_task(attempt)
-    PlacementWritingTask.find_by!(placement_form: attempt.placement_form)
+    Placement::WritingTask.find_by!(form: attempt.form)
   end
 
   def self.speaking_task(attempt)
-    attempt.placement_form.placement_speaking_tasks.for_reading_result(attempt.reading_result)
+    attempt.form.speaking_tasks.for_reading_result(attempt.reading_result)
   end
 
   def self.advance!(attempt)
@@ -84,16 +84,16 @@ module Placement::Steps
 
   # The hardest clip answered correctly: 0 for none, 1 for A, 2 for B, 3 for C.
   def self.listening_result(attempt)
-    correct_tiers = attempt.placement_responses
-      .joins(placement_question: :placement_passage)
+    correct_tiers = attempt.responses
+      .joins(question: :passage)
       .where(correct: true, placement_passages: { section: "listening" })
       .pluck("placement_passages.tier")
     correct_tiers.map { TIERS.index(_1) + 1 }.max || 0
   end
 
   def self.passed?(attempt, passage)
-    responses = attempt.placement_responses.where(placement_question: passage.placement_questions)
-    responses.size == passage.placement_questions.size && responses.all?(&:correct)
+    responses = attempt.responses.where(question: passage.questions)
+    responses.size == passage.questions.size && responses.all?(&:correct)
   end
 
   def self.next_tier(tier)

@@ -3,12 +3,12 @@ namespace :placement do
   task :import, [ :name ] => :environment do |_task, args|
     name = args.fetch(:name)
     form = Placement::Import.call(name: name)
-    missing = form.placement_passages.where(section: "listening").reject { _1.audio.attached? }.map(&:tier)
+    missing = form.passages.where(section: "listening").reject { _1.audio.attached? }.map(&:tier)
 
-    puts "Draft form ##{form.id} \"#{form.name}\": #{form.placement_questions.count} questions, " \
-         "1 writing task with #{form.placement_writing_anchors.count} anchors, " \
-         "#{form.placement_speaking_tasks.count} speaking tasks with #{form.placement_speaking_anchors.count} anchors, " \
-         "#{form.placement_rubric_descriptors.count} rubric descriptors"
+    puts "Draft form ##{form.id} \"#{form.name}\": #{form.questions.count} questions, " \
+         "1 writing task with #{form.writing_anchors.count} anchors, " \
+         "#{form.speaking_tasks.count} speaking tasks with #{form.speaking_anchors.count} anchors, " \
+         "#{form.rubric_descriptors.count} rubric descriptors"
 
     if missing.any?
       puts "\n⚠️  Listening audio missing for tiers: #{missing.join(', ')}"
@@ -20,8 +20,8 @@ namespace :placement do
 
   desc "Retroactively attach missing audio files to an existing draft form"
   task :attach_audio, [ :name ] => :environment do |_task, args|
-    form = PlacementForm.find_by!(name: args.fetch(:name))
-    missing_passages = form.placement_passages.where(section: "listening").reject { _1.audio.attached? }
+    form = Placement::Form.find_by!(name: args.fetch(:name))
+    missing_passages = form.passages.where(section: "listening").reject { _1.audio.attached? }
 
     if missing_passages.empty?
       puts "All listening passages for '#{form.name}' already have audio attached."
@@ -44,14 +44,14 @@ namespace :placement do
 
   desc "Serve a draft form to new learners, retiring the current one: bin/rails 'placement:activate[2026-10 study]'"
   task :activate, [ :name ] => :environment do |_task, args|
-    PlacementForm.find_by!(name: args.fetch(:name)).activate!
+    Placement::Form.find_by!(name: args.fetch(:name)).activate!
     puts "Active: #{args[:name]}"
   end
 
   desc "Destroy a draft form (will abort if user answers exist): bin/rails 'placement:destroy[2026-10 study]'"
   task :destroy, [ :name ] => :environment do |_task, args|
     name = args.fetch(:name)
-    form = PlacementForm.find_by(name: name)
+    form = Placement::Form.find_by(name: name)
 
     if form.nil?
       puts "⚠️  Could not find a form named '#{name}'."

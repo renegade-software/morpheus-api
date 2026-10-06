@@ -8,9 +8,9 @@ module Placement
       return head :conflict unless attempt.current_step == "speaking" && params.expect(:step) == attempt.current_step
       return head :forbidden unless current_participant.current_consent&.voice_allowed?
 
-      PlacementAttempt.transaction do
-        recording = attempt.create_placement_recording!(
-          placement_speaking_task: Steps.speaking_task(attempt),
+      Attempt.transaction do
+        recording = attempt.create_recording!(
+          speaking_task: Steps.speaking_task(attempt),
           timed_out: ActiveModel::Type::Boolean.new.cast(params[:timed_out]) || false,
           capture_metadata: capture_metadata
         )
