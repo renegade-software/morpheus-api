@@ -16,7 +16,7 @@ module Placement
                       status: :unprocessable_content
       end
 
-      PlacementAttempt.transaction do
+      Attempt.transaction do
         answers.each { |answer| record_response(attempt, open_questions.fetch(Integer(answer[:question_id])), answer) }
         if Steps.unanswered_questions(attempt).none?
           Steps.advance!(attempt)
@@ -31,8 +31,8 @@ module Placement
 
     def record_response(attempt, question, answer)
       selected_option = answer[:selected_option].presence&.then { Integer(_1) }
-      attempt.placement_responses.create!(
-        placement_question: question,
+      attempt.responses.create!(
+        question: question,
         selected_option: selected_option,
         correct: selected_option == question.correct_option
       )

@@ -7,9 +7,9 @@ module Placement
       return head :not_found unless attempt
       return head :conflict unless attempt.current_step == "writing" && params.expect(:step) == attempt.current_step
 
-      PlacementAttempt.transaction do
-        attempt.create_placement_writing!(
-          placement_writing_task: Steps.writing_task(attempt),
+      Attempt.transaction do
+        attempt.create_writing!(
+          writing_task: Steps.writing_task(attempt),
           text: params[:text].to_s,
           timed_out: ActiveModel::Type::Boolean.new.cast(params[:timed_out]) || false
         )

@@ -4,6 +4,6 @@ module FrozenWithPlacementForm
   extend ActiveSupport::Concern
 
   def readonly?
-    super || (persisted? && placement_form.locked?)
+    super || (persisted? && form.locked?)
   end
 end

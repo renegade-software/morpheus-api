@@ -7,11 +7,11 @@ module Placement
       existing = current_participant.placement_attempt
       return render json: StepSerializer.new(existing) if existing
 
-      form = PlacementForm.current
+      form = Form.current
       return render json: { errors: [ "no active placement form" ] }, status: :service_unavailable unless form
 
       attempt = current_participant.create_placement_attempt!(
-        placement_form: form,
+        form: form,
         current_step: Steps::FIRST,
         started_at: Time.current
       )
