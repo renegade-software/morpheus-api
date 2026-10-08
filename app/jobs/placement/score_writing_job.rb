@@ -2,9 +2,6 @@ module Placement
   # Rates a placement message through morpheus-agent and stores a trace for every call. Queued as soon as the message
   # is sent, so the rating is usually done before the learner finishes the speaking part.
   class ScoreWritingJob < ApplicationJob
-    # The agent's fields that are evaluation_traces columns, one to one.
-    TRACE_FIELDS = %w[step prompt_path prompt_sha256 model effort input output input_tokens output_tokens latency_ms
-                      cost_usd status error retried].freeze
     EMPTY_STEP = "rate_empty_placement_writing".freeze
 
     queue_as :scoring
@@ -23,7 +20,7 @@ module Placement
 
     def store(writing, response)
       Writing.transaction do
-        traces = response.fetch("traces").map { |trace| create_trace(writing, trace.slice(*TRACE_FIELDS)) }
+        traces = response.fetch("traces").map { |trace| create_trace(writing, trace.slice(*EvaluationTrace::AGENT_FIELDS)) }
         if response.fetch("status") == "ok"
           rate(writing, response.fetch("rating"), traces.last)
         else

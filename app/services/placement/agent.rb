@@ -16,6 +16,10 @@ module Placement::Agent
     post("/placement/writing", payload)
   end
 
+  def self.score_speaking(payload)
+    post("/placement/speaking", payload)
+  end
+
   def self.post(path, body)
     uri = URI.join(ENV.fetch("AGENT_URL"), path)
     request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json",
