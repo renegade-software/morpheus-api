@@ -48,6 +48,10 @@ Rails.application.configure do
   config.cache_store = :memory_store
   config.active_job.queue_adapter = :solid_queue
 
+  # A Claude call outlasts the 5-second default; stay inside Render's 30-second shutdown window
+  # so a deploy lets running jobs finish instead of failing them.
+  config.solid_queue.shutdown_timeout = 25.seconds
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

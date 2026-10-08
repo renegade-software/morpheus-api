@@ -78,8 +78,8 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-# Render gives one Postgres database via DATABASE_URL. Solid Cache/Queue/Cable are off in
-# production until something needs them, so there is no cache/queue/cable database.
+# Render gives one Postgres database via DATABASE_URL. Solid Queue's tables live in it (added by a
+# normal migration); Solid Cache/Cable are off in production, so there is no cache/cable database.
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
