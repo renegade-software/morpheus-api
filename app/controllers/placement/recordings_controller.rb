@@ -8,7 +8,7 @@ module Placement
       return head :conflict unless attempt.current_step == "speaking" && params.expect(:step) == attempt.current_step
       return head :forbidden unless current_participant.current_consent&.voice_allowed?
 
-      Attempt.transaction do
+      recording = Attempt.transaction do
         recording = attempt.create_recording!(
           speaking_task: Steps.speaking_task(attempt),
           timed_out: ActiveModel::Type::Boolean.new.cast(params[:timed_out]) || false,
@@ -17,7 +17,11 @@ module Placement
         recording.audio.attach(params[:audio]) if params[:audio].present?
         Steps.advance!(attempt)
         attempt.save!
+        recording
       end
+      # Queued after the transaction, unlike writing: Active Storage uploads the file in an after_commit callback, so
+      # only now is the audio in storage for the agent to download.
+      ScoreSpeakingJob.perform_later(recording)
 
       render json: StepSerializer.new(attempt), status: :created
     end
