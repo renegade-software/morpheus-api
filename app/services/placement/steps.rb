@@ -100,5 +100,6 @@ module Placement::Steps
     TIERS.fetch(TIERS.index(tier) + 1)
   end
 
-  private_class_method :advance_reading, :advance_listening, :advance_writing, :voice_allowed?, :finish, :passed?, :next_tier
+  # voice_allowed? stays public: Scoring needs the same rule to know whether speaking is part of the range.
+  private_class_method :advance_reading, :advance_listening, :advance_writing, :finish, :passed?, :next_tier
 end
