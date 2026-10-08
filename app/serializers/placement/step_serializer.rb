@@ -9,10 +9,16 @@ module Placement
     end
 
     def as_json(*)
-      { status: @attempt.status, current_step: @attempt.current_step, step: step }
+      { status: @attempt.status, current_step: @attempt.current_step, step: step, result: result }
     end
 
     private
+
+    def result
+      return unless @attempt.status == "completed"
+
+      { level_low: @attempt.level_low, level_high: @attempt.level_high }
+    end
 
     def step
       return if @attempt.current_step.nil?
