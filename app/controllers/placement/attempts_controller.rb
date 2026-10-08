@@ -61,7 +61,7 @@ module Placement
       counted = attempt.with_lock do
         next false if attempt.retakes_used >= task.retakes
 
-        attempt.update!(retakes_used: attempt.retakes_used + 1, step_started_at: Time.current - task.prep_seconds)
+        attempt.update!(retakes_used: attempt.retakes_used + 1, step_started_at: Time.current)
       end
       return head :unprocessable_content unless counted
 
