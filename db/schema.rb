@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_08_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,10 +61,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
   create_table "evaluation_traces", force: :cascade do |t|
     t.bigint "participant_id", null: false
     t.string "step", null: false
-    t.string "model", null: false
+    t.string "model"
     t.string "effort"
-    t.string "prompt_path", null: false
-    t.string "prompt_sha256", null: false
+    t.string "prompt_path"
+    t.string "prompt_sha256"
     t.jsonb "input"
     t.jsonb "output"
     t.integer "input_tokens"
@@ -75,7 +75,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.text "error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "retried", default: false, null: false
+    t.bigint "placement_attempt_id"
     t.index ["participant_id"], name: "index_evaluation_traces_on_participant_id"
+    t.index ["placement_attempt_id"], name: "index_evaluation_traces_on_placement_attempt_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -424,6 +427,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "evaluation_traces", "participants"
+  add_foreign_key "evaluation_traces", "placement_attempts"
   add_foreign_key "placement_attempts", "participants"
   add_foreign_key "placement_attempts", "placement_forms"
   add_foreign_key "placement_passages", "placement_forms"

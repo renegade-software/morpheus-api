@@ -8,6 +8,8 @@ module Placement
     has_many :responses, foreign_key: :placement_attempt_id, dependent: :destroy
     has_one :writing, foreign_key: :placement_attempt_id, dependent: :destroy
     has_one :recording, foreign_key: :placement_attempt_id, dependent: :destroy
+    # After writing and recording: they point at traces, so they're destroyed before the traces are.
+    has_many :evaluation_traces, foreign_key: :placement_attempt_id, dependent: :destroy
 
     validates :participant_id, uniqueness: true
     validates :status, inclusion: { in: STATUSES }
