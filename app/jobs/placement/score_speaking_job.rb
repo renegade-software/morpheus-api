@@ -10,10 +10,14 @@ module Placement
     discard_on ActiveJob::DeserializationError
 
     def perform(recording)
-      return if recording.rated? # a rerun after a success
-      return rate_missing(recording) unless recording.audio.attached?
-
-      store(recording, Placement::Agent.score_speaking(Placement::SpeakingPayload.build(recording)))
+      unless recording.rated? # a rerun after a success skips straight to completing
+        if recording.audio.attached?
+          store(recording, Placement::Agent.score_speaking(Placement::SpeakingPayload.build(recording)))
+        else
+          rate_missing(recording)
+        end
+      end
+      Placement::Scoring.complete_if_ready(recording.attempt)
     end
 
     private

@@ -10,10 +10,14 @@ module Placement
     discard_on ActiveJob::DeserializationError
 
     def perform(writing)
-      return if writing.rated? # a rerun after a success
-      return rate_empty(writing) if writing.text.blank?
-
-      store(writing, Placement::Agent.score_writing(Placement::WritingPayload.build(writing)))
+      unless writing.rated? # a rerun after a success skips straight to completing
+        if writing.text.blank?
+          rate_empty(writing)
+        else
+          store(writing, Placement::Agent.score_writing(Placement::WritingPayload.build(writing)))
+        end
+      end
+      Placement::Scoring.complete_if_ready(writing.attempt)
     end
 
     private
