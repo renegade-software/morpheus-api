@@ -43,10 +43,10 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # In-process cache and jobs: production has a single database, so Solid Cache/Queue stay off
-  # until a feature needs durable caching or background jobs.
+  # In-process cache: production has a single database, so Solid Cache stays off until a feature
+  # needs durable caching. Jobs use Solid Queue, with its tables in the main database.
   config.cache_store = :memory_store
-  config.active_job.queue_adapter = :async
+  config.active_job.queue_adapter = :solid_queue
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
