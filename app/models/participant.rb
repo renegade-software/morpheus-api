@@ -1,4 +1,7 @@
 class Participant < ApplicationRecord
+  # Interface languages only; practice is always in English (NFR7).
+  DISPLAY_LANGUAGES = %w[en es].freeze
+
   before_validation :assign_pseudonym, on: :create
 
   # Declared before evaluation_traces so the attempt (whose writing and recording point at traces) is destroyed first.
@@ -7,6 +10,7 @@ class Participant < ApplicationRecord
 
   validates :clerk_user_id, presence: true, uniqueness: true
   validates :pseudonym, presence: true, uniqueness: true
+  validates :display_language, inclusion: { in: DISPLAY_LANGUAGES }, allow_nil: true
 
   def current_consent
     Consent.find_by(pseudonym: pseudonym, document_version: Consent::CURRENT_VERSION)
