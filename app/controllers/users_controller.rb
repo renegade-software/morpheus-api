@@ -7,8 +7,7 @@ class UsersController < ApplicationController
 
   def update
     current_participant.assign_attributes(user_params.except(:onboarded))
-    # The app only says "done"; the server stamps when, and the first time stays.
-    current_participant.onboarded_at ||= Time.current if onboarded?
+    apply_onboarded if user_params.key?(:onboarded)
 
     if current_participant.save
       render json: user_json
@@ -23,8 +22,14 @@ class UsersController < ApplicationController
     params.expect(user: [ :display_language, :onboarded ])
   end
 
-  def onboarded?
-    ActiveModel::Type::Boolean.new.cast(user_params[:onboarded])
+  # The app only says done or not; the server stamps when. True keeps the first time, false clears it so the
+  # tour shows again.
+  def apply_onboarded
+    if ActiveModel::Type::Boolean.new.cast(user_params[:onboarded])
+      current_participant.onboarded_at ||= Time.current
+    else
+      current_participant.onboarded_at = nil
+    end
   end
 
   def user_json
