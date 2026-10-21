@@ -82,13 +82,13 @@ module Placement::Steps
     TIERS.take_while { |tier| passed?(attempt, passage(attempt, "reading.#{tier}")) }.size
   end
 
-  # The hardest clip answered correctly: 0 for none, 1 for A, 2 for B, 3 for C.
+  # Clips answered correctly, 0–3. The clips get harder in order, so for consistent answers this equals the hardest
+  # one right; an out-of-order right answer, likely a guess, counts as one step instead of the top (decided 2026-10-20).
   def self.listening_result(attempt)
-    correct_tiers = attempt.responses
+    attempt.responses
       .joins(question: :passage)
       .where(correct: true, placement_passages: { section: "listening" })
-      .pluck("placement_passages.tier")
-    correct_tiers.map { TIERS.index(_1) + 1 }.max || 0
+      .count
   end
 
   def self.passed?(attempt, passage)

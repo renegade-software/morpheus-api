@@ -4,8 +4,7 @@ module Placement::Scoring
   # (decided 2026-10-07). Writing and speaking are already levels, 0–5.
   TIER_LEVEL = [ 0.5, 2.0, 3.5, 4.5 ].freeze
   WEIGHTS = { speaking: 0.5, listening: 0.2, reading: 0.15, writing: 0.15 }.freeze
-  # No voice consent: speaking's half spread over the rest in proportion, and writing sets the low end instead
-  # (decided 2026-10-07).
+  # No voice consent: speaking's half spread over the rest in proportion (decided 2026-10-07).
   WEIGHTS_WITHOUT_SPEAKING = { listening: 0.4, reading: 0.3, writing: 0.3 }.freeze
 
   # Called by both rating jobs; whichever finishes last completes the attempt. The lock stops two jobs finishing
@@ -26,22 +25,18 @@ module Placement::Scoring
     end
   end
 
-  # A range, never one level, so a short test never claims more precision than it has. Returns [low, high, score].
+  # Always two adjacent levels: the score's band and the one above it, so a short test never claims more precision
+  # than it has. The weights alone decide it; speaking no longer caps the low end, so one 60-second recording can't
+  # override the other parts (decided 2026-10-20). Returns [low, high, score].
   def self.cefr_range(reading:, listening:, writing:, speaking:)
     parts = { listening: TIER_LEVEL.fetch(listening), reading: TIER_LEVEL.fetch(reading), writing: writing }
-    if speaking
-      score = weighted(parts.merge(speaking: speaking), WEIGHTS)
-      anchor = speaking # speaking decides where the learner starts
-    else
-      score = weighted(parts, WEIGHTS_WITHOUT_SPEAKING)
-      anchor = writing
-    end
-    low = [ score.floor, anchor ].min
-    high = [ score.ceil, low + 1 ].max.clamp(CefrLevel::RANGE.min, CefrLevel::RANGE.max)
-    [ low, high, score ]
+    score = speaking ? weighted(parts.merge(speaking: speaking), WEIGHTS) : weighted(parts, WEIGHTS_WITHOUT_SPEAKING)
+    # Capped one below C2 so low + 1 is always a real level.
+    low = score.floor.clamp(CefrLevel::RANGE.min, CefrLevel::RANGE.max - 1)
+    [ low, low + 1, score ]
   end
 
-  # Rounded so float noise (2.5000000000000004) can't push a whole-number score up a level when ceil is taken.
+  # Rounded so float noise (2.9999999999999996) can't pull a whole-number score down a level when floor is taken.
   def self.weighted(parts, weights)
     weights.sum { |part, weight| weight * parts.fetch(part) }.round(2)
   end
