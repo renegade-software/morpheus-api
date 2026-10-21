@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resource :user, only: :show
+  resource :user, only: %i[show update]
   resource :consent, only: :create
 
   namespace :placement do
