@@ -21,7 +21,7 @@ module Placement::Scoring
       attempt.update!(level_low: low, level_high: high, score: score, writing_level: attempt.writing.overall_level,
                       speaking_level: speaking, status: "completed", completed_at: Time.current)
       # Practice starts at the bottom of the range; the intake range on the attempt never changes.
-      attempt.participant.update!(current_level: low)
+      attempt.participant.update!(current_level: low, rank_points: RankPoints.from_placement(score))
     end
   end
 
