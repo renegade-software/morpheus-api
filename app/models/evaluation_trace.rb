@@ -7,6 +7,7 @@ class EvaluationTrace < ApplicationRecord
 
   belongs_to :participant
   belongs_to :placement_attempt, class_name: "Placement::Attempt", optional: true
+  belongs_to :conversation, optional: true
 
   validates :step, presence: true
   validates :status, inclusion: { in: STATUSES }

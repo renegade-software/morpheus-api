@@ -5,7 +5,7 @@ module Placement
     EMPTY_STEP = "rate_empty_placement_writing".freeze
 
     queue_as :scoring
-    retry_on Placement::Agent::Unavailable, wait: :polynomially_longer, attempts: 5
+    retry_on Agent::Unavailable, wait: :polynomially_longer, attempts: 5
     # The learner deleted their data before the job ran.
     discard_on ActiveJob::DeserializationError
 
@@ -14,7 +14,7 @@ module Placement
         if writing.text.blank?
           rate_empty(writing)
         else
-          store(writing, Placement::Agent.score_writing(Placement::WritingPayload.build(writing)))
+          store(writing, Agent.score_writing(Placement::WritingPayload.build(writing)))
         end
       end
       Placement::Scoring.complete_if_ready(writing.attempt)
