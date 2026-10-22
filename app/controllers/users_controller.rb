@@ -40,6 +40,7 @@ class UsersController < ApplicationController
       pseudonym: current_participant.pseudonym,
       display_language: current_participant.display_language,
       onboarded: current_participant.onboarded_at.present?,
+      rank_points: current_participant.rank_points,
       consent: consent && { eligible: consent.eligible?, voice_allowed: consent.voice_allowed? }
     }
   end
