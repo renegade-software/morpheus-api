@@ -5,14 +5,14 @@ module Placement
     MISSING_STEP = "rate_missing_placement_speaking".freeze
 
     queue_as :scoring
-    retry_on Placement::Agent::Unavailable, wait: :polynomially_longer, attempts: 5
+    retry_on Agent::Unavailable, wait: :polynomially_longer, attempts: 5
     # The learner deleted their data before the job ran.
     discard_on ActiveJob::DeserializationError
 
     def perform(recording)
       unless recording.rated? # a rerun after a success skips straight to completing
         if recording.audio.attached?
-          store(recording, Placement::Agent.score_speaking(Placement::SpeakingPayload.build(recording)))
+          store(recording, Agent.score_speaking(Placement::SpeakingPayload.build(recording)))
         else
           rate_missing(recording)
         end

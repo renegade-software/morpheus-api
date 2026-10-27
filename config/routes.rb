@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resource :user, only: %i[show update]
   resource :consent, only: :create
 
+  resources :conversations, only: %i[create show] do
+    post :finish, on: :member
+    resources :turns, only: :create, module: :conversations
+  end
+
   namespace :placement do
     resource :attempt, only: %i[create show] do
       post :start

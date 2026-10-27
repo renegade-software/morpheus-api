@@ -4,8 +4,10 @@ class Participant < ApplicationRecord
 
   before_validation :assign_pseudonym, on: :create
 
-  # Declared before evaluation_traces so the attempt (whose writing and recording point at traces) is destroyed first.
+  # Declared before evaluation_traces so the attempt (whose writing and recording point at traces) and the
+  # conversations (whose turns do) are destroyed first.
   has_one :placement_attempt, class_name: "Placement::Attempt", dependent: :destroy
+  has_many :conversations, dependent: :destroy
   has_many :evaluation_traces, dependent: :destroy
 
   validates :clerk_user_id, presence: true, uniqueness: true

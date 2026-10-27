@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_22_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
     t.index ["pseudonym"], name: "index_consents_on_pseudonym"
   end
 
+  create_table "conversation_turns", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.integer "position", null: false
+    t.string "speaker", null: false
+    t.text "text", null: false
+    t.bigint "evaluation_trace_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id", "position"], name: "index_conversation_turns_on_conversation_id_and_position", unique: true
+    t.index ["conversation_id"], name: "index_conversation_turns_on_conversation_id"
+    t.index ["evaluation_trace_id"], name: "index_conversation_turns_on_evaluation_trace_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "participant_id", null: false
+    t.bigint "scenario_id", null: false
+    t.string "status", default: "active", null: false
+    t.string "finished_reason"
+    t.jsonb "goals", default: [], null: false
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participant_id"], name: "index_conversations_on_participant_id"
+    t.index ["scenario_id"], name: "index_conversations_on_scenario_id"
+  end
+
   create_table "evaluation_traces", force: :cascade do |t|
     t.bigint "participant_id", null: false
     t.string "step", null: false
@@ -77,6 +103,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
     t.datetime "updated_at", null: false
     t.boolean "retried", default: false, null: false
     t.bigint "placement_attempt_id"
+    t.bigint "conversation_id"
+    t.index ["conversation_id"], name: "index_evaluation_traces_on_conversation_id"
     t.index ["participant_id"], name: "index_evaluation_traces_on_participant_id"
     t.index ["placement_attempt_id"], name: "index_evaluation_traces_on_placement_attempt_id"
   end
@@ -277,6 +305,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
     t.index ["placement_writing_task_id"], name: "index_placement_writings_on_placement_writing_task_id"
   end
 
+  create_table "scenarios", force: :cascade do |t|
+    t.string "key", null: false
+    t.integer "level", null: false
+    t.integer "turn_limit", null: false
+    t.jsonb "content", null: false
+    t.string "content_sha256", null: false
+    t.string "status", default: "active", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_sha256"], name: "index_scenarios_on_content_sha256", unique: true
+    t.index ["key"], name: "index_scenarios_on_key_when_active", unique: true, where: "((status)::text = 'active'::text)"
+  end
+
   create_table "solid_queue_batch_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.bigint "batch_id", null: false
@@ -429,6 +470,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "conversation_turns", "conversations"
+  add_foreign_key "conversation_turns", "evaluation_traces"
+  add_foreign_key "conversations", "participants"
+  add_foreign_key "conversations", "scenarios"
+  add_foreign_key "evaluation_traces", "conversations"
   add_foreign_key "evaluation_traces", "participants"
   add_foreign_key "evaluation_traces", "placement_attempts"
   add_foreign_key "placement_attempts", "participants"
