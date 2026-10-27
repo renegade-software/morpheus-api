@@ -15,7 +15,7 @@ speech_register: "Professional but friendly. The supervisor should be firm witho
 opening: "Hey boss! It's boiling out there. Anything I should know before I head back out?"
 goals:
   - id: water
-    text: "Tell him to drink water often and where the dispenser is."
+    text: "Tell him to drink water and where to get it."
   - id: inside
     text: "Ask him to work inside during the hottest part of the afternoon."
   - id: bonus

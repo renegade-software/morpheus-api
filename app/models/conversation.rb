@@ -23,6 +23,17 @@ class Conversation < ApplicationRecord
     end
   end
 
+  # A met goal stays met, with the evidence that first met it. The agent rechecks every goal from the whole transcript
+  # on each turn, and a later, stricter reading of the same words mustn't untick what the learner already saw met.
+  def self.merge_goals(previous, checks)
+    met = previous.select { _1.fetch("met") }.index_by { _1.fetch("goal_id") }
+    checks.map { met.fetch(_1.fetch("goal_id"), _1) }
+  end
+
+  def all_goals_met?
+    goals.all? { _1.fetch("met") }
+  end
+
   def active?
     status == "active"
   end

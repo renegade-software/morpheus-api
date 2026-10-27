@@ -15,8 +15,9 @@ module Conversation::TakeTurn
       conversation.turns.create!(position: position, speaker: "learner", text: text)
       conversation.turns.create!(position: position + 1, speaker: "character", text: response.fetch("reply"),
                                  evaluation_trace: traces.last)
-      conversation.update!(goals: response.fetch("goals"))
-      finish(conversation) if response.fetch("closed")
+      conversation.update!(goals: Conversation.merge_goals(conversation.goals, response.fetch("goals")))
+      # The agent only sees this turn's check, so a goal it took back can leave it open while every goal is met here.
+      finish(conversation) if response.fetch("closed") || conversation.all_goals_met?
       :ok
     end
   end
@@ -30,7 +31,7 @@ module Conversation::TakeTurn
   end
 
   def self.finish(conversation)
-    conversation.finish!(conversation.goals.all? { _1.fetch("met") } ? "goals_met" : "turn_limit")
+    conversation.finish!(conversation.all_goals_met? ? "goals_met" : "turn_limit")
   end
 
   def self.create_trace(conversation, trace)
