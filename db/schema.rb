@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_22_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -107,6 +107,49 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_150000) do
     t.index ["conversation_id"], name: "index_evaluation_traces_on_conversation_id"
     t.index ["participant_id"], name: "index_evaluation_traces_on_participant_id"
     t.index ["placement_attempt_id"], name: "index_evaluation_traces_on_placement_attempt_id"
+  end
+
+  create_table "feedback_comments", force: :cascade do |t|
+    t.bigint "feedback_id", null: false
+    t.bigint "conversation_turn_id", null: false
+    t.text "quote", null: false
+    t.integer "start_offset", null: false
+    t.integer "end_offset", null: false
+    t.string "skill", null: false
+    t.string "category", null: false
+    t.string "priority", null: false
+    t.text "explanation", null: false
+    t.text "rewrite", null: false
+    t.string "flagged_as"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_turn_id"], name: "index_feedback_comments_on_conversation_turn_id"
+    t.index ["feedback_id"], name: "index_feedback_comments_on_feedback_id"
+  end
+
+  create_table "feedback_scores", force: :cascade do |t|
+    t.bigint "feedback_id", null: false
+    t.string "skill", null: false
+    t.integer "score"
+    t.text "reason", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feedback_id", "skill"], name: "index_feedback_scores_on_feedback_id_and_skill", unique: true
+    t.index ["feedback_id"], name: "index_feedback_scores_on_feedback_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.string "status", default: "pending", null: false
+    t.string "mode", null: false
+    t.string "display_language", null: false
+    t.text "summary"
+    t.jsonb "dropped", default: [], null: false
+    t.bigint "evaluation_trace_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_feedbacks_on_conversation_id", unique: true
+    t.index ["evaluation_trace_id"], name: "index_feedbacks_on_evaluation_trace_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -477,6 +520,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_150000) do
   add_foreign_key "evaluation_traces", "conversations"
   add_foreign_key "evaluation_traces", "participants"
   add_foreign_key "evaluation_traces", "placement_attempts"
+  add_foreign_key "feedback_comments", "conversation_turns"
+  add_foreign_key "feedback_comments", "feedbacks"
+  add_foreign_key "feedback_scores", "feedbacks"
+  add_foreign_key "feedbacks", "conversations"
+  add_foreign_key "feedbacks", "evaluation_traces"
   add_foreign_key "placement_attempts", "participants"
   add_foreign_key "placement_attempts", "placement_forms"
   add_foreign_key "placement_passages", "placement_forms"

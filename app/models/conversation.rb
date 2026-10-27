@@ -4,12 +4,16 @@ class Conversation < ApplicationRecord
   STATUSES = %w[active finished].freeze
   # How it ended: every goal met, the last extra turn used, the learner pressed Terminar, or they left (abandoned).
   FINISHED_REASONS = %w[goals_met turn_limit ended_by_learner abandoned].freeze
+  # An abandoned conversation gets no feedback: the learner isn't there to read it (2026-10-27).
+  FEEDBACK_REASONS = %w[goals_met turn_limit ended_by_learner].freeze
   # No typing, click or scroll for this long means the learner has left (2026-10-27). The chat screen measures it;
   # the server only sees messages, so it applies the same limit to conversations whose tab was closed.
   IDLE_LIMIT = 3.minutes
 
   belongs_to :participant
   belongs_to :scenario
+  # Declared first: its comments point at turns and it points at a trace, so it goes before both on destroy.
+  has_one :feedback, dependent: :destroy
   # Declared before evaluation_traces: turns point at traces, so they go first when a conversation is destroyed.
   has_many :turns, -> { order(:position) }, dependent: :destroy
   has_many :evaluation_traces, dependent: :destroy
@@ -26,8 +30,6 @@ class Conversation < ApplicationRecord
     end
   end
 
-  # A met goal stays met, with the evidence that first met it. The agent rechecks every goal from the whole transcript
-  # on each turn, and a later, stricter reading of the same words mustn't untick what the learner already saw met.
   # Ends the participant's open conversations with no message within the idle limit: a closed tab can't end its own.
   # They end when the limit ran out, not now, so their duration in the analysis isn't stretched by the time away.
   def self.abandon_idle!(participant)
@@ -37,6 +39,8 @@ class Conversation < ApplicationRecord
     end
   end
 
+  # A met goal stays met, with the evidence that first met it. The agent rechecks every goal from the whole transcript
+  # on each turn, and a later, stricter reading of the same words mustn't untick what the learner already saw met.
   def self.merge_goals(previous, checks)
     met = previous.select { _1.fetch("met") }.index_by { _1.fetch("goal_id") }
     checks.map { met.fetch(_1.fetch("goal_id"), _1) }
@@ -52,5 +56,13 @@ class Conversation < ApplicationRecord
 
   def finish!(reason, at: Time.current)
     update!(status: "finished", finished_reason: reason, finished_at: at)
+    request_feedback if FEEDBACK_REASONS.include?(reason) && turns.exists?(speaker: "learner")
+  end
+
+  private
+
+  def request_feedback
+    language = participant.display_language || "es" # the placement test, the only thing before the choice, is Spanish
+    GenerateFeedbackJob.perform_later(create_feedback!(mode: scenario.mode, display_language: language))
   end
 end
