@@ -6,6 +6,8 @@ class ConversationsController < ApplicationController
     scenario = Scenario.current(params.expect(:scenario))
     return head :not_found unless scenario
 
+    Conversation.abandon_idle!(current_participant)
+
     render json: ConversationSerializer.new(Conversation.start!(current_participant, scenario)), status: :created
   end
 
@@ -13,11 +15,11 @@ class ConversationsController < ApplicationController
     render json: ConversationSerializer.new(conversation)
   end
 
-  # Terminar: the learner ends it before the goals or the turns run out.
+  # Terminar, or the chat screen's idle limit: the learner ends it, or leaves, before the goals or the turns run out.
   def finish
     return head :conflict unless conversation.active?
 
-    conversation.finish!("ended_by_learner")
+    conversation.finish!(params[:reason] == "abandoned" ? "abandoned" : "ended_by_learner")
     render json: ConversationSerializer.new(conversation)
   end
 
