@@ -23,6 +23,11 @@ module Agent
     post("/placement/speaking", payload)
   end
 
+  # A finished conversation's feedback; a background job, so it gets the rating timeout, not the turn's.
+  def self.feedback(payload)
+    post("/feedback", payload)
+  end
+
   def self.take_turn(payload)
     post("/conversation/turn", payload, read_timeout: TURN_READ_TIMEOUT)
   end

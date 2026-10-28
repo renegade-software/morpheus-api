@@ -2,6 +2,8 @@
 # that ran on it (NFR6). New versions come from content/scenarios/ through `bin/rails scenarios:import`.
 class Scenario < ApplicationRecord
   STATUSES = %w[active retired].freeze
+  # Text chat or voice notes: decides which skills feedback covers (text leaves out rhythm and pronunciation).
+  MODES = %w[text voice].freeze
   DIR = Rails.root.join("content", "scenarios")
   INTERLOCUTOR_FILE = "interlocutor.yaml"
 
@@ -45,6 +47,11 @@ class Scenario < ApplicationRecord
   # The leeway past the turn limit while a goal is still open, as the agent counts it (models.extra_turns).
   def extra_turns
     (turn_limit / 4.0).ceil
+  end
+
+  # Versions imported before scenarios named their mode were all text chats.
+  def mode
+    content.dig("scenario", "mode") || "text"
   end
 
   def opening
