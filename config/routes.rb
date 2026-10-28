@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     post :finish, on: :member
     resources :turns, only: :create, module: :conversations
     resource :feedback, only: :show, module: :conversations
+    resources :feedback_comments, only: :update, module: :conversations, path: "feedback/comments"
   end
 
   namespace :placement do
