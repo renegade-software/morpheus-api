@@ -6,6 +6,7 @@ class Scenario < ApplicationRecord
   MODES = %w[text voice].freeze
   DIR = Rails.root.join("content", "scenarios")
   INTERLOCUTOR_FILE = "interlocutor.yaml"
+  CHARACTERS_FILE = Rails.root.join("content", "characters.yaml")
 
   has_many :conversations, dependent: :restrict_with_exception
 
@@ -21,19 +22,26 @@ class Scenario < ApplicationRecord
     find_by(key: key, status: "active")
   end
 
-  # Imports every scenario file. A file whose content (with its level's descriptors) is already stored is skipped;
-  # a changed one becomes a new active version and retires the old one. Returns the versions it created.
+  # Imports every scenario file. A file whose content (with its level's descriptors and its character) is already
+  # stored is skipped; a changed one becomes a new active version and retires the old one. Returns the versions it
+  # created.
   def self.import_all!
     interlocutor = YAML.load_file(DIR.join(INTERLOCUTOR_FILE))
+    characters = YAML.load_file(CHARACTERS_FILE)
     DIR.glob("*.yaml").reject { _1.basename.to_s == INTERLOCUTOR_FILE }.filter_map do |path|
-      import!(YAML.load_file(path), interlocutor)
+      import!(YAML.load_file(path), interlocutor, characters)
     end
   end
 
-  def self.import!(scenario, interlocutor)
-    level = scenario.fetch("level")
+  def self.import!(file, interlocutor, characters)
+    level = file.fetch("level")
     descriptors = interlocutor.fetch(level) { raise ArgumentError, "no interlocutor descriptors for level #{level}" }
-    content = { "scenario" => scenario, "interlocutor" => descriptors.map { { "level" => level, "text" => _1 } } }
+    key = file.fetch("character")
+    character = characters.fetch(key) { raise ArgumentError, "no character #{key} in #{CHARACTERS_FILE.basename}" }
+    # The agent reads one "You are: …" line, so the frozen scenario carries the name and this scenario's role together.
+    scenario = file.except("role").merge("character" => "#{character.fetch('name')}, #{file.fetch('role')}")
+    content = { "scenario" => scenario, "character" => character.merge("key" => key),
+                "interlocutor" => descriptors.map { { "level" => level, "text" => _1 } } }
     sha256 = Digest::SHA256.hexdigest(JSON.generate(content))
     return if exists?(content_sha256: sha256)
 

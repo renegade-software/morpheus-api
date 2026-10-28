@@ -4,7 +4,8 @@
 id: warehouseHeat
 level: 3 # B2
 mode: text # text chat; voice scenarios get rhythm and pronunciation feedback too
-character: "Tom Osei, a new warehouse hire in his first week."
+character: tom # a key in content/characters.yaml
+role: "a new warehouse hire in his first week." # who the character is in this scenario; follows the name
 personality: "Eager and friendly, a bit pushy. Wants the roof bonus and pushes back when told no, but respects a clear answer."
 agenda:
   - "Asks how much water to drink and where to get it."
