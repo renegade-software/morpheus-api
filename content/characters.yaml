@@ -1,6 +1,7 @@
 # The recurring cast. A character keeps only what stays the same in every scenario: the name and, for voice scenarios,
-# one pinned Cartesia voice so every participant hears the same person. Who they are in a given situation (a new hire,
+# one pinned ElevenLabs voice so every participant hears the same person. Who they are in a given situation (a new hire,
 # a customer calling support) is the scenario's `role`. `scenarios:import` copies the character into each frozen
 # version, so a conversation keeps the voice it ran with even if this file changes later.
 tom:
   name: "Tom Osei"
+  voice: "Kai8v6OYQRPG5WgxvCRF"
