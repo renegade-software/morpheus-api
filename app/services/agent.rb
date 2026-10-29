@@ -32,6 +32,16 @@ module Agent
     post("/conversation/turn", payload, read_timeout: TURN_READ_TIMEOUT)
   end
 
+  # Transcription, the character's turn and its voice in one call; budgeted at 6 s (NFR3), same cut-off as text.
+  def self.take_voice_turn(payload)
+    post("/conversation/voice-turn", payload, read_timeout: TURN_READ_TIMEOUT)
+  end
+
+  # One line in a character's voice: a voice scenario's opening, made at import.
+  def self.synthesize(payload)
+    post("/speech", payload, read_timeout: TURN_READ_TIMEOUT)
+  end
+
   def self.post(path, body, read_timeout: READ_TIMEOUT)
     uri = URI.join(ENV.fetch("AGENT_URL"), path)
     request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json",

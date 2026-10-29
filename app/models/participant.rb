@@ -18,6 +18,14 @@ class Participant < ApplicationRecord
     Consent.find_by(pseudonym: pseudonym, document_version: Consent::CURRENT_VERSION)
   end
 
+  # The scenarios the learner has finished, for the path to move past (2026-10-29): a conversation that ended any way
+  # but abandoned, with at least one message of theirs. The same rule that gives a conversation feedback.
+  def completed_scenario_keys
+    conversations.where(status: "finished", finished_reason: Conversation::FEEDBACK_REASONS)
+                 .where(id: Conversation::Turn.where(speaker: "learner").select(:conversation_id))
+                 .joins(:scenario).distinct.pluck("scenarios.key")
+  end
+
   private
 
   # The pseudonym is the only identifier allowed in research data, so it must not derive from Clerk or the email.

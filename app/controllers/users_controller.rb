@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       display_language: current_participant.display_language,
       onboarded: current_participant.onboarded_at.present?,
       rank_points: current_participant.rank_points,
+      completed_scenarios: current_participant.completed_scenario_keys,
       consent: consent && { eligible: consent.eligible?, voice_allowed: consent.voice_allowed? }
     }
   end

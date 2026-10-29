@@ -3,7 +3,7 @@
 # Goal ids and texts match the learner's brief in the UI (scenarios.warehouseHeat in the locale files).
 id: warehouseHeat
 level: 3 # B2
-mode: text # text chat; voice scenarios get rhythm and pronunciation feedback too
+mode: text # typed chat; its voice twin is warehouse_heat_voice.yaml
 character: tom # a key in content/characters.yaml
 role: "a new warehouse hire in his first week." # who the character is in this scenario; follows the name
 personality: "Eager and friendly, a bit pushy. Wants the roof bonus and pushes back when told no, but respects a clear answer."

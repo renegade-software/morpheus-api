@@ -9,6 +9,9 @@ class Scenario < ApplicationRecord
   CHARACTERS_FILE = Rails.root.join("content", "characters.yaml")
 
   has_many :conversations, dependent: :restrict_with_exception
+  # A voice version's opening line in the character's pinned voice, the same for every conversation on it. It isn't
+  # learner data, so it lives on the version rather than on anyone's turns.
+  has_one_attached :opening_audio
 
   validates :key, :content, :content_sha256, presence: true
   validates :status, inclusion: { in: STATUSES }
@@ -64,6 +67,19 @@ class Scenario < ApplicationRecord
 
   def opening
     content.dig("scenario", "opening")
+  end
+
+  def needs_opening_audio?
+    mode == "voice" && !opening_audio.attached?
+  end
+
+  # Made once per version by `scenarios:import`, through the agent. Agent errors propagate, so the import can simply
+  # be run again. Returns the synthesis trace for the import to report.
+  def voice_opening!
+    response = Agent.synthesize(voice_id: content.fetch("character").fetch("voice"), text: opening)
+    opening_audio.attach(io: StringIO.new(Base64.strict_decode64(response.fetch("audio"))),
+                         filename: "#{key}-#{id}-opening.mp3", content_type: response.fetch("content_type"))
+    response.fetch("trace")
   end
 
   def goal_ids

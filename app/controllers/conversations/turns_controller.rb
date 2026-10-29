@@ -8,6 +8,8 @@ module Conversations
     def create
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
       return head :conflict unless conversation.active?
+      # A scenario is practised one way only (2026-10-29): typed messages here, voice notes in VoiceTurnsController.
+      return head :unprocessable_content unless conversation.scenario.mode == "text"
 
       text = params.expect(:text).to_s.strip
       return head :unprocessable_content if text.empty? || text.length > Conversation::TakeTurn::MAX_TEXT
