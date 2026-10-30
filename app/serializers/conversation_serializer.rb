@@ -19,7 +19,9 @@ class ConversationSerializer
       turn_limit: scenario.turn_limit,
       extra_turns: scenario.extra_turns,
       turns: @conversation.turns.with_attached_audio.map { turn(_1) },
-      goals: @conversation.goals
+      goals: @conversation.goals,
+      # Once it's over: what it earned, for the XP screen (null while active, or when it doesn't count).
+      xp: (Xp.for(@conversation) unless @conversation.active?)
     }
   end
 
