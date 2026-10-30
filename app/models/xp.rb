@@ -10,7 +10,7 @@ module Xp
   REPEAT_FACTORS = [ 1, 0.5, 0.25 ].freeze
 
   # One counted conversation's share: what it earned and how, for the screen at its end.
-  Award = Data.define(:conversation_id, :points, :goals_met, :goals, :factor)
+  Award = Data.define(:conversation_id, :scenario_key, :points, :goals_met, :goals, :factor)
 
   # Every counted conversation's award, oldest first.
   def self.awards(participant)
@@ -19,15 +19,18 @@ module Xp
       key = conversation.scenario.key
       factor = REPEAT_FACTORS[[ attempts[key], REPEAT_FACTORS.size - 1 ].min]
       attempts[key] += 1
-      Award.new(conversation_id: conversation.id, points: (FIRST_TRY * conversation.goals_met_share * factor).round,
+      Award.new(conversation_id: conversation.id, scenario_key: key,
+                points: (FIRST_TRY * conversation.goals_met_share * factor).round,
                 goals_met: conversation.goals.count { _1.fetch("met") }, goals: conversation.goals.size, factor: factor)
     end
   end
 
-  # The total and the most recent change, for the XP card on Inicio.
+  # The total and the most recent change, for the XP card on Inicio, and what each scenario earned over all its
+  # attempts, for a finished stone's card.
   def self.summary(participant)
-    points = awards(participant).map(&:points)
-    { total: points.sum, last_change: points.last }
+    awards = awards(participant)
+    by_scenario = awards.group_by(&:scenario_key).transform_values { _1.sum(&:points) }
+    { total: awards.sum(&:points), last_change: awards.last&.points, by_scenario: by_scenario }
   end
 
   # What one finished conversation earned and the total before and after it; nil if it doesn't count (abandoned, or
