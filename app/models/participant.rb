@@ -18,6 +18,12 @@ class Participant < ApplicationRecord
     Consent.find_by(pseudonym: pseudonym, document_version: Consent::CURRENT_VERSION)
   end
 
+  # The scenarios the path moves past: one counted conversation that met every goal (2026-10-29). Anything less and
+  # the learner plays the same conversation again.
+  def completed_scenario_keys
+    conversations.counted.includes(:scenario).select(&:all_goals_met?).map { _1.scenario.key }.uniq
+  end
+
   private
 
   # The pseudonym is the only identifier allowed in research data, so it must not derive from Clerk or the email.

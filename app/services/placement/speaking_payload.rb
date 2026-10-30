@@ -16,11 +16,8 @@ module Placement::SpeakingPayload
     }
   end
 
-  # S3 in production signs the link itself; local disk storage needs this server's address (development.rb).
   def self.audio_url(recording)
-    ActiveStorage::Current.set(url_options: Rails.configuration.x.audio_url_options || {}) do
-      recording.audio.url(expires_in: AUDIO_LINK_TTL)
-    end
+    AudioLink.url(recording.audio, expires_in: AUDIO_LINK_TTL)
   end
 
   def self.anchor_fields(anchor)

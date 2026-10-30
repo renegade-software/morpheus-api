@@ -21,6 +21,13 @@ class Conversation < ApplicationRecord
   validates :status, inclusion: { in: STATUSES }
   validates :finished_reason, inclusion: { in: FINISHED_REASONS }, allow_nil: true
 
+  # The conversations that count for the path and XP: ended any way but abandoned, with at least one message of the
+  # learner's. The same rule that gives a conversation feedback.
+  scope :counted, lambda {
+    where(status: "finished", finished_reason: FEEDBACK_REASONS)
+      .where(id: Conversation::Turn.where(speaker: "learner").select(:conversation_id))
+  }
+
   def self.start!(participant, scenario)
     transaction do
       conversation = create!(participant: participant, scenario: scenario,
@@ -48,6 +55,10 @@ class Conversation < ApplicationRecord
 
   def all_goals_met?
     goals.all? { _1.fetch("met") }
+  end
+
+  def goals_met_share
+    goals.count { _1.fetch("met") }.fdiv(goals.size)
   end
 
   def active?

@@ -3,8 +3,9 @@
 # Goal ids and texts match the learner's brief in the UI (scenarios.warehouseHeat in the locale files).
 id: warehouseHeat
 level: 3 # B2
-mode: text # text chat; voice scenarios get rhythm and pronunciation feedback too
-character: "Tom Osei, a new warehouse hire in his first week."
+mode: text # typed chat; its voice twin is warehouse_heat_voice.yaml
+character: tom # a key in content/characters.yaml
+role: "a new warehouse hire in his first week." # who the character is in this scenario; follows the name
 personality: "Eager and friendly, a bit pushy. Wants the roof bonus and pushes back when told no, but respects a clear answer."
 agenda:
   - "Asks how much water to drink and where to get it."
@@ -16,9 +17,11 @@ speech_register: "Professional but friendly. The supervisor should be firm witho
 opening: "Hey boss! It's boiling out there. Anything I should know before I head back out?"
 goals:
   - id: water
-    text: "Tell him to drink water and where to get it."
+    text: "Tell him to drink water."
+  - id: waterSource
+    text: "Tell him where he can get water."
   - id: inside
     text: "Ask him to work inside during the hottest part of the afternoon."
   - id: bonus
-    text: "Hold your position when he pushes about the bonus for working on the roof."
+    text: "Say no when he pushes about the bonus for working on the roof."
 turn_limit: 8 # learner turns; the agent adds a quarter of it as extra turns while a goal is open
