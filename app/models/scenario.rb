@@ -1,6 +1,6 @@
 class Scenario < ApplicationRecord
   STATUSES = %w[active retired].freeze
-  MODES = %w[text voice].freeze
+  MODES = %w[text voice writing].freeze
   DIR = Rails.root.join("content", "scenarios")
   INTERLOCUTOR_FILE = "interlocutor.yaml"
   CHARACTERS_FILE = Rails.root.join("content", "characters.yaml")
@@ -51,6 +51,10 @@ class Scenario < ApplicationRecord
 
   def mode
     content.dig("scenario", "mode") || "text"
+  end
+
+  def writing?
+    mode == "writing"
   end
 
   def opening

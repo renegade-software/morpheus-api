@@ -5,10 +5,10 @@ module Conversations
     def create
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
       return head :conflict unless conversation.active?
-      return head :unprocessable_content unless conversation.scenario.mode == "text"
+      return head :unprocessable_content unless %w[text writing].include?(conversation.scenario.mode)
 
       text = params.expect(:text).to_s.strip
-      return head :unprocessable_content if text.empty? || text.length > Conversation::TakeTurn::MAX_TEXT
+      return head :unprocessable_content if text.empty? || text.length > Conversation::TakeTurn.max_length(conversation)
 
       case Conversation::TakeTurn.call(conversation, text)
       when :ok then render json: ConversationSerializer.new(conversation.reload), status: :created

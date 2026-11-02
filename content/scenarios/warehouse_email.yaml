@@ -1,0 +1,28 @@
+id: warehouseEmail
+level: 3
+mode: writing
+character: tom
+role: "a new warehouse hire in his first week."
+personality: "Eager and friendly, a bit pushy. Wants the roof bonus and respects a clear answer."
+agenda:
+  - "Says he felt dizzy on the roof yesterday but is fine now."
+  - "Asks whether he still gets the roof bonus if he works inside tomorrow."
+  - "Asks to swap his Saturday shift with Ana for his sister's wedding."
+learner_role: "Tom's shift supervisor."
+setting: "The morning after a very hot day. Tom has emailed his supervisor before his shift."
+speech_register: "A work email between a supervisor and a new hire. Friendly but clear."
+opening: |-
+  Hi boss,
+
+  Thanks for yesterday. I felt a bit dizzy on the roof after lunch, but I'm OK now. Quick question: if I work inside again tomorrow, do I still get the roof bonus? Also, could I swap my Saturday shift with Ana? My sister is getting married that day.
+
+  Thanks,
+  Tom
+goals:
+  - id: health
+    text: "Tell him what to do if he feels dizzy again."
+  - id: bonus
+    text: "Explain that the roof bonus is only for work on the roof."
+  - id: swap
+    text: "Answer his request to swap Saturday with Ana."
+turn_limit: 1
