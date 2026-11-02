@@ -1,6 +1,6 @@
 class Consent < ApplicationRecord
   QUESTIONS = %i[adult participate personal_data sensitive_data audio_recording transcription receive_results].freeze
-  CURRENT_VERSION = "1.0".freeze
+  CURRENT_VERSION = "1.1".freeze
 
   validates :pseudonym, :document_version, :accepted_at, presence: true
   validates(*QUESTIONS, inclusion: { in: [ true, false ] })
