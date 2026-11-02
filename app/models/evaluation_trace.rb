@@ -1,7 +1,5 @@
-# Holds learner text, so it belongs to the participant and is deleted with them.
 class EvaluationTrace < ApplicationRecord
   STATUSES = %w[ok failed_checks error].freeze
-  # The fields of the agent's TraceStep that are columns here, one to one.
   AGENT_FIELDS = %w[step prompt_path prompt_sha256 model effort input output input_tokens output_tokens latency_ms
                     cost_usd status error retried].freeze
 
@@ -12,10 +10,8 @@ class EvaluationTrace < ApplicationRecord
   validates :step, presence: true
   validates :status, inclusion: { in: STATUSES }
 
-  # Speech-to-text and text-to-speech run a model but have no prompt to name.
   SPEECH_STEPS = %w[transcribe_placement_speaking transcribe_conversation_turn synthesize_character_turn].freeze
 
-  # Rule-based steps run no model, so only a prompted model call must name its prompt.
   with_options if: :prompted_model_call? do
     validates :prompt_path, presence: true
     validates :prompt_sha256, format: { with: /\A\h{64}\z/ }

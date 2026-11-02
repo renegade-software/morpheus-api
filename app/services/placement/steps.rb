@@ -1,6 +1,4 @@
 module Placement::Steps
-  # The order of the test: reading A → B → C (stopping at the first text with a wrong answer), listening A → B → C for
-  # everyone, then writing and speaking. Also works out the reading and listening results as each section ends.
   FIRST = "reading.a".freeze
   TIERS = Placement::Passage::TIERS
 
@@ -9,7 +7,6 @@ module Placement::Steps
     attempt.form.passages.find_by!(section: section, tier: tier)
   end
 
-  # The questions the current step must answer: both questions of a reading text, or the one listening question.
   def self.questions(attempt)
     section = attempt.current_step.split(".").first
     return Placement::Question.none unless Placement::Passage::SECTIONS.include?(section)
@@ -77,13 +74,10 @@ module Placement::Steps
     end
   end
 
-  # Texts passed in a row: 0 means the A text was failed, 3 means all three were passed.
   def self.reading_result(attempt)
     TIERS.take_while { |tier| passed?(attempt, passage(attempt, "reading.#{tier}")) }.size
   end
 
-  # Clips answered correctly, 0–3. The clips get harder in order, so for consistent answers this equals the hardest
-  # one right; an out-of-order right answer, likely a guess, counts as one step instead of the top (decided 2026-10-20).
   def self.listening_result(attempt)
     attempt.responses
       .joins(question: :passage)
@@ -100,6 +94,5 @@ module Placement::Steps
     TIERS.fetch(TIERS.index(tier) + 1)
   end
 
-  # voice_allowed? stays public: Scoring needs the same rule to know whether speaking is part of the range.
   private_class_method :advance_reading, :advance_listening, :advance_writing, :finish, :passed?, :next_tier
 end

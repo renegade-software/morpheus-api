@@ -7,7 +7,6 @@ module Placement
 
     belongs_to :form, foreign_key: :placement_form_id
     has_many :questions, -> { order(:position) }, foreign_key: :placement_passage_id, dependent: :destroy
-    # Listening only. Attach it before the form is activated; after that the passage is read-only.
     has_one_attached :audio
 
     validates :section, inclusion: { in: SECTIONS }

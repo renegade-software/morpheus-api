@@ -1,5 +1,3 @@
-# The body of POST /placement/writing, built from the form the attempt is frozen to. Reading and listening results
-# are left out on purpose, so they can't sway the rating.
 module Placement::WritingPayload
   CRITERIA = %w[production range accuracy coherence].freeze
 
@@ -14,7 +12,6 @@ module Placement::WritingPayload
     }
   end
 
-  # Descriptors grouped by criterion, as the agent expects. A missing criterion raises, so a broken form fails loudly.
   def self.rubric(form)
     descriptors = form.rubric_descriptors.where(skill: "writing").order(:level).group_by(&:criterion)
     CRITERIA.index_with { |criterion| descriptors.fetch(criterion).map { |d| { level: d.level, text: d.text } } }

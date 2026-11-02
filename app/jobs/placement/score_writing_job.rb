@@ -1,16 +1,13 @@
 module Placement
-  # Rates a placement message through morpheus-agent and stores a trace for every call. Queued as soon as the message
-  # is sent, so the rating is usually done before the learner finishes the speaking part.
   class ScoreWritingJob < ApplicationJob
     EMPTY_STEP = "rate_empty_placement_writing".freeze
 
     queue_as :scoring
     retry_on Agent::Unavailable, wait: :polynomially_longer, attempts: 5
-    # The learner deleted their data before the job ran.
     discard_on ActiveJob::DeserializationError
 
     def perform(writing)
-      unless writing.rated? # a rerun after a success skips straight to completing
+      unless writing.rated?
         if writing.text.blank?
           rate_empty(writing)
         else
@@ -28,7 +25,7 @@ module Placement
         if response.fetch("status") == "ok"
           rate(writing, response.fetch("rating"), traces.last)
         else
-          writing.attempt.update!(status: "failed") # results page: "Revisaremos tus respuestas"
+          writing.attempt.update!(status: "failed")
         end
       end
     end
@@ -45,7 +42,6 @@ module Placement
       )
     end
 
-    # No words, nothing for Claude to rate: A1 by rule. Still traced, with no model, so every rating has a record.
     def rate_empty(writing)
       Writing.transaction do
         trace = create_trace(writing, "step" => EMPTY_STEP, "status" => "ok",

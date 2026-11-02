@@ -1,8 +1,5 @@
-# The body of POST /placement/speaking, built from the form the attempt is frozen to. Only the anchors for the
-# learner's own prompt are sent. Reading, listening and writing results are left out, so they can't sway the rating.
 module Placement::SpeakingPayload
   CRITERIA = %w[range accuracy fluency coherence].freeze
-  # The agent downloads the audio straight away; the link only has to outlive one request.
   AUDIO_LINK_TTL = 5.minutes
 
   def self.build(recording)
@@ -24,7 +21,6 @@ module Placement::SpeakingPayload
     anchor.slice(:level, :transcript, :note, :speaking_ms, :word_count, :long_pauses)
   end
 
-  # Descriptors grouped by criterion, as the agent expects. A missing criterion raises, so a broken form fails loudly.
   def self.rubric(form)
     descriptors = form.rubric_descriptors.where(skill: "speaking").order(:level).group_by(&:criterion)
     CRITERIA.index_with { |criterion| descriptors.fetch(criterion).map { |d| { level: d.level, text: d.text } } }

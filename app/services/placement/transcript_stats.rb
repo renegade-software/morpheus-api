@@ -1,6 +1,4 @@
 module Placement::TranscriptStats
-  # Fluency numbers from a transcript written with the placement convention: hesitation as "um"/"uh" and pauses over
-  # 1 second as "…". Used for anchors, so they carry the same numbers recordings get from speech-to-text.
   FILLERS = %w[um uh].freeze
 
   def self.word_count(transcript)

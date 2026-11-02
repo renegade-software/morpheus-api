@@ -5,7 +5,6 @@ module Placement
     def create
       attempt = current_participant.placement_attempt
       return head :not_found unless attempt
-      # A stale tab submitting a step that's already done would otherwise overwrite nothing and confuse the sequence.
       return head :conflict unless params.expect(:step) == attempt.current_step
 
       answers = params.expect(answers: [ [ :question_id, :selected_option ] ])

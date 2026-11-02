@@ -1,7 +1,4 @@
 module Placement::Import
-  # Builds a draft form in the item bank from the authoring files in content/placement/. The app never reads those
-  # files at runtime; once imported and activated, the database is the only source of the test.
-
   DIR = Rails.root.join("content", "placement")
   AUDIO_DIR = DIR.join("audio")
   RUBRIC_SOURCES = {

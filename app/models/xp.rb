@@ -1,19 +1,9 @@
-# XP, the points learners see on the path (2026-10-22): earned per conversation; since 2026-11-02 the UI opens each
-# stage's quiz at 200 earned in that stage. Never taken away (2026-10-29): a conversation that misses goals
-# earns less and has to be played again instead. Worked out from the saved conversations every time, not stored, so
-# it can't drift from what happened. The hidden Elo-style rank points from placement are separate (RankPoints).
 module Xp
-  # A conversation's worth the first time, scaled by the share of goals met. The UI shows it as the stake
-  # (FIRST_TRY_POINTS in path/xp.ts); keep the two in step.
   FIRST_TRY = 50
-  # Each later attempt at the same scenario earns 80% of the one before: 0.8, 0.64, 0.512… (2026-11-02, was half,
-  # then a quarter).
   REPEAT_FACTOR = 0.8
 
-  # One counted conversation's share: what it earned and how, for the screen at its end.
   Award = Data.define(:conversation_id, :scenario_key, :points, :goals_met, :goals, :factor)
 
-  # Every counted conversation's award, oldest first.
   def self.awards(participant)
     attempts = Hash.new(0)
     participant.conversations.counted.includes(:scenario).order(:finished_at, :id).map do |conversation|
@@ -26,16 +16,12 @@ module Xp
     end
   end
 
-  # The total and the most recent change, for the XP card on Inicio, and what each scenario earned over all its
-  # attempts, for a finished stone's card.
   def self.summary(participant)
     awards = awards(participant)
     by_scenario = awards.group_by(&:scenario_key).transform_values { _1.sum(&:points) }
     { total: awards.sum(&:points), last_change: awards.last&.points, by_scenario: by_scenario }
   end
 
-  # What one finished conversation earned and the total before and after it; nil if it doesn't count (abandoned, or
-  # the learner never wrote). Totals run up to this conversation, so the screen shows the jump it made.
   def self.for(conversation)
     awards = awards(conversation.participant)
     index = awards.index { _1.conversation_id == conversation.id }

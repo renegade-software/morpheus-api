@@ -4,7 +4,6 @@ module Placement
 
     belongs_to :attempt, foreign_key: :placement_attempt_id
     belongs_to :writing_task, foreign_key: :placement_writing_task_id
-    # Points at the call whose rating was accepted; nil until the writing is rated.
     belongs_to :evaluation_trace, optional: true
 
     validates :placement_attempt_id, uniqueness: true

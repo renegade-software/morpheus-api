@@ -22,8 +22,6 @@ class UsersController < ApplicationController
     params.expect(user: [ :display_language, :onboarded ])
   end
 
-  # The app only says done or not; the server stamps when. True keeps the first time, false clears it so the
-  # tour shows again.
   def apply_onboarded
     if ActiveModel::Type::Boolean.new.cast(user_params[:onboarded])
       current_participant.onboarded_at ||= Time.current

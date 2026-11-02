@@ -22,7 +22,6 @@ module Placement
       status != "draft"
     end
 
-    # Learners only ever see one form. Activating a new one retires the old; attempts already on it keep pointing at it.
     def activate!
       missing_audio = passages.where(section: "listening").reject { _1.audio.attached? }
       if missing_audio.any?

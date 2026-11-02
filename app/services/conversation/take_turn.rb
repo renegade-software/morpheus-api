@@ -1,8 +1,5 @@
-# One learner message and the character's answer. The agent is called before anything is saved, so a busy or failed
-# call leaves the conversation as it was and the learner can send the same message again. Every call's traces are
-# stored either way (NFR5).
 module Conversation::TakeTurn
-  MAX_TEXT = 1_000 # characters; a chat message, not an essay
+  MAX_TEXT = 1_000
 
   def self.call(conversation, text)
     position = conversation.turns.last.position + 1
@@ -16,13 +13,11 @@ module Conversation::TakeTurn
       conversation.turns.create!(position: position + 1, speaker: "character", text: response.fetch("reply"),
                                  evaluation_trace: traces.last)
       conversation.update!(goals: Conversation.merge_goals(conversation.goals, response.fetch("goals")))
-      # The agent only sees this turn's check, so a goal it took back can leave it open while every goal is met here.
       finish(conversation) if response.fetch("closed") || conversation.all_goals_met?
       :ok
     end
   end
 
-  # The agent holds no state: the frozen scenario version and the whole transcript, with the new message last.
   def self.payload(conversation, text)
     content = conversation.scenario.content
     turns = conversation.turns.map { { speaker: _1.speaker, text: _1.text } }
