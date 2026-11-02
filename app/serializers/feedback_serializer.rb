@@ -1,5 +1,3 @@
-# What the review screen needs, picked by hand like the conversation serializer. No quotes and no dropped comments:
-# the screen slices each turn's stored text with the offsets, so it can never show words Claude made up.
 class FeedbackSerializer
   def initialize(feedback)
     @feedback = feedback
@@ -18,7 +16,6 @@ class FeedbackSerializer
 
   private
 
-  # `turn` is the position, the same index the conversation serializer's turns use.
   def comment(comment)
     { id: comment.id, turn: comment.turn.position, start: comment.start_offset, end: comment.end_offset,
       skill: comment.skill, category: comment.category, priority: comment.priority,

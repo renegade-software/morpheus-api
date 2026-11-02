@@ -1,5 +1,3 @@
-# Public landing page for the API root: a Matrix-style page for browsers, the plain banner for curl.
-# It inherits from ActionController::API, not ApplicationController, so it never requires a Clerk session.
 class RootController < ActionController::API
   BANNER = <<~'TEXT'
      __  __  ___  ____  ____  _   _ _____ _   _ ____

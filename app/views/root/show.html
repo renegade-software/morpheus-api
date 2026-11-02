@@ -43,7 +43,6 @@
   </div>
 </main>
 <script>
-  // Digital rain: half-width katakana and digits, one column per glyph width.
   const canvas = document.getElementById("rain");
   const ctx = canvas.getContext("2d");
   const glyphs = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789";
@@ -71,7 +70,6 @@
   resize();
   window.addEventListener("resize", resize);
 
-  // Typewriter lines, shown instantly for people who prefer reduced motion.
   const lines = ["Wake up, Neo..."];
   const out = document.getElementById("out");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

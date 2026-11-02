@@ -19,8 +19,6 @@ module Placement
         attempt.save!
         recording
       end
-      # Queued after the transaction, unlike writing: Active Storage uploads the file in an after_commit callback, so
-      # only now is the audio in storage for the agent to download.
       ScoreSpeakingJob.perform_later(recording)
 
       render json: StepSerializer.new(attempt), status: :created

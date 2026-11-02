@@ -1,6 +1,4 @@
 module Placement
-  # The only way placement content reaches the browser. Every field is picked by hand (an allow list), so answer keys,
-  # transcripts, anchors, rubric text and scoring rules stay on the server even when new columns are added.
   class StepSerializer
     include Rails.application.routes.url_helpers
 

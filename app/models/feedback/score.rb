@@ -1,4 +1,3 @@
-# One skill's score (FR9). A nil score is "not enough evidence", never a low one.
 class Feedback::Score < ApplicationRecord
   belongs_to :feedback
 
