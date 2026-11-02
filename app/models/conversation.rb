@@ -3,6 +3,7 @@ class Conversation < ApplicationRecord
   FINISHED_REASONS = %w[goals_met turn_limit ended_by_learner abandoned].freeze
   FEEDBACK_REASONS = %w[goals_met turn_limit ended_by_learner].freeze
   IDLE_LIMIT = 3.minutes
+  WRITING_IDLE_LIMIT = 20.minutes
 
   belongs_to :participant
   belongs_to :scenario
@@ -28,8 +29,8 @@ class Conversation < ApplicationRecord
   end
 
   def self.abandon_idle!(participant)
-    participant.conversations.where(status: "active").find_each do |conversation|
-      idle_until = conversation.turns.last.created_at + IDLE_LIMIT
+    participant.conversations.where(status: "active").includes(:scenario).find_each do |conversation|
+      idle_until = conversation.turns.last.created_at + conversation.idle_limit
       conversation.finish!("abandoned", at: idle_until) if idle_until.past?
     end
   end
@@ -45,6 +46,10 @@ class Conversation < ApplicationRecord
 
   def goals_met_share
     goals.count { _1.fetch("met") }.fdiv(goals.size)
+  end
+
+  def idle_limit
+    scenario.writing? ? WRITING_IDLE_LIMIT : IDLE_LIMIT
   end
 
   def active?

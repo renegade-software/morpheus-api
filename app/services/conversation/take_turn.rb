@@ -1,5 +1,10 @@
 module Conversation::TakeTurn
   MAX_TEXT = 1_000
+  MAX_WRITING = 2_000
+
+  def self.max_length(conversation)
+    conversation.scenario.writing? ? MAX_WRITING : MAX_TEXT
+  end
 
   def self.call(conversation, text)
     position = conversation.turns.last.position + 1
@@ -10,10 +15,13 @@ module Conversation::TakeTurn
       next :failed_checks unless response.fetch("status") == "ok"
 
       conversation.turns.create!(position: position, speaker: "learner", text: text)
-      conversation.turns.create!(position: position + 1, speaker: "character", text: response.fetch("reply"),
-                                 evaluation_trace: traces.last)
+      reply = response["reply"]
+      if reply.present?
+        conversation.turns.create!(position: position + 1, speaker: "character", text: reply,
+                                   evaluation_trace: traces.last)
+      end
       conversation.update!(goals: Conversation.merge_goals(conversation.goals, response.fetch("goals")))
-      finish(conversation) if response.fetch("closed") || conversation.all_goals_met?
+      finish(conversation) if conversation.scenario.writing? || response.fetch("closed") || conversation.all_goals_met?
       :ok
     end
   end
