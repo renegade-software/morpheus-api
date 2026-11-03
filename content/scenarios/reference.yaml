@@ -1,0 +1,29 @@
+# Etapa 9 (C1), stop 7. CEFR: Correspondence C1 (p. 82).
+id: reference
+level: 4 # C1
+mode: writing
+character: hannah
+role: "who interned with the learner last year."
+personality: "Enthusiastic and grateful."
+agenda:
+  - "Says she's applying to volunteer with a sea-turtle project in Costa Rica."
+  - "Asks the learner for a short reference."
+learner_role: "Hannah's supervisor during her internship last year."
+learner_facts: "Hannah interned with them for six months. Her best strength: on her own initiative, she organised a fundraiser that raised 3,000 for a local animal shelter."
+setting: "An email from a former intern."
+speech_register: "A formal reference, warm but professional."
+opening: |-
+  Hi!
+
+  I hope you're well. I'm applying to volunteer with a sea-turtle conservation project in Costa Rica, and they've asked for a short reference. Would you be willing to write one for me? It would mean a lot.
+
+  Thank you so much,
+  Hannah Quinn
+goals:
+  - id: know
+    text: "Say how you know her."
+  - id: strength
+    text: "Show one of her strengths through an example."
+  - id: recommend
+    text: "Recommend her in the right register."
+turn_limit: 1

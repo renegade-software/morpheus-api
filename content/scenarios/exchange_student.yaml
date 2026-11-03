@@ -1,0 +1,26 @@
+# Etapa 9 (C1), stop 6. CEFR: Facilitating pluricultural space C1 (p. 114).
+id: exchangeStudent
+level: 4 # C1
+mode: voice
+character: richard
+role: "the father of a family hosting a Colombian exchange student next week."
+personality: "Cautious and formal, kind, and keen not to offend."
+agenda:
+  - "His facts: the student, Valentina, is 16, from Medellín, and staying for three months; the family eats dinner at 6 pm and is fairly reserved."
+  - "Asks what they should watch out for."
+  - "Shares one worry of his own: that she'll find them cold."
+  - "Asks follow-up questions about what the learner suggests."
+learner_role: "a friend of the family, from Colombia."
+setting: "A voice call with a friend who's about to host an exchange student."
+speech_register: "Warm and thoughtful."
+opening: "[cautious, polite] You know Colombia. [short pause] What should we watch out for?"
+goals:
+  - id: misunderstanding
+    text: "Anticipate one likely misunderstanding."
+  - id: perspective
+    text: "Explain the perspective behind it."
+  - id: handle
+    text: "Suggest how to handle it."
+  - id: stereotype
+    text: "Avoid stereotyping."
+turn_limit: 9

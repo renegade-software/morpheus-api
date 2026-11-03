@@ -1,0 +1,30 @@
+# Etapa 12 (C2), stop 7. CEFR: Sociolinguistic appropriateness C2 (p. 137); Online conversation and discussion C2 (p. 85).
+id: languageExchangeChat
+level: 5 # C2
+mode: writing
+character: klaus
+role: "a German member of an international language exchange group."
+personality: "Precise and blunt, but he means well."
+agenda:
+  - "Corrected a Mexican member's English bluntly, in front of the group."
+  - "Two Mexican members replied that they felt mocked."
+learner_role: "a long-time member of the group who knows Klaus and the Mexican members."
+learner_facts: "Klaus is direct by habit; he joined to help people improve, and he has helped many members."
+setting: "An international language exchange group chat."
+speech_register: "Online group chat across cultures: warm, tactful and clear."
+opening: |-
+  Klaus: Small correction, Lupita: it's "I have been living here for two years", not "I live here since two years". Please learn the present perfect.
+
+  Lupita: wow ok…
+
+  Diego: we're here to practise, not to be judged
+goals:
+  - id: reaction
+    text: "Acknowledge the reaction."
+  - id: meant
+    text: "Explain what Klaus meant."
+  - id: rephrase
+    text: "Rephrase the point so it works for both sides."
+  - id: moveOn
+    text: "Move the thread on."
+turn_limit: 1

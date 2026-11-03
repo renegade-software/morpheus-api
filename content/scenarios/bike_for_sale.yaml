@@ -1,0 +1,25 @@
+# Etapa 6 (B1+), stop 7. CEFR: Correspondence B1+ (p. 83).
+id: bikeForSale
+level: 2 # B1
+mode: writing
+character: sean
+role: "who is selling his bike online."
+personality: "Brief and friendly."
+agenda:
+  - "Advertises a second-hand road bike for 250."
+  - "Says it's in good condition and can be seen in the city centre in the evenings."
+learner_role: "someone who wants to buy a second-hand bike."
+setting: "An online advert for a second-hand bike. The learner is writing to the seller."
+speech_register: "A polite, clear email to a stranger."
+opening: |-
+  FOR SALE: road bike, 250. Blue, 21 gears, in good condition. I can show it in the city centre in the evenings. Write to me if you're interested!
+
+  Sean Doyle
+goals:
+  - id: why
+    text: "Say why you're interested."
+  - id: question
+    text: "Ask one question the advert doesn't answer."
+  - id: see
+    text: "Ask to see the bike."
+turn_limit: 1

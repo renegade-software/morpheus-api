@@ -1,0 +1,30 @@
+# Etapa 3 (A2), stop 7. CEFR: Correspondence A2 (p. 83); Information exchange A2 (p. 79).
+id: beachCleanup
+level: 1 # A2
+mode: writing
+character: tara
+role: "the volunteer coordinator of a beach clean-up team."
+personality: "Warm and organised."
+agenda:
+  - "Welcomes the learner to the beach clean-up team."
+  - "Says the clean-ups are on Saturdays and Sundays."
+  - "Asks what they do, what they like doing in their free time and which day they can help."
+learner_role: "a new volunteer."
+setting: "An email from the volunteer coordinator."
+speech_register: "A short, friendly email."
+opening: |-
+  Hello,
+
+  Welcome to our beach clean-up team! We clean the beach on Saturdays and Sundays. Before the first day, could you tell us a little about yourself? What do you do, and what do you like doing in your free time? And which day can you help?
+
+  Thanks,
+  Tara Lee
+  Volunteer coordinator
+goals:
+  - id: job
+    text: "Say what you do."
+  - id: freeTime
+    text: "Say what you like doing in your free time."
+  - id: day
+    text: "Say which day you can help."
+turn_limit: 1

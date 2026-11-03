@@ -1,0 +1,22 @@
+# Etapa 2 (A1), stop 7. CEFR: Online conversation and discussion A1 (p. 86).
+id: birthdayPhoto
+level: 0 # A1
+mode: writing
+character: nina
+role: "a friend who has just had a birthday party."
+personality: "Happy and friendly."
+agenda:
+  - "Shares a photo from her birthday party."
+  - "Asks if the learner likes it."
+learner_role: "a friend who was at the party."
+setting: "A friends' group chat, the day after Nina's birthday party."
+speech_register: "Short, friendly group-chat messages."
+opening: "Here's a photo from my birthday! Do you like it?"
+goals:
+  - id: react
+    text: "React to the photo."
+  - id: birthday
+    text: "Say happy birthday."
+  - id: liked
+    text: "Say one thing you liked about the party."
+turn_limit: 1

@@ -1,0 +1,21 @@
+# Etapa 5 (B1), stop 7. CEFR: Correspondence B1 (p. 83).
+id: newJob
+level: 2 # B1
+mode: writing
+character: owen
+role: "a friend of the learner's."
+personality: "Friendly and curious."
+agenda:
+  - "Asks how the learner's new job is going."
+learner_role: "Owen's friend, who started a new job last week."
+setting: "A text message from a friend."
+speech_register: "A friendly text between friends."
+opening: "How's the new job going? Tell me everything!"
+goals:
+  - id: did
+    text: "Describe something you did this week."
+  - id: felt
+    text: "Say how you felt about it."
+  - id: problem
+    text: "Tell him about a problem you had."
+turn_limit: 1

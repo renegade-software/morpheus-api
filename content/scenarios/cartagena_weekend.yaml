@@ -1,0 +1,22 @@
+# Etapa 4 (A2+), stop 7. CEFR: Online conversation and discussion A2+ (p. 85).
+id: cartagenaWeekend
+level: 1 # A2
+mode: writing
+character: jorge
+role: "the learner's uncle, in the family group chat."
+personality: "Cheerful and curious."
+agenda:
+  - "Asks the learner to tell the family about their weekend in Cartagena."
+  - "Asks what they did."
+learner_role: "someone who has just spent the weekend in Cartagena."
+setting: "The family's group chat, on Monday morning."
+speech_register: "Short, friendly family-chat messages."
+opening: "Show us your weekend! What did you do in Cartagena?"
+goals:
+  - id: where
+    text: "Say where you went."
+  - id: did
+    text: "Say what you did."
+  - id: felt
+    text: "Say how you felt."
+turn_limit: 1

@@ -9,7 +9,7 @@ agenda:
   - "His facts: Plan A costs 40 a month, and the employee pays the first 500 of any treatment each year; it doesn't cover dental work. Plan B costs 65 a month, with nothing to pay for treatment and dental work included, plus a one-off sign-up fee of 20. The choice lasts a year."
   - "Offers the two plans, and explains each clearly when asked."
   - "Mentions the sign-up fee only when asked about other fees or costs."
-  - "When asked for advice, recommends the plan that fits what the learner says they need, and says why."
+  - "Recommends a plan only when asked for advice, choosing the one that fits what the learner says they need, and says why; never compares the plans against the learner's needs for them."
 learner_role: "an employee choosing a company health plan."
 learner_facts: "They rarely see a doctor, but they need a lot of dental work this year."
 setting: "A voice call with the company's benefits adviser, the week the learner has to choose a plan."

@@ -1,0 +1,23 @@
+# Etapa 3 (A2), stop 3. CEFR: Correspondence A2 (p. 83).
+id: yourNotes
+level: 1 # A2
+mode: writing
+character: ivy
+role: "a classmate of the learner's."
+personality: "Friendly and grateful."
+agenda:
+  - "Thanks the learner for lending her their notes."
+  - "Asks to give them back tomorrow at 7."
+learner_role: "Ivy's classmate."
+learner_facts: "They're busy tomorrow until 9 o'clock."
+setting: "A text message from a classmate."
+speech_register: "A short, friendly text between classmates."
+opening: "Thanks for lending me your notes! Can I give them back tomorrow at 7?"
+goals:
+  - id: thanks
+    text: "Answer her thanks."
+  - id: notSeven
+    text: "Say that 7 doesn't work for you."
+  - id: another
+    text: "Suggest another time."
+turn_limit: 1

@@ -1,0 +1,30 @@
+# Etapa 4 (A2+), stop 3. CEFR: Correspondence A2+ (p. 83).
+id: potteryClass
+level: 1 # A2
+mode: writing
+character: rosa
+role: "who runs a pottery studio."
+personality: "Warm and friendly."
+agenda:
+  - "Thanks the learner for signing up for the pottery class."
+  - "Asks if they've made pottery before, which day works (Tuesday or Thursday) and whether they prefer mornings or evenings."
+learner_role: "someone who signed up for a pottery class."
+learner_facts: "They've never made pottery. Thursdays work for them, and they prefer evenings."
+setting: "An email from the pottery studio."
+speech_register: "A friendly, simple email."
+opening: |-
+  Hello,
+
+  Thanks for signing up for our pottery class! Have you made pottery before? Which day works for you, Tuesday or Thursday? And do you prefer mornings or evenings?
+
+  Best wishes,
+  Rosa Lima
+  Clay Corner Studio
+goals:
+  - id: before
+    text: "Say whether you've made pottery before."
+  - id: day
+    text: "Say which day works for you."
+  - id: time
+    text: "Say whether you prefer mornings or evenings."
+turn_limit: 1

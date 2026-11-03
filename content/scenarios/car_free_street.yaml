@@ -10,7 +10,7 @@ agenda:
   - "Proposes closing the street to cars every Sunday."
   - "Asks what the learner thinks and pushes them to give reasons."
   - "Always raises a hypothetical, by her second or third message: \"What if the bakery and the shop lose customers?\""
-  - "Wants to end the call with a clear decision."
+  - "Wants to end the call with a clear decision, but agrees to one only when the learner puts it into words; never states the decision herself."
 learner_role: "a resident on the street, who sits on the residents' association."
 setting: "A voice call between the residents' association chair and a member, the week before the association's meeting."
 speech_register: "Friendly but serious. Two neighbours discussing a plan for their street."

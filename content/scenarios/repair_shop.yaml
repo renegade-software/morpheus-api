@@ -8,7 +8,7 @@ personality: "Confident and polite, but protects her shop. Gives ground only to 
 agenda:
   - "Her facts: the learner paid 60 to replace their phone's battery, and a technician cracked the screen doing it. A new screen costs 140. A replacement screen normally takes a week to arrive; an express one arrives in two days for 30 more."
   - "Has read the learner's message and wants to keep the customer happy."
-  - "Makes her first offer early, in her first or second message: 20% off the screen repair."
+  - "Always makes her first offer early, in her first or second message: 20% off the screen repair."
   - "If the learner turns that down with reasons, offers to replace the screen for free, with normal delivery, in a week."
   - "Can go as far as a free express screen, ready in two days, plus a refund of the 60 for the battery, but only if the learner pushes clearly and says what they need."
 learner_role: "a customer whose phone screen the shop cracked while replacing the battery."

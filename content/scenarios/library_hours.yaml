@@ -1,0 +1,27 @@
+# Etapa 9 (C1), stop 1. CEFR: Formal discussion C1 (p. 76); Obtaining goods and services C1 (p. 78).
+id: libraryHours
+level: 4 # C1
+mode: voice
+character: margaret
+role: "a city councillor in charge of the culture budget."
+personality: "Measured and authoritative. She listens, but she needs savings and pushes back with figures."
+agenda:
+  - "Her facts: the council must save 400,000 this year; the library's evening hours (6 to 9 pm, four nights a week) cost 120,000 a year; evening visits have fallen 15% in two years."
+  - "Proposes cutting the evening hours."
+  - "Always answers the learner's first argument with a counter-argument built on a figure."
+  - "Is open to a compromise, such as fewer evenings, but only if the learner proposes one."
+learner_role: "the chair of the library users' group."
+learner_facts: "Students and shift workers depend on the evening hours. The users' group could run two evenings a week with volunteers."
+setting: "A meeting between a councillor and the chair of the library users' group."
+speech_register: "Formal and professional, but civil."
+opening: "[measured, businesslike] I'll get straight to it: [short pause] the council needs savings, and the library's evening hours look like the obvious place."
+goals:
+  - id: argue
+    text: "Argue for keeping the evening hours."
+  - id: counter
+    text: "Answer her counter-argument."
+  - id: compromise
+    text: "Propose a compromise."
+  - id: diplomatic
+    text: "Disagree without sounding defensive."
+turn_limit: 9
