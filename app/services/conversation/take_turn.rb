@@ -33,8 +33,13 @@ module Conversation::TakeTurn
       turns: turns + [ { speaker: "learner", text: text } ] }
   end
 
+  # A conversation the character closed before the turn limit with goals still open ended on a goodbye the learner
+  # asked for ("that'll be all"), so it counts as ended by the learner.
   def self.finish(conversation)
-    conversation.finish!(conversation.all_goals_met? ? "goals_met" : "turn_limit")
+    return conversation.finish!("goals_met") if conversation.all_goals_met?
+
+    learner_turns = conversation.turns.where(speaker: "learner").count
+    conversation.finish!(learner_turns < conversation.scenario.turn_limit ? "ended_by_learner" : "turn_limit")
   end
 
   def self.create_trace(conversation, trace)

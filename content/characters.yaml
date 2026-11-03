@@ -1,7 +1,211 @@
-# The recurring cast. A character keeps only what stays the same in every scenario: the name and, for voice scenarios,
-# one pinned ElevenLabs voice so every participant hears the same person. Who they are in a given situation (a new hire,
-# a customer calling support) is the scenario's `role`. `scenarios:import` copies the character into each frozen
-# version, so a conversation keeps the voice it ran with even if this file changes later.
+# The cast. A character keeps only what stays the same in every scenario they're in: the name and, for voice
+# scenarios, one pinned ElevenLabs voice so every participant hears the same person. Each scenario has its own person
+# (2026-11-03), so 24 voices play 48 people: one per stage each, never twice in a stage. Who they are in the scene is
+# the scenario's `role`. `scenarios:import` copies the character into each frozen version, so a conversation keeps the
+# voice it ran with even if this file changes later.
+
+# A1
+grace:
+  name: "Grace Hill"
+  voice: "DODLEQrClDo8wCz460ld" # Emma's voice
+holly:
+  name: "Holly Evans"
+  voice: "nf4MCGNSdM0hxM95ZBQR" # Lucy's voice
+ben:
+  name: "Ben Carter"
+  voice: "kZyHKZLGYb8nFxD5oMQS" # Sam's voice
+yusuf:
+  name: "Dr Yusuf Ali"
+  voice: "3LPKEa2TICTsITcoxL7H" # Omar's voice
+anna:
+  name: "Anna Wood"
+  voice: "DODLEQrClDo8wCz460ld" # Emma's voice
+ruby:
+  name: "Ruby Fox"
+  voice: "nf4MCGNSdM0hxM95ZBQR" # Lucy's voice
+jack:
+  name: "Jack Hughes"
+  voice: "kZyHKZLGYb8nFxD5oMQS" # Sam's voice
+peter:
+  name: "Peter Marsh"
+  voice: "3LPKEa2TICTsITcoxL7H" # Omar's voice
+
+# A2
+martin:
+  name: "Martin Ross"
+  voice: "mZ8K1MPRiT5wDQaasg3i" # Daniel's voice
+ella:
+  name: "Ella Ward"
+  voice: "6fZce9LFNG3iEITDfqZZ" # Mia's voice
+amy:
+  name: "Amy Cole"
+  voice: "aEO01A4wXwd1O8GPgGlF" # Chloe's voice
+luca:
+  name: "Luca Romano"
+  voice: "A7AUsa1uITCDpK29MG3m" # Ravi's voice
+hugh:
+  name: "Hugh Barnes"
+  voice: "mZ8K1MPRiT5wDQaasg3i" # Daniel's voice
+lily:
+  name: "Lily Grey"
+  voice: "6fZce9LFNG3iEITDfqZZ" # Mia's voice
+megan:
+  name: "Megan Hart"
+  voice: "aEO01A4wXwd1O8GPgGlF" # Chloe's voice
+dev:
+  name: "Dev Sharma"
+  voice: "A7AUsa1uITCDpK29MG3m" # Ravi's voice
+
+# B1
+joanna:
+  name: "Joanna Webb"
+  voice: "VzvwO54njbMkjpH6lreS" # Anika's voice
+toby:
+  name: "Toby Lane"
+  voice: "6ERVtmmxU0xToHKMxwW2" # Jake's voice
+brenda:
+  name: "Brenda Kerr"
+  voice: "WLjZnm4PkNmYtNCyiCq8" # Sofia's voice
+kelly:
+  name: "Kelly Dunn"
+  voice: "DXX4Q5Bh1vqK8CciYVPf" # Tasha's voice
+ryan:
+  name: "Ryan Moss"
+  voice: "6ERVtmmxU0xToHKMxwW2" # Jake's voice
+maureen:
+  name: "Maureen Lamb"
+  voice: "WLjZnm4PkNmYtNCyiCq8" # Sofia's voice
+diane:
+  name: "Diane Fairley"
+  voice: "VzvwO54njbMkjpH6lreS" # Anika's voice
+erin:
+  name: "Erin Walsh"
+  voice: "DXX4Q5Bh1vqK8CciYVPf" # Tasha's voice
+
+# B2
 tom:
   name: "Tom Osei"
-  voice: "Kai8v6OYQRPG5WgxvCRF"
+  voice: "gAMZphRyrWJnLMDnom6H" # Tom's voice
+nathan:
+  name: "Nathan Reid"
+  voice: "jyYV4jm5Wq39qXvc4ERa" # Ethan's voice
+monica:
+  name: "Monica Reyes"
+  voice: "n3yMmKmTfVCEM13Kk2lp" # Carmen's voice
+jess:
+  name: "Jess Morgan"
+  voice: "NbkKnEAZ7Bqw4EAkVEaz" # Rachel's voice
+patricia:
+  name: "Patricia Holt"
+  voice: "n3yMmKmTfVCEM13Kk2lp" # Carmen's voice
+claire:
+  name: "Claire Dawson"
+  voice: "NbkKnEAZ7Bqw4EAkVEaz" # Rachel's voice
+mark:
+  name: "Mark Fenwick"
+  voice: "jyYV4jm5Wq39qXvc4ERa" # Ethan's voice
+kwame:
+  name: "Kwame Asante"
+  voice: "gAMZphRyrWJnLMDnom6H" # Tom's voice
+
+# C1
+margaret:
+  name: "Margaret Ellis"
+  voice: "EtBr43MW0sMHh44Pdij6" # Helen's voice
+femi:
+  name: "Femi Okoro"
+  voice: "qRRCpZ9846Z3NiCRzdQ5" # Marcus's voice
+camille:
+  name: "Camille Durand"
+  voice: "I7qs7sGMuqqIuJ1AE3eT" # Sophie's voice
+richard:
+  name: "Richard Lyle"
+  voice: "0lp4RIz96WD1RUtvEu3Q" # James's voice
+theo:
+  name: "Theo Barrett"
+  voice: "qRRCpZ9846Z3NiCRzdQ5" # Marcus's voice
+anne:
+  name: "Professor Anne Ferris"
+  voice: "EtBr43MW0sMHh44Pdij6" # Helen's voice
+graham:
+  name: "Graham Pike"
+  voice: "0lp4RIz96WD1RUtvEu3Q" # James's voice
+margot:
+  name: "Margot Lefèvre"
+  voice: "I7qs7sGMuqqIuJ1AE3eT" # Sophie's voice
+
+# C2
+hamish:
+  name: "Hamish Fraser"
+  voice: "YrAYvOVjAFiqVwBgB4qI" # Oliver's voice
+leila:
+  name: "Leila Mansour"
+  voice: "aCChyB4P5WEomwRsOKRh" # Nadia's voice
+deirdre:
+  name: "Deirdre Nolan"
+  voice: "sgk995upfe3tYLvoGcBN" # Siobhan's voice
+naomi:
+  name: "Naomi Sato"
+  voice: "u6a6bRv82Zfi9NzoIqvt" # Yuki's voice
+aiko:
+  name: "Aiko Tanaka"
+  voice: "u6a6bRv82Zfi9NzoIqvt" # Yuki's voice
+maeve:
+  name: "Maeve Gallagher"
+  voice: "sgk995upfe3tYLvoGcBN" # Siobhan's voice
+angus:
+  name: "Angus Blair"
+  voice: "YrAYvOVjAFiqVwBgB4qI" # Oliver's voice
+rania:
+  name: "Rania Aziz"
+  voice: "aCChyB4P5WEomwRsOKRh" # Nadia's voice
+
+# Senders of typed messages: no voice, since writing scenarios are never spoken.
+leo:
+  name: "Leo Martin"
+kate:
+  name: "Kate Shaw"
+clara:
+  name: "Clara"
+nina:
+  name: "Nina Rossi"
+ivy:
+  name: "Ivy Chen"
+rosa:
+  name: "Rosa Lima"
+tara:
+  name: "Tara Lee"
+jorge:
+  name: "Jorge"
+neil:
+  name: "Neil Ford"
+priya:
+  name: "Priya Nair"
+owen:
+  name: "Owen Lowe"
+sean:
+  name: "Sean Doyle"
+fiona:
+  name: "Fiona Blake"
+danny:
+  name: "Danny Hale"
+lena:
+  name: "Lena Fischer"
+dana:
+  name: "Dana Price"
+susan:
+  name: "Susan Bright"
+gary:
+  name: "Gary Hollis"
+hannah:
+  name: "Hannah Quinn"
+lucas:
+  name: "Lucas Brandt"
+alan:
+  name: "Professor Alan Whitby"
+chris:
+  name: "Chris Dale"
+victor:
+  name: "Victor Lang"
+klaus:
+  name: "Klaus Becker"

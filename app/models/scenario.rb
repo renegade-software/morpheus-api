@@ -4,6 +4,8 @@ class Scenario < ApplicationRecord
   DIR = Rails.root.join("content", "scenarios")
   INTERLOCUTOR_FILE = "interlocutor.yaml"
   CHARACTERS_FILE = Rails.root.join("content", "characters.yaml")
+  # Delivery directions like [sighs] in a voice opening, for ElevenLabs only (morpheus-agent strips them from replies).
+  AUDIO_TAG = /\[[^\]]*\]\s*/
 
   has_many :conversations, dependent: :restrict_with_exception
   has_one_attached :opening_audio
@@ -58,6 +60,10 @@ class Scenario < ApplicationRecord
   end
 
   def opening
+    spoken_opening&.gsub(AUDIO_TAG, "")&.strip
+  end
+
+  def spoken_opening
     content.dig("scenario", "opening")
   end
 
@@ -66,7 +72,7 @@ class Scenario < ApplicationRecord
   end
 
   def voice_opening!
-    response = Agent.synthesize(voice_id: content.fetch("character").fetch("voice"), text: opening)
+    response = Agent.synthesize(voice_id: content.fetch("character").fetch("voice"), text: spoken_opening)
     opening_audio.attach(io: StringIO.new(Base64.strict_decode64(response.fetch("audio"))),
                          filename: "#{key}-#{id}-opening.mp3", content_type: response.fetch("content_type"))
     response.fetch("trace")

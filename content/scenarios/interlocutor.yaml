@@ -1,6 +1,19 @@
 # What a character's speech must stay within, by the scenario's level: the CEFR Companion Volume's "Understanding an
-# interlocutor" scale (Council of Europe, 2020). Each scenario carries its level's descriptors into its frozen version.
-# Scores run A1 = 0 … C2 = 5. Only B2 so far, the level of the one scenario written.
-# The wording was written from memory; check it word for word against the Companion Volume before the thesis cites it.
+# interlocutor" scale (Council of Europe, 2020, p. 73). Each scenario carries its level's descriptors into its frozen
+# version. Scores run A1 = 0 … C2 = 5.
+# Paraphrased, not quoted: the thesis cites the volume's own wording on p. 73.
+0:
+  - "Follows only everyday phrases about simple, concrete needs, said to them directly, slowly and clearly, with repetition, by a patient and helpful speaker."
+  - "Follows questions and instructions only when they are put slowly and carefully, and follows short, simple directions."
+1:
+  - "Understands enough to handle simple, routine exchanges without much effort."
+  - "Follows clear, standard speech on familiar matters said to them, as long as they can ask now and then for something to be repeated or said another way."
+  - "Follows simple everyday conversation said to them clearly, slowly and directly; a speaker who takes the trouble can get through to them."
+2:
+  - "Follows clearly articulated everyday conversation said to them, though they sometimes need particular words and phrases repeated."
 3:
-  - "Can understand in detail what is said to them in the standard spoken language even in a noisy environment."
+  - "Understands in detail what is said to them in the standard language or a familiar variety, even with background noise."
+4:
+  - "Understands a speaker in detail even on abstract, complex and specialist topics outside their own field, though they may need to check the odd detail, especially in an unfamiliar variety."
+5:
+  - "Understands any speaker, even on abstract, complex and specialist topics outside their own field, once they have had a chance to get used to a less familiar variety."

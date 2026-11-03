@@ -25,8 +25,12 @@ module Agent
     post("/conversation/turn", payload, read_timeout: TURN_READ_TIMEOUT)
   end
 
-  def self.take_voice_turn(payload)
-    post("/conversation/voice-turn", payload, read_timeout: TURN_READ_TIMEOUT)
+  def self.transcribe(payload)
+    post("/conversation/transcribe", payload, read_timeout: TURN_READ_TIMEOUT)
+  end
+
+  def self.voice_reply(payload)
+    post("/conversation/voice-reply", payload, read_timeout: TURN_READ_TIMEOUT)
   end
 
   def self.synthesize(payload)

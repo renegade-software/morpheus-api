@@ -1,6 +1,6 @@
-# Tom's scenario by voice: the same scene as warehouse_heat.yaml, the path's next stop after the typed one
-# (2026-10-29). Keep the two in step until the voice one gets a scene of its own. `bin/rails scenarios:import` freezes
-# it like any scenario and voices its opening. The UI shares the typed one's brief (scenarios.warehouseHeat).
+# Tom's scenario by voice: the same scene as warehouse_heat.yaml, and Etapa 7's first stop since the typed one left the
+# path (2026-11-02). `bin/rails scenarios:import` freezes it like any scenario and voices its opening. The UI shares the
+# typed one's brief (scenarios.warehouseHeat).
 id: warehouseHeatVoice
 level: 3 # B2
 mode: voice # voice notes both ways; typed messages are refused
@@ -14,7 +14,7 @@ agenda:
 learner_role: "Tom's shift supervisor."
 setting: "A warehouse floor on a very hot afternoon. The roof crew earns a bonus."
 speech_register: "Professional but friendly. The supervisor should be firm without being rude."
-opening: "Hey boss! It's boiling out there. Anything I should know before I head back out?"
+opening: "[cheerful, a little out of breath] Hey boss! [exhales] It's boiling out there. [curious] Anything I should know before I head back out?"
 goals:
   - id: water
     text: "Tell him to drink water."
