@@ -1,0 +1,28 @@
+# Etapa 10 (C1), stop 3. CEFR: Online conversation and discussion C1 (p. 85); Correspondence C1 (p. 82).
+id: cafeTerrace
+level: 4 # C1
+mode: writing
+character: gary
+role: "a neighbour posting on a neighbourhood forum."
+personality: "Annoyed and blunt."
+agenda:
+  - "Complains that the café's terrace is noisy in the evenings."
+  - "Claims, wrongly, that the terrace is open until 2 am."
+learner_role: "the owner of a small café, replying on the neighbourhood forum."
+learner_facts: "The terrace closes at 10 pm every night, and the café itself at 11. Last Friday a birthday party on the terrace was louder than usual."
+setting: "A public neighbourhood forum."
+speech_register: "A public reply on a local forum: polite, clear and calm, read by many neighbours."
+opening: |-
+  Is anyone else fed up with the noise from the café terrace on Calle 9? It's open until 2 am and the noise is unbearable, especially last Friday. Something needs to be done.
+
+  Gary Hollis
+goals:
+  - id: acknowledge
+    text: "Acknowledge the real problem."
+  - id: correct
+    text: "Correct the wrong fact politely."
+  - id: step
+    text: "Offer a next step."
+  - id: tone
+    text: "Keep a calm tone other readers will trust."
+turn_limit: 1

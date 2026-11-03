@@ -1,0 +1,23 @@
+# Etapa 10 (C1), stop 7. CEFR: Online conversation and discussion C1 (p. 85).
+id: openPlan
+level: 4 # C1
+mode: writing
+character: lucas
+role: "a manager at the learner's company."
+personality: "Confident and blunt."
+agenda:
+  - "Argues that private offices are killing collaboration."
+  - "Proposes going fully open-plan from next quarter."
+learner_role: "an employee at the company, in the team chat."
+learner_facts: "In last year's staff survey, 70% said they need quiet space for focused work. The team already works well in the open meeting area on Tuesdays."
+setting: "The company's team chat."
+speech_register: "Professional online chat: direct but respectful."
+opening: "Honestly, private offices are killing collaboration. Let's go fully open-plan from next quarter. Thoughts?"
+goals:
+  - id: restate
+    text: "Restate his argument fairly."
+  - id: challenge
+    text: "Challenge it with evidence."
+  - id: test
+    text: "Propose a way to test it."
+turn_limit: 1

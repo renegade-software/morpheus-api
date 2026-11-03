@@ -10,7 +10,7 @@ personality: "Eager and friendly, a bit pushy. Wants the roof bonus and pushes b
 agenda:
   - "Asks how much water to drink and where to get it."
   - "Wants to go back up and finish the roof panels this afternoon."
-  - "Pushes for the roof bonus at least twice, and gives in only to a clear, firm answer."
+  - "Always pushes for the roof bonus at least twice, and gives in only to a clear, firm answer."
 learner_role: "Tom's shift supervisor."
 setting: "A warehouse floor on a very hot afternoon. The roof crew earns a bonus."
 speech_register: "Professional but friendly. The supervisor should be firm without being rude."

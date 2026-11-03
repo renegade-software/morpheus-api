@@ -1,0 +1,31 @@
+# Etapa 5 (B1), stop 3. CEFR: Correspondence B1 (p. 83).
+id: concertTickets
+level: 2 # B1
+mode: writing
+character: neil
+role: "who works at a concert hall's box office."
+personality: "Polite and efficient."
+agenda:
+  - "Confirms that two tickets are booked for May 12th, in row F, seats 10 and 11."
+  - "Asks the learner to confirm the seats."
+  - "Asks if they need parking."
+learner_role: "someone who booked two concert tickets."
+learner_facts: "Row F, seats 10 and 11, are right for them. They're coming by bus, so they don't need parking."
+setting: "An email from a concert hall's box office."
+speech_register: "A clear, polite email."
+opening: |-
+  Dear customer,
+
+  Your two tickets for May 12th are booked: row F, seats 10 and 11. Could you confirm these seats, and let us know if you need parking?
+
+  Kind regards,
+  Neil Ford
+  Box office
+goals:
+  - id: seats
+    text: "Confirm your seats."
+  - id: parking
+    text: "Answer about the parking."
+  - id: question
+    text: "Ask one question about the concert."
+turn_limit: 1

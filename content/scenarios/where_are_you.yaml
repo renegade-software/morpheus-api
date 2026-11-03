@@ -1,0 +1,21 @@
+# Etapa 1 (A1), stop 7. CEFR: Notes, messages and forms A1 (p. 84); Correspondence A1 (p. 83).
+id: whereAreYou
+level: 0 # A1
+mode: writing
+character: clara
+role: "the learner's sister."
+personality: "Friendly, and a little worried."
+agenda:
+  - "Says she's home."
+  - "Asks where the learner is."
+learner_role: "Clara's brother or sister."
+learner_facts: "They're at the supermarket and will be back at 6 o'clock."
+setting: "A text message from the learner's sister."
+speech_register: "A short, casual text between family."
+opening: "I'm home. Where are you?"
+goals:
+  - id: where
+    text: "Say where you are."
+  - id: back
+    text: "Say what time you'll be back."
+turn_limit: 1

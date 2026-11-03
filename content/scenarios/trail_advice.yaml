@@ -1,0 +1,31 @@
+# Etapa 12 (C2), stop 3. CEFR: Online conversation and discussion C2 (p. 85).
+id: trailAdvice
+level: 5 # C2
+mode: writing
+character: chris
+role: "a member of a hiking forum."
+personality: "Well-meaning but careless."
+agenda:
+  - "Shares the learner's safety advice about the Nevado trail wrongly: says they recommend starting around noon."
+  - "Says, rightly, that the summit takes about six hours."
+  - "Others reply that the advice is dangerous."
+learner_role: "an experienced hiker whose safety advice was misquoted on the forum."
+learner_facts: "Their original post says to start before 6 am, because storms usually arrive after noon. Chris is right that the summit takes about six hours."
+setting: "A public hiking forum thread."
+speech_register: "A public forum reply: precise, calm and friendly, read by many hikers."
+opening: |-
+  Tip from someone who knows the Nevado trail: it's about six hours to the summit, and they recommend starting around noon so you have it to yourself. (From their trail guide post.)
+
+  Chris Dale
+
+  Replies: "Noon?! That's how people get caught in storms." "This is dangerous advice."
+goals:
+  - id: correct
+    text: "Correct the claim precisely."
+  - id: credit
+    text: "Credit what he got right."
+  - id: calm
+    text: "Calm the thread."
+  - id: source
+    text: "Point readers to the source."
+turn_limit: 1

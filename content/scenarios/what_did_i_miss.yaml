@@ -1,0 +1,23 @@
+# Etapa 6 (B1+), stop 3. CEFR: Information exchange B1+ (p. 79).
+id: whatDidIMiss
+level: 2 # B1
+mode: writing
+character: priya
+role: "a teammate in the learner's Sunday football team."
+personality: "Friendly and laid-back."
+agenda:
+  - "Says she missed last night's team meeting."
+  - "Asks if anything important was decided."
+learner_role: "a member of the football team who was at the meeting."
+learner_facts: "The meeting decided that from next month, training moves from Wednesdays to Thursdays at 7 pm, and that everyone pays 10 for new shirts by Friday."
+setting: "The football team's group chat."
+speech_register: "Casual group-chat messages between teammates."
+opening: "Couldn't make the team meeting last night. Anything important?"
+goals:
+  - id: decision
+    text: "Summarise the main decision."
+  - id: doWhat
+    text: "Say what she has to do."
+  - id: opinion
+    text: "Give your opinion on it."
+turn_limit: 1

@@ -1,0 +1,30 @@
+# Etapa 11 (C2), stop 7. CEFR: Correspondence C2 (p. 82).
+id: angryTenant
+level: 5 # C2
+mode: writing
+character: victor
+role: "a tenant in the small apartment building the learner manages."
+personality: "Angry and accusatory; writes in capitals when he's upset."
+agenda:
+  - "Accuses the learner of incompetence over the broken lift, copying every tenant."
+  - "Claims he reported it a week ago and nothing was done."
+learner_role: "the manager of a small apartment building, replying to all the tenants."
+learner_facts: "The lift broke on Monday, after Victor wedged its doors open with a sofa during his move; he reported it on Tuesday, not a week ago. An engineer comes on Thursday morning, and the repair is covered."
+setting: "An email from a tenant to the building manager, copying all the tenants."
+speech_register: "A professional email to many readers: calm, precise and tactful."
+opening: |-
+  To the building manager (and everyone in the building),
+
+  The lift has been broken for a WEEK. I reported it straight away and nothing has been done. This is completely incompetent. Some of us carry shopping up five floors every day.
+
+  Victor Lang, flat 5A
+goals:
+  - id: defuse
+    text: "Defuse the tone."
+  - id: record
+    text: "Correct the record without blaming him."
+  - id: fix
+    text: "Commit to a concrete fix."
+  - id: relationship
+    text: "Protect the relationship."
+turn_limit: 1

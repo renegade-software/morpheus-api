@@ -1,0 +1,32 @@
+# Etapa 9 (C1), stop 3. CEFR: Correspondence C1 (p. 82); Overall written interaction C1 (p. 82).
+id: careHome
+level: 4 # C1
+mode: writing
+character: susan
+role: "the manager of the care home where the learner's grandmother lives."
+personality: "Professional and kind."
+agenda:
+  - "Says the learner's grandmother will move to a room in the east wing next month, while her current room is renovated."
+  - "Asks the family for any thoughts."
+learner_role: "a grandchild of one of the care home's residents."
+learner_facts: "Their grandmother's main worry is losing her view of the garden, and she's close to her current neighbour, Mrs Ortega. The learner doesn't know whether the move is temporary."
+setting: "An email from the care home's manager."
+speech_register: "A formal but warm email about a family member's care."
+opening: |-
+  Dear family,
+
+  I'm writing to let you know that your grandmother will move to a room in our east wing next month, while her current room is renovated. We'll do everything we can to make the move easy for her. If you have any thoughts, please let me know.
+
+  Warm regards,
+  Susan Bright
+  Care home manager
+goals:
+  - id: acknowledge
+    text: "Acknowledge the decision."
+  - id: concern
+    text: "Raise your main concern diplomatically."
+  - id: measure
+    text: "Suggest one concrete measure."
+  - id: clarify
+    text: "Ask her to clarify one point."
+turn_limit: 1

@@ -1,0 +1,33 @@
+# Etapa 11 (C2), stop 3. CEFR: Overall written interaction C2 (p. 82); Correspondence C1 and C2 (p. 82).
+id: professorRetires
+level: 5 # C2
+mode: writing
+character: alan
+role: "the learner's old university professor."
+personality: "Warm, witty and self-deprecating."
+agenda:
+  - "Announces he's retiring early, at the end of term, for health reasons."
+  - "Makes light of it with a joke about finally reading the books he assigned."
+learner_role: "a former student of Professor Whitby's."
+learner_facts: "His seminar on research ethics is why they chose their career, and he once stayed two hours after class to help them with their thesis."
+setting: "An email from a former professor to his past students."
+speech_register: "A personal email: warm, witty and respectful, about a delicate subject."
+opening: |-
+  Dear all,
+
+  After thirty years, I'm retiring at the end of term: my doctors and I have reached an agreement, and for once I've lost the argument. I'm told retirement means finally reading the books I assigned you. I can't say I'm looking forward to it.
+
+  It has been a privilege to teach you all.
+
+  With warm regards,
+  Alan Whitby
+goals:
+  - id: warmly
+    text: "Respond warmly to the news."
+  - id: humour
+    text: "Match his humour without making light of his health."
+  - id: meant
+    text: "Say what his teaching meant to you."
+  - id: door
+    text: "Leave the door open."
+turn_limit: 1
