@@ -1,0 +1,32 @@
+# Etapa 8 (B2+), stop 7. CEFR: Correspondence B2+ (p. 82).
+id: closedClaim
+level: 3 # B2
+mode: writing
+character: dana
+role: "a claims officer at a courier company."
+personality: "Polite but formulaic. Writes in standard customer-service language."
+agenda:
+  - "Says the company has reviewed the claim about a late delivery and closed it."
+  - "Says the delivery arrived within the company's standard delivery window."
+learner_role: "the customer who made the claim."
+learner_facts: "They paid for next-day delivery of their sister's birthday present, and it arrived four days late, after her birthday."
+setting: "An email from the courier company's claims team, closing the learner's claim."
+speech_register: "A formal complaint email to a company. Firm but polite."
+opening: |-
+  Dear customer,
+
+  Thank you for contacting us. We have reviewed your claim regarding the late delivery of order 48213 and found that it was delivered within our standard delivery window. Your claim has therefore been closed.
+
+  Kind regards,
+  Dana Price
+  Claims team
+goals:
+  - id: disagree
+    text: "Say clearly that you disagree with the decision."
+  - id: details
+    text: "Give details that support your claim."
+  - id: outcome
+    text: "Say what outcome you want."
+  - id: polite
+    text: "Keep the email polite."
+turn_limit: 1

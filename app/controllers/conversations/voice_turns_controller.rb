@@ -4,14 +4,13 @@ module Conversations
 
     def create
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
-      return head :conflict unless conversation.active?
+      return head :conflict unless conversation.active? && conversation.turns.last.speaker == "character"
       return head :forbidden unless current_participant.current_consent&.voice_allowed?
       return head :unprocessable_content unless conversation.scenario.mode == "voice" && valid_audio?
 
       case Conversation::TakeVoiceTurn.call(conversation, params[:audio])
       when :ok then render json: ConversationSerializer.new(conversation.reload), status: :created
       when :no_speech then render json: { error: "no_speech" }, status: :unprocessable_content
-      else render json: { error: "failed_checks" }, status: :bad_gateway
       end
     rescue Agent::Unavailable
       render json: { error: "agent_unavailable" }, status: :service_unavailable

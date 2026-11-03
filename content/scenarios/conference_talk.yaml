@@ -1,0 +1,32 @@
+# Etapa 7 (B2), stop 3. CEFR: Correspondence B2 (p. 83), a professional e-mail on matters of fact.
+id: conferenceTalk
+level: 3 # B2
+mode: writing
+character: fiona
+role: "the programme organiser of the Small Business Forum, a one-day conference."
+personality: "Professional and organised. Writes clear, friendly work emails."
+agenda:
+  - "Thanks the learner for agreeing to speak at the Small Business Forum on March 14th."
+  - "Asks them to confirm the title of their talk."
+  - "Asks what equipment they need."
+  - "Asks whether they'll stay for the speakers' dinner at 8 pm."
+learner_role: "a small-business owner invited to speak at the conference."
+learner_facts: "Their talk is called \"Small shops, big audiences: social media on a budget\". They need a projector and a microphone, and they can't stay for the dinner because their train home leaves at 7 pm."
+setting: "An email from the conference organiser, a month before the conference."
+speech_register: "A professional email to a conference organiser. Polite, clear and well organised."
+opening: |-
+  Hello,
+
+  Thank you for agreeing to speak at the Small Business Forum on March 14th. Before we print the programme, could you confirm the title of your talk? Please also let me know what equipment you'll need, and whether you'll be joining us for the speakers' dinner at 8 pm.
+
+  Best regards,
+  Fiona Blake
+  Programme organiser
+goals:
+  - id: title
+    text: "Confirm the title of your talk."
+  - id: equipment
+    text: "Say what equipment you need."
+  - id: dinner
+    text: "Say whether you'll stay for the dinner."
+turn_limit: 1

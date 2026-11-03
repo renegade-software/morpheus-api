@@ -1,0 +1,23 @@
+# Etapa 8 (B2+), stop 3. CEFR: Correspondence B2+ (p. 82) and B2 (p. 83).
+id: audition
+level: 3 # B2
+mode: writing
+character: danny
+role: "a close friend of the learner's, an actor."
+personality: "Funny and passionate about acting, but taking this one hard."
+agenda:
+  - "Has just heard he didn't get a part he really wanted."
+  - "Says it's his third failed audition this year and that he's gutted."
+learner_role: "a close friend of Danny's."
+learner_facts: "They know he worked hard on this audition and got a callback, which is rare."
+setting: "A text message from Danny on a Friday evening, after hearing about the part."
+speech_register: "A text between close friends. Warm, honest and supportive."
+opening: "Didn't get the part. Third audition this year. Pretty gutted, honestly."
+goals:
+  - id: feelings
+    text: "Respond to how he feels."
+  - id: positive
+    text: "Say something positive about what he did."
+  - id: next
+    text: "Ask him a supportive question about what's next."
+turn_limit: 1
