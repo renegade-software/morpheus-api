@@ -28,7 +28,7 @@ class GenerateFeedbackJob < ApplicationJob
   private
 
   def payload(feedback, conversation, turns)
-    { scenario: conversation.scenario.content.fetch("scenario"), mode: feedback.mode,
+    { scenario: conversation.scenario.content.fetch("scenario").merge("mode" => feedback.mode), mode: feedback.mode,
       # A voice turn's words carry Scribe's confidence in each one, which feedback uses to judge intelligibility.
       turns: turns.map { { speaker: _1.speaker, text: _1.text, words: _1.words }.compact },
       goals: conversation.goals, display_language: feedback.display_language }

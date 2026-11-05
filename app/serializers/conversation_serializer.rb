@@ -10,7 +10,7 @@ class ConversationSerializer
     {
       id: @conversation.id,
       scenario: scenario.key,
-      mode: scenario.mode,
+      mode: @conversation.mode,
       status: @conversation.status,
       finished_reason: @conversation.finished_reason,
       turn_limit: scenario.turn_limit,
@@ -28,6 +28,9 @@ class ConversationSerializer
   end
 
   def audio_url(turn)
+    # A voice scenario played as a typed chat shows its opening as text only.
+    return if turn.position.zero? && !@conversation.voice?
+
     audio = turn.position.zero? ? @conversation.scenario.opening_audio : turn.audio
     AudioLink.url(audio, expires_in: AUDIO_LINK_TTL) if audio.attached?
   end

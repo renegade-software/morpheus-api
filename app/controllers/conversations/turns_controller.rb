@@ -5,7 +5,7 @@ module Conversations
     def create
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
       return head :conflict unless conversation.active?
-      return head :unprocessable_content unless %w[text writing].include?(conversation.scenario.mode)
+      return head :unprocessable_content unless %w[text writing].include?(conversation.mode)
 
       text = params.expect(:text).to_s.strip
       return head :unprocessable_content if text.empty? || text.length > Conversation::TakeTurn.max_length(conversation)

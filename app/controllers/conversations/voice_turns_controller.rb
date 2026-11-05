@@ -6,7 +6,7 @@ module Conversations
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
       return head :conflict unless conversation.active? && conversation.turns.last.speaker == "character"
       return head :forbidden unless current_participant.current_consent&.voice_allowed?
-      return head :unprocessable_content unless conversation.scenario.mode == "voice" && valid_audio?
+      return head :unprocessable_content unless conversation.voice? && valid_audio?
 
       case Conversation::TakeVoiceTurn.call(conversation, params[:audio])
       when :ok then render json: ConversationSerializer.new(conversation.reload), status: :created
