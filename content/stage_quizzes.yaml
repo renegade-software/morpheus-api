@@ -1,0 +1,224 @@
+# The short grammar quiz at the end of each stage: four questions, three options each, `answer` is the option's index.
+# Grammar per level from TrackTest's "English grammar CEF level requirements" (A1 to C1; C2 has no quiz).
+# The first stage of a level tests verbs (tenses, questions, gerund and infinitive), the second the rest.
+# Attempts store a copy of the questions they were given, so editing a question here never changes a past result.
+
+firstSteps: # A1, verbs
+  - id: a1-present-simple
+    point: Present simple for routines
+    prompt: "She ___ to work every day."
+    options: ["go", "goes", "going"]
+    answer: 1
+  - id: a1-past-simple
+    point: Past simple, regular verbs
+    prompt: "Yesterday we ___ a film at home."
+    options: ["watch", "watched", "watching"]
+    answer: 1
+  - id: a1-questions-to-be
+    point: Questions with to be
+    prompt: "___ you a teacher?"
+    options: ["Are", "Do", "Is"]
+    answer: 0
+  - id: a1-going-to
+    point: Going to for plans
+    prompt: "Next week I ___ visit my grandmother."
+    options: ["am going to", "going to", "go to"]
+    answer: 0
+
+onFoot: # A1, the rest
+  - id: a1-can
+    point: Can for ability
+    prompt: "I ___ swim, but I can't dance."
+    options: ["can", "am", "does"]
+    answer: 0
+  - id: a1-articles
+    point: A, an, the
+    prompt: "She is ___ engineer."
+    options: ["a", "an", "any"]
+    answer: 1
+  - id: a1-comparatives
+    point: Comparatives with -er
+    prompt: "My house is ___ than your house."
+    options: ["big", "bigger", "biggest"]
+    answer: 1
+  - id: a1-object-pronouns
+    point: Object pronouns
+    prompt: "This is Ana. I know ___ from school."
+    options: ["she", "her", "hers"]
+    answer: 1
+
+path: # A2, verbs
+  - id: a2-past-progressive
+    point: Past progressive interrupted by past simple
+    prompt: "I ___ dinner when the phone rang."
+    options: ["cooked", "was cooking", "am cooking"]
+    answer: 1
+  - id: a2-present-perfect-questions
+    point: Questions in the present perfect
+    prompt: "___ you ever been to Spain?"
+    options: ["Did", "Have", "Were"]
+    answer: 1
+  - id: a2-present-progressive-future
+    point: Present progressive for future plans
+    prompt: "We ___ my parents this Saturday. It's all planned."
+    options: ["visiting", "are visiting", "visited"]
+    answer: 1
+  - id: a2-verb-infinitive
+    point: Verbs followed by an infinitive
+    prompt: "She decided ___ a new job."
+    options: ["to look for", "looking for", "look for"]
+    answer: 0
+
+crossing: # A2, the rest
+  - id: a2-first-conditional
+    point: First conditional
+    prompt: "If it rains tomorrow, we ___ at home."
+    options: ["stay", "will stay", "stayed"]
+    answer: 1
+  - id: a2-should
+    point: Should for advice
+    prompt: "You look tired. You ___ go to bed early."
+    options: ["should", "mustn't", "can't"]
+    answer: 0
+  - id: a2-prepositions-time
+    point: Prepositions of time
+    prompt: "The meeting is ___ Monday."
+    options: ["in", "on", "at"]
+    answer: 1
+  - id: a2-reflexive
+    point: Reflexive pronouns
+    prompt: "He cut ___ while he was cooking."
+    options: ["him", "himself", "his"]
+    answer: 1
+
+bridge: # B1, verbs
+  - id: b1-past-perfect
+    point: Past perfect
+    prompt: "When we arrived, the film ___ already started."
+    options: ["has", "had", "was"]
+    answer: 1
+  - id: b1-used-to
+    point: Used to
+    prompt: "I ___ live in Bogotá, but now I live in Medellín."
+    options: ["use to", "used to", "was used to"]
+    answer: 1
+  - id: b1-passive
+    point: Passive voice, past
+    prompt: "This bridge ___ in 1950."
+    options: ["built", "was built", "has built"]
+    answer: 1
+  - id: b1-verb-gerund
+    point: Verbs followed by a gerund
+    prompt: "She enjoys ___ in the mountains."
+    options: ["to walk", "walking", "walk"]
+    answer: 1
+
+firmFooting: # B1, the rest
+  - id: b1-second-conditional
+    point: Second conditional
+    prompt: "If I ___ more money, I would travel around the world."
+    options: ["have", "had", "will have"]
+    answer: 1
+  - id: b1-must-deduction
+    point: Must for deduction
+    prompt: "He's been working all day. He ___ be tired."
+    options: ["must", "can't", "mustn't"]
+    answer: 0
+  - id: b1-ed-ing
+    point: Adjectives with -ed and -ing
+    prompt: "The film was really long and ___."
+    options: ["bored", "boring", "bore"]
+    answer: 1
+  - id: b1-until
+    point: Connecting words of time
+    prompt: "I'll wait here ___ you come back."
+    options: ["until", "while", "during"]
+    answer: 0
+
+lookout: # B2, verbs
+  - id: b2-future-perfect
+    point: Future perfect
+    prompt: "By next June, I ___ my degree."
+    options: ["will finish", "will have finished", "am finishing"]
+    answer: 1
+  - id: b2-have-something-done
+    point: Have something done
+    prompt: "I'm not cutting my own hair. I'm going to ___."
+    options: ["cut my hair", "have my hair cut", "have cut my hair"]
+    answer: 1
+  - id: b2-be-used-to
+    point: Be used to
+    prompt: "She's lived in London for years, so she's used to ___ on the left."
+    options: ["drive", "driving", "drove"]
+    answer: 1
+  - id: b2-to-gerund
+    point: To followed by a gerund
+    prompt: "I look forward to ___ from you."
+    options: ["hear", "hearing", "heard"]
+    answer: 1
+
+bend: # B2, the rest
+  - id: b2-third-conditional
+    point: Third conditional
+    prompt: "If she had left earlier, she ___ the train."
+    options: ["would catch", "would have caught", "had caught"]
+    answer: 1
+  - id: b2-must-have
+    point: Must have done
+    prompt: "The streets are wet. It ___ rained last night."
+    options: ["must have", "should have", "can't have"]
+    answer: 0
+  - id: b2-whose
+    point: Relative pronouns
+    prompt: "That's the man ___ car was stolen."
+    options: ["who", "whose", "which"]
+    answer: 1
+  - id: b2-so-do-i
+    point: So do I, neither do I
+    prompt: "\"I love this song.\" \"___\""
+    options: ["So do I.", "I do so.", "Neither do I."]
+    answer: 0
+
+longRoad: # C1, conditionals and wishes
+  - id: c1-wish-past
+    point: Wish for regrets
+    prompt: "I wish I ___ to the party last night. It sounds like it was great."
+    options: ["went", "had gone", "would go"]
+    answer: 1
+  - id: c1-mixed-conditional
+    point: Mixed conditionals
+    prompt: "If I had taken that job, I ___ in Madrid now."
+    options: ["would be living", "would have lived", "will live"]
+    answer: 0
+  - id: c1-if-only-would
+    point: If only for regrets
+    prompt: "If only he ___ interrupting me all the time! It's so annoying."
+    options: ["would stop", "stops", "will stop"]
+    answer: 0
+  - id: c1-should-inversion
+    point: Conditionals, all forms
+    prompt: "___ you need any help, just call me."
+    options: ["Should", "Would", "Had"]
+    answer: 0
+
+goodPace: # C1, past modals and inversion
+  - id: c1-should-have
+    point: Modals in the past
+    prompt: "You ___ told me you were coming. I would have cooked more."
+    options: ["should have", "must have", "could"]
+    answer: 0
+  - id: c1-never-inversion
+    point: Inversion with negative adverbials
+    prompt: "Never ___ such a beautiful view."
+    options: ["I have seen", "have I seen", "I saw"]
+    answer: 1
+  - id: c1-may-have
+    point: Modals in the past
+    prompt: "She isn't answering. She ___ have forgotten her phone at home."
+    options: ["may", "ought", "can"]
+    answer: 0
+  - id: c1-not-only
+    point: Inversion with negative adverbials
+    prompt: "Not only ___ late, but he also forgot the tickets."
+    options: ["he arrived", "did he arrive", "he did arrive"]
+    answer: 1

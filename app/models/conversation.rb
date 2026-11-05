@@ -4,6 +4,7 @@ class Conversation < ApplicationRecord
   FEEDBACK_REASONS = %w[goals_met turn_limit ended_by_learner].freeze
   IDLE_LIMIT = 3.minutes
   WRITING_IDLE_LIMIT = 20.minutes
+  WRITING_SHARE_TO_ADVANCE = 0.5
 
   belongs_to :participant
   belongs_to :scenario
@@ -46,6 +47,13 @@ class Conversation < ApplicationRecord
 
   def goals_met_share
     goals.count { _1.fetch("met") }.fdiv(goals.size)
+  end
+
+  # Whether this counts as the stop done on the path. A conversation needs every goal; a written task is one
+  # reply where the goal check can miss something the learner did cover, so half its goals are enough.
+  # Mirrors advancesPath in morpheus-ui src/path/xp.ts.
+  def advances_path?
+    scenario.writing? ? goals_met_share >= WRITING_SHARE_TO_ADVANCE : all_goals_met?
   end
 
   def idle_limit

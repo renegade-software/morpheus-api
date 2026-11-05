@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resource :user, only: %i[show update]
+  resource :user, only: %i[show update] do
+    post :advance_stage
+  end
   resource :consent, only: :create
 
   resources :conversations, only: %i[create show] do
@@ -15,6 +17,10 @@ Rails.application.routes.draw do
 
   resources :stage_reviews, only: :show, param: :stage do
     post :acknowledge, on: :member
+  end
+
+  resources :stage_quizzes, only: :show, param: :stage do
+    post :attempt, on: :member
   end
 
   namespace :placement do

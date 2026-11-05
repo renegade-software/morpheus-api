@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
-  before_action :require_eligible_consent!, only: :update
+  before_action :require_eligible_consent!, only: %i[update advance_stage]
 
   def show
+    render json: user_json
+  end
+
+  # POST /user/advance_stage  { from: "firstSteps" }
+  def advance_stage
+    return head :conflict unless current_participant.advance_stage!(params.expect(:from))
+
     render json: user_json
   end
 
@@ -39,8 +46,10 @@ class UsersController < ApplicationController
       display_language: current_participant.display_language,
       onboarded: current_participant.onboarded_at.present?,
       rank_points: current_participant.rank_points,
+      current_stage: current_participant.stage,
       completed_scenarios: current_participant.completed_scenario_keys,
       completed_reviews: current_participant.stage_reviews.pluck(:stage),
+      passed_quizzes: current_participant.stage_quiz_attempts.passed.distinct.pluck(:stage),
       xp: Xp.summary(current_participant),
       consent: consent && { eligible: consent.eligible?, voice_allowed: consent.voice_allowed? }
     }

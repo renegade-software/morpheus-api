@@ -1,7 +1,6 @@
 class StageReview < ApplicationRecord
   POINTS = 25
-  # The UI's stage keys (morpheus-ui src/path/stages.ts); the API has no other notion of stages.
-  STAGES = %w[firstSteps onFoot path crossing bridge firmFooting lookout bend longRoad goodPace summit beyond].freeze
+  STAGES = Stage::KEYS
   # Goal comments are about the task, not the language, so they aren't mistakes to recap.
   EXCLUDED_SKILLS = %w[goal].freeze
 
