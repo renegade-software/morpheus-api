@@ -6,6 +6,7 @@ class Participant < ApplicationRecord
   has_one :placement_attempt, class_name: "Placement::Attempt", dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :evaluation_traces, dependent: :destroy
+  has_many :stage_reviews, dependent: :destroy
 
   validates :clerk_user_id, presence: true, uniqueness: true
   validates :pseudonym, presence: true, uniqueness: true
