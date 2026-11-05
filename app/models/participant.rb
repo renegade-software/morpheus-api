@@ -34,7 +34,8 @@ class Participant < ApplicationRecord
     following = Stage.after(from) if from == stage
     return false unless following && stage_finished?(from)
 
-    update!(current_stage: following, current_level: Stage.level_of(following))
+    # current_level stays what the placement test measured: passing a stage's grammar quiz isn't a CEFR measurement.
+    update!(current_stage: following)
   end
 
   def current_consent
