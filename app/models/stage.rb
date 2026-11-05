@@ -7,10 +7,6 @@ module Stage
     KEYS.fetch(level * PER_LEVEL)
   end
 
-  def self.level_of(key)
-    KEYS.index(key) / PER_LEVEL
-  end
-
   def self.after(key)
     KEYS[KEYS.index(key) + 1]
   end
