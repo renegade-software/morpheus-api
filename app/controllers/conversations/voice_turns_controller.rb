@@ -12,7 +12,7 @@ module Conversations
       when :ok then render json: ConversationSerializer.new(conversation.reload), status: :created
       when :no_speech then render json: { error: "no_speech" }, status: :unprocessable_content
       end
-    rescue Agent::Unavailable
+    rescue Agent::Unavailable, Agent::Rejected
       render json: { error: "agent_unavailable" }, status: :service_unavailable
     rescue ActiveRecord::RecordNotUnique
       head :conflict

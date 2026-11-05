@@ -3,6 +3,9 @@ class GenerateFeedbackJob < ApplicationJob
   retry_on Agent::Unavailable, wait: :polynomially_longer, attempts: 5 do |job, _error|
     job.arguments.first.update!(status: "failed")
   end
+  discard_on Agent::Rejected do |job, _error|
+    job.arguments.first.update!(status: "failed")
+  end
   discard_on ActiveJob::DeserializationError
 
   def perform(feedback)

@@ -3,6 +3,8 @@ require "net/http"
 module Agent
   class Error < StandardError; end
   class Unavailable < Error; end
+  # The model provider refused the account (no credits, bad key): failing now beats retrying for minutes.
+  class Rejected < Error; end
 
   READ_TIMEOUT = 120
   TURN_READ_TIMEOUT = 20
@@ -56,6 +58,7 @@ module Agent
     status = response.code.to_i
     return JSON.parse(response.body) if status == 200
     raise Unavailable, "agent answered #{status}" if status == 429 || status >= 500
+    raise Rejected, "agent answered #{status}: #{response.body.to_s.truncate(200)}" if status == 424
 
     raise Error, "agent answered #{status}: #{response.body.to_s.truncate(500)}"
   end
