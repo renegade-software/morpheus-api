@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resources :feedback_comments, only: :update, module: :conversations, path: "feedback/comments"
   end
 
+  resources :stage_reviews, only: :show, param: :stage do
+    post :acknowledge, on: :member
+  end
+
   namespace :placement do
     resource :attempt, only: %i[create show] do
       post :start
