@@ -5,7 +5,7 @@ module Conversations
     def create
       conversation = current_participant.conversations.find(params.expect(:conversation_id))
       return head :conflict unless conversation.active? && conversation.turns.last.speaker == "learner"
-      return head :unprocessable_content unless conversation.scenario.mode == "voice"
+      return head :unprocessable_content unless conversation.voice?
 
       case Conversation::VoiceReply.call(conversation)
       when :ok then render json: ConversationSerializer.new(conversation.reload), status: :created

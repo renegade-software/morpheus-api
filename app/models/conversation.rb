@@ -14,6 +14,7 @@ class Conversation < ApplicationRecord
 
   validates :status, inclusion: { in: STATUSES }
   validates :finished_reason, inclusion: { in: FINISHED_REASONS }, allow_nil: true
+  validates :mode, inclusion: { in: Scenario::MODES }, allow_nil: true
 
   scope :counted, lambda {
     where(status: "finished", finished_reason: FEEDBACK_REASONS)
@@ -22,11 +23,18 @@ class Conversation < ApplicationRecord
 
   def self.start!(participant, scenario)
     transaction do
-      conversation = create!(participant: participant, scenario: scenario,
+      conversation = create!(participant: participant, scenario: scenario, mode: mode_for(participant, scenario),
                              goals: scenario.goal_ids.map { { "goal_id" => _1, "evidence" => nil, "met" => false } })
       conversation.turns.create!(position: 0, speaker: "character", text: scenario.opening)
       conversation
     end
+  end
+
+  # Without consent to record audio, a voice scenario is played as a typed chat with the same scene and goals.
+  def self.mode_for(participant, scenario)
+    return "text" if scenario.mode == "voice" && !participant.current_consent&.voice_allowed?
+
+    scenario.mode
   end
 
   def self.abandon_idle!(participant)
@@ -41,6 +49,18 @@ class Conversation < ApplicationRecord
     checks.map { met.fetch(_1.fetch("goal_id"), _1) }
   end
 
+  def mode
+    super || scenario.mode
+  end
+
+  def writing?
+    mode == "writing"
+  end
+
+  def voice?
+    mode == "voice"
+  end
+
   def all_goals_met?
     goals.all? { _1.fetch("met") }
   end
@@ -53,11 +73,11 @@ class Conversation < ApplicationRecord
   # reply where the goal check can miss something the learner did cover, so half its goals are enough.
   # Mirrors advancesPath in morpheus-ui src/path/xp.ts.
   def advances_path?
-    scenario.writing? ? goals_met_share >= WRITING_SHARE_TO_ADVANCE : all_goals_met?
+    writing? ? goals_met_share >= WRITING_SHARE_TO_ADVANCE : all_goals_met?
   end
 
   def idle_limit
-    scenario.writing? ? WRITING_IDLE_LIMIT : IDLE_LIMIT
+    writing? ? WRITING_IDLE_LIMIT : IDLE_LIMIT
   end
 
   def active?
@@ -73,6 +93,6 @@ class Conversation < ApplicationRecord
 
   def request_feedback
     language = participant.display_language || "es"
-    GenerateFeedbackJob.perform_later(create_feedback!(mode: scenario.mode, display_language: language))
+    GenerateFeedbackJob.perform_later(create_feedback!(mode: mode, display_language: language))
   end
 end

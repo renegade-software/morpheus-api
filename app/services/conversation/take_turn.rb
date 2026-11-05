@@ -3,7 +3,7 @@ module Conversation::TakeTurn
   MAX_WRITING = 2_000
 
   def self.max_length(conversation)
-    conversation.scenario.writing? ? MAX_WRITING : MAX_TEXT
+    conversation.writing? ? MAX_WRITING : MAX_TEXT
   end
 
   def self.call(conversation, text)
@@ -21,7 +21,7 @@ module Conversation::TakeTurn
                                    evaluation_trace: traces.last)
       end
       conversation.update!(goals: Conversation.merge_goals(conversation.goals, response.fetch("goals")))
-      finish(conversation) if conversation.scenario.writing? || response.fetch("closed") || conversation.all_goals_met?
+      finish(conversation) if conversation.writing? || response.fetch("closed") || conversation.all_goals_met?
       :ok
     end
   end
@@ -29,7 +29,8 @@ module Conversation::TakeTurn
   def self.payload(conversation, text)
     content = conversation.scenario.content
     turns = conversation.turns.map { { speaker: _1.speaker, text: _1.text } }
-    { scenario: content.fetch("scenario"), interlocutor: content.fetch("interlocutor"),
+    # The character's prompt names the medium, so a voice scenario played as a typed chat is sent as text.
+    { scenario: content.fetch("scenario").merge("mode" => conversation.mode), interlocutor: content.fetch("interlocutor"),
       turns: turns + [ { speaker: "learner", text: text } ] }
   end
 
