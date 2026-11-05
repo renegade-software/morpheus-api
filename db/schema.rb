@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_05_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_05_200000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -162,6 +162,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_120000) do
     t.string "display_language"
     t.datetime "onboarded_at"
     t.integer "rank_points"
+    t.string "current_stage"
     t.index ["clerk_user_id"], name: "index_participants_on_clerk_user_id", unique: true
     t.index ["pseudonym"], name: "index_participants_on_pseudonym", unique: true
   end
@@ -512,6 +513,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_120000) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "stage_quiz_attempts", force: :cascade do |t|
+    t.bigint "participant_id", null: false
+    t.string "stage", null: false
+    t.jsonb "items", null: false
+    t.integer "correct", null: false
+    t.boolean "passed", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participant_id", "stage"], name: "index_stage_quiz_attempts_on_participant_id_and_stage"
+    t.index ["participant_id"], name: "index_stage_quiz_attempts_on_participant_id"
+  end
+
   create_table "stage_reviews", force: :cascade do |t|
     t.bigint "participant_id", null: false
     t.string "stage", null: false
@@ -561,5 +574,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_120000) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "stage_quiz_attempts", "participants"
   add_foreign_key "stage_reviews", "participants"
 end
