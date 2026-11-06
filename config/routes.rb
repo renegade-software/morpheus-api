@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :user, only: %i[show update] do
     post :advance_stage
   end
-  resource :consent, only: :create
+  resource :consent, only: %i[create show]
 
   resources :conversations, only: %i[create show] do
     post :finish, on: :member

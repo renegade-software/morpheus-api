@@ -56,3 +56,5 @@ group :development, :test do
 end
 
 gem "clerk-sdk-ruby", "~> 8.0", require: "clerk"
+
+gem "prawn", "~> 2.5"
