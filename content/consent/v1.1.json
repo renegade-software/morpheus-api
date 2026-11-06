@@ -1,0 +1,357 @@
+{
+  "version": "1.1",
+  "information": [
+    {
+      "title": "Presentación",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "lead": "Título de la Investigación:",
+          "text": "Integrating Agentic Systems and Multimodal Conversation Data for Personalized Feedback in Self-Directed EFL Practice"
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Nombre y correo de los investigadores:",
+          "text": "Andrés Ortiz (a.ortizg@uniandes.edu.co)"
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Asesora:",
+          "text": "Prof. Kelly Johany Garcés Pernett (kj.garces971@uniandes.edu.co)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Estimado(a) participante,"
+        },
+        {
+          "kind": "paragraph",
+          "text": "El propósito de este consentimiento informado es proveer a los participantes en esta investigación una clara explicación de la naturaleza de la misma, así como el rol que desempeña en esta."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Este estudio, se desarrolla en el marco de un proyecto de grado (tesis de pregrado) del Departamento de Ingeniería de Sistemas y Computación de la Facultad de Ingeniería de la Universidad de los Andes. La presente investigación es realizada por Andrés Ortiz, estudiante de Ingeniería de Sistemas y Computación, y asesorada por la profesora Kelly Johany Garcés Pernett de la misma institución. El proyecto no cuenta con financiación externa. Para participar debe ser mayor de 18 años."
+        },
+        {
+          "kind": "paragraph",
+          "text": "El proyecto desarrolla una aplicación web en la que personas que aprenden inglés practican conversaciones por voz o por texto con un personaje de inteligencia artificial (IA), y reciben retroalimentación personalizada sobre lo que dijeron."
+        },
+        {
+          "kind": "paragraph",
+          "text": "El objetivo de esta investigación es evaluar si la retroalimentación generada por un sistema de IA es consistente, está respaldada por lo que el estudiante realmente dijo, y si los estudiantes la consideran útil y actúan a partir de ella. La evaluación se realizará entre el 2 y el 14 de noviembre de 2026. Y los resultados se presentarán de forma agregada y sin información que permita identificarlo en el documento del proyecto de grado."
+        },
+        {
+          "kind": "paragraph",
+          "text": "En este estudio pretendemos recoger información sobre su práctica de conversación en inglés en la aplicación y sobre la retroalimentación que usted recibe. Con esta información evaluaremos la consistencia y la utilidad de la retroalimentación generada por IA, y los resultados se presentarán en el documento del proyecto de grado. La actividad consiste en una prueba corta de nivelación y en conversaciones de práctica en inglés con un personaje de IA, seguidas de retroalimentación sobre cada conversación. Esto tomará aproximadamente 25 a 30 minutos de su tiempo en total, y se llevará a cabo de forma virtual, en la aplicación web del proyecto."
+        }
+      ]
+    },
+    {
+      "title": "Qué hará usted",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "lead": "Qué hará usted.",
+          "text": "Si acepta participar:"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Presentará una prueba corta de nivelación que estima su nivel de inglés según el Marco Común Europeo de Referencia (A1–C2).",
+            "Practicará conversaciones en inglés en situaciones cotidianas o laborales (por ejemplo, el primer día en un trabajo nuevo), escribiendo mensajes o enviando notas de voz. Se le pedirá completar al menos 3 conversaciones, y puede realizar más si lo desea.",
+            "Al terminar cada conversación, recibirá comentarios sobre su gramática, vocabulario, pronunciación, ritmo, tono y logro de los objetivos de la conversación. Podrá marcar los comentarios que considere incorrectos o poco útiles."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Duración de la actividad y fechas de realización.",
+          "text": "La prueba de nivelación toma aproximadamente 10 minutos y cada conversación aproximadamente 5 a 6 minutos. Se le pedirá completar al menos 3 conversaciones durante el periodo del estudio, entre el 2 y el 14 de noviembre de 2026, lo que toma en total aproximadamente 25 a 30 minutos. Si lo desea, puede realizar todas las conversaciones adicionales que quiera durante ese periodo."
+        }
+      ]
+    },
+    {
+      "title": "Sus datos",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "lead": "Datos que se recogen y cómo se tratan.",
+          "text": "Se recogen su nombre, su correo electrónico, sus respuestas a la prueba de nivelación, el texto de sus conversaciones, las grabaciones de sus notas de voz (solo si lo autoriza), las transcripciones de esas grabaciones, la retroalimentación generada y los comentarios que usted marque. Las grabaciones de voz se transcriben de forma automática y se analizan para evaluar la pronunciación y el ritmo. Para funcionar, la aplicación usa los siguientes servicios externos, que procesan sus datos en Estados Unidos:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Servicio",
+            "Uso en el proyecto",
+            "Ubicación"
+          ],
+          "rows": [
+            [
+              "Clerk",
+              "Registro e inicio de sesión (nombre y correo electrónico)",
+              "Estados Unidos"
+            ],
+            [
+              "OpenRouter (modelos Claude, de Anthropic)",
+              "Personaje de la conversación y análisis de los textos y transcripciones",
+              "Estados Unidos"
+            ],
+            [
+              "ElevenLabs",
+              "Transcripción de las notas de voz y generación de la voz del personaje",
+              "Estados Unidos"
+            ],
+            [
+              "Amazon Web Services (S3)",
+              "Almacenamiento cifrado de las notas de voz",
+              "Estados Unidos"
+            ],
+            [
+              "Render",
+              "Alojamiento de la aplicación y de la base de datos",
+              "Estados Unidos"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "La retroalimentación es generada automáticamente por IA y puede contener errores. Ninguna persona revisa sus conversaciones individualmente, salvo el investigador cuando sea necesario para analizar los resultados o revisar un comentario que usted haya marcado."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Los datos que usted proporcione en este estudio serán almacenados de forma cifrada en la base de datos de la aplicación del proyecto (alojada en Render) y, en el caso de las notas de voz, en Amazon Web Services (S3); a estos datos solo tendrán acceso investigadores(as) de esta investigación y no se divulgarán los datos individuales. Los datos se usarán en un trabajo de grado: la comunidad de la Universidad de los Andes tendrá acceso al trabajo de grado por medio de la biblioteca virtual de la Universidad. En ese documento, los resultados se reportan de forma agregada y sin información que permita identificarlo."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La información recolectada en el marco de esta investigación será utilizada principalmente para el desarrollo del presente proyecto. No obstante, una vez procesada y bajo las medidas de seguridad y confidencialidad correspondientes, los datos podrán ser utilizados posteriormente en otros estudios académicos o de investigación desarrollados por la Universidad de los Andes o por el grupo de investigación responsable, siempre que dichos usos estén relacionados con fines científicos o académicos."
+        },
+        {
+          "kind": "paragraph",
+          "text": "En este estudio, ese uso posterior se limita a resultados anonimizados y agregados: los datos identificables se eliminan en el plazo indicado en el apartado de confidencialidad."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Cuando sea posible, la información será anonimizada, de manera que no permita identificar directa o indirectamente a los participantes. En los casos en que los datos deban conservar algún nivel de trazabilidad para fines de investigación, se aplicarán mecanismos de seudonimización y control de acceso, garantizando que la información sea utilizada únicamente por investigadores autorizados y para propósitos académicos o científicos."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir las finalidades de la investigación y las obligaciones académicas o institucionales asociadas al proyecto. Una vez cumplidas dichas finalidades, la información será eliminada o anonimizada, según corresponda."
+        }
+      ]
+    },
+    {
+      "title": "Confidencialidad",
+      "blocks": [
+        {
+          "kind": "list",
+          "items": [
+            "Sus datos solo serán usados para esta investigación y no se compartirán con terceros distintos de los servicios técnicos listados en la tabla anterior.",
+            "Solo el investigador tendrá acceso a los datos identificables. La asesora podrá conocer los resultados agregados.",
+            "En el análisis y en el documento de tesis, los participantes se identifican con un código, y los resultados se reportan de forma agregada. Ningún resultado publicado incluirá su nombre, su correo, su voz ni fragmentos que permitan identificarlo.",
+            "Los datos se conservan hasta la finalización del proyecto de grado, a más tardar el 31 de enero de 2027, y luego se eliminan. Solo se conserva el registro de su consentimiento, como constancia exigida por la Universidad."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Beneficios y riesgos",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "lead": "Beneficios.",
+          "text": "Usted tendrá acceso gratuito a práctica de conversación en inglés, a retroalimentación personalizada sobre sus propias frases y a una estimación de su nivel. Además, los resultados aportarán conocimiento sobre la utilidad de la retroalimentación generada por IA en el aprendizaje del inglés."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Si usted decide participar en este estudio, existe el riesgo de que se sienta incómodo por alguna pregunta, al hablar en inglés o al recibir correcciones; también existe el riesgo de recibir retroalimentación incorrecta y riesgos asociados a la privacidad de sus datos. Sin embargo, tenga presente que tomamos todas las precauciones necesarias para minimizar al máximo los riesgos asociados y que durante todo momento se va a respetar su bienestar, reconocimiento, dignidad e integridad corporal con la finalidad de que no sufra ningún daño físico o psicológico."
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Riesgos.",
+          "text": "Esta investigación se considera de riesgo mínimo. Los riesgos posibles y cómo se manejan son:"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Incomodidad al hablar en inglés o al recibir correcciones. Puede pausar o abandonar cualquier conversación en cualquier momento, y puede practicar solo por texto si prefiere no grabar su voz. Las conversaciones no tratan temas personales o sensibles.",
+            "Retroalimentación incorrecta. El sistema solo muestra comentarios vinculados a frases que usted realmente dijo, y usted puede marcar como incorrecto cualquier comentario. Los comentarios marcados se revisan para mejorar el sistema.",
+            "Privacidad de sus datos. Sus datos se almacenan cifrados y con acceso restringido, como se describe en el apartado de confidencialidad. Ante cualquier incidente de seguridad, se le informará y se eliminarán los datos comprometidos."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Compensación.",
+          "text": "No se ofrece compensación económica por participar."
+        }
+      ]
+    },
+    {
+      "title": "Voluntariedad",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Su participación en este estudio es completamente voluntaria y no tiene ningún costo o compensación económica. Asimismo, puede interrumpir su participación en cualquier momento sin penalización. Si desea interrumpir la investigación, no se utilizará la información recopilada. Agradecemos su participación en el estudio y le solicitamos, si tiene preguntas o comentarios, contactar a Andrés Ortiz, por medio del correo a.ortizg@uniandes.edu.co."
+        },
+        {
+          "kind": "paragraph",
+          "lead": "Voluntariedad y derecho a retirarse.",
+          "text": "Su participación es completamente voluntaria. Puede negarse a participar o retirarse en cualquier momento, sin dar explicaciones y sin ninguna consecuencia. Puede retirar su consentimiento y pedir la eliminación de sus datos desde la opción \"Eliminar mis datos\" de la aplicación o escribiendo al investigador. Para participar debe ser mayor de 18 años."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Por favor, firme este documento en caso de estar de acuerdo con este consentimiento informado y con participar voluntariamente en el estudio. Al firmar, también verifica que entiende toda la información de este formulario y que el investigador ha respondido a todas y cada una de las preguntas que le surgieron sobre este estudio. En la aplicación, la firma se realiza de forma electrónica: corresponde a sus respuestas a las preguntas siguientes, que quedan registradas como se describe en el apartado «Registro de la aceptación»."
+        }
+      ]
+    }
+  ],
+  "authorization": [
+    {
+      "title": "Consentimiento",
+      "blocks": [
+        {
+          "kind": "question",
+          "id": "adult",
+          "text": "Declaro que soy mayor de 18 años."
+        },
+        {
+          "kind": "question",
+          "id": "participate",
+          "text": "He leído y comprendido la información proporcionada. Acepto participar en el estudio."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Si responde \"No\" a alguna de estas dos preguntas, no podrá participar en el estudio."
+        }
+      ]
+    },
+    {
+      "title": "Autorización de datos personales",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "La Universidad de los Andes, como institución que almacena y recolecta datos personales, requiere obtener su autorización para recolectar, usar, suprimir, procesar, verificar, dar tratamiento, actualizar y disponer de los datos que han sido suministrados y que se han incorporado en las bases de datos con que cuenta la Universidad (incluyendo fotografía o producción Audiovisual (Video), biométricos). La información será utilizada para el desarrollo de las funciones propias de la Universidad en su condición de institución de educación superior, de forma directa o a través de terceros."
+        },
+        {
+          "kind": "paragraph",
+          "text": "De igual manera usted declara que está al tanto de los derechos que le asisten como titular de datos, especialmente los de conocer, actualizar y rectificar sus datos personales frente a la Universidad de los Andes, y los demás consagrados en el Manual de Política de Tratamiento de Datos Personales de la Universidad (ver link), las normas pertinentes y aplicables, así como del carácter facultativo de la respuesta a las preguntas, si se le llegasen a hacer, cuando estas versen sobre datos sensibles o sobre los datos de las niñas, niños y adolescentes."
+        },
+        {
+          "kind": "link",
+          "href": "https://secretariageneral.uniandes.edu.co/images/documents/Manual-Politica-Tratamiento-Datos-Personales-2020-Uniandes.pdf"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Para ejercer su derecho de Habeas Data, usted puede direccionar sus peticiones al correo: habeasdata@uniandes.edu.co."
+        },
+        {
+          "kind": "question",
+          "id": "personal_data",
+          "text": "Autorizo el tratamiento de datos personales."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sus datos personales en este estudio son su nombre y su correo electrónico. Sin esta autorización no es posible participar."
+        },
+        {
+          "kind": "question",
+          "id": "sensitive_data",
+          "text": "Autorizo el tratamiento de datos sensibles."
+        },
+        {
+          "kind": "paragraph",
+          "text": "En este estudio, su voz se considera un dato sensible (dato biométrico). Si responde \"No\", podrá participar practicando solo por texto, y no se grabará su voz."
+        }
+      ]
+    },
+    {
+      "title": "Audio (grabación y transcripción)",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Si autoriza la grabación, la aplicación graba únicamente las notas de voz que usted decida enviar durante las conversaciones. Las grabaciones se transcriben automáticamente con el servicio ElevenLabs, y se analizan para dar retroalimentación sobre pronunciación y ritmo. Las grabaciones y transcripciones se almacenan cifradas y se eliminan según lo descrito en el apartado de confidencialidad. Las grabaciones no se usarán en publicaciones ni presentaciones. No se graba video ni imagen."
+        },
+        {
+          "kind": "question",
+          "id": "audio_recording",
+          "text": "Autorizo la grabación de audio."
+        },
+        {
+          "kind": "question",
+          "id": "transcription",
+          "text": "Autorizo la transcripción del audio."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Estas dos autorizaciones requieren haber autorizado el tratamiento de datos sensibles."
+        }
+      ]
+    },
+    {
+      "title": "Resultados del estudio",
+      "blocks": [
+        {
+          "kind": "question",
+          "id": "receive_results",
+          "text": "Deseo recibir por correo un resumen de los resultados generales del estudio."
+        }
+      ]
+    },
+    {
+      "title": "Información de contacto",
+      "blocks": [
+        {
+          "kind": "contacts",
+          "contacts": [
+            {
+              "role": "Investigador",
+              "lines": [
+                "Andrés Ortiz",
+                "Tel: (302) 232 - 6974",
+                "Correo: a.ortizg@uniandes.edu.co"
+              ]
+            },
+            {
+              "role": "Asesora",
+              "lines": [
+                "Prof. Kelly Johany Garcés Pernett",
+                "Correo: kj.garces971@uniandes.edu.co"
+              ]
+            },
+            {
+              "role": "Comité de Ética de la Investigación",
+              "lines": [
+                "Universidad de los Andes",
+                "Tel: 3394949, ext. 5339",
+                "Correo: comite-etica-investigaciones@uniandes.edu.co"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Registro de la aceptación",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Al aceptar, la aplicación registra de forma automática:"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Nombre y correo electrónico del participante.",
+            "Fecha y hora de la aceptación.",
+            "Versión de este documento.",
+            "Cada una de las respuestas Sí / No anteriores."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "El participante recibe una copia en PDF de este consentimiento con sus respuestas, y puede consultarla en cualquier momento desde la aplicación."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Versión 1.1, octubre de 2026"
+        }
+      ]
+    }
+  ]
+}
