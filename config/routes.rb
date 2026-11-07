@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post :advance_stage
   end
   resource :consent, only: %i[create show]
+  get "progress" => "progress#show"
 
   resources :conversations, only: %i[create show] do
     post :finish, on: :member
