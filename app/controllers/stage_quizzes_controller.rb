@@ -1,6 +1,7 @@
 class StageQuizzesController < ApplicationController
   before_action :require_eligible_consent!
   before_action :require_quiz!
+  before_action :require_reached!
 
   # GET /stage_quizzes/:stage
   def show
@@ -31,5 +32,9 @@ class StageQuizzesController < ApplicationController
 
   def require_quiz!
     head :not_found unless StageQuiz.questions(stage)
+  end
+
+  def require_reached!
+    head :forbidden unless LearningPath.can_take_quiz?(current_participant, stage)
   end
 end

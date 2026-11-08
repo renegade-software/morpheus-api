@@ -1,6 +1,7 @@
 class StageReviewsController < ApplicationController
   before_action :require_eligible_consent!
   before_action :require_known_stage!
+  before_action :require_reached!
 
   # GET /stage_reviews/:stage?scenarios=a,b,c
   # The UI sends the scenario keys that come before the review on that stage's path.
@@ -35,5 +36,9 @@ class StageReviewsController < ApplicationController
 
   def require_known_stage!
     head :not_found unless StageReview::STAGES.include?(stage)
+  end
+
+  def require_reached!
+    head :forbidden unless LearningPath.can_review?(current_participant, stage)
   end
 end
