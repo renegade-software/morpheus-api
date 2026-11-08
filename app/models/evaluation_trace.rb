@@ -10,7 +10,9 @@ class EvaluationTrace < ApplicationRecord
   validates :step, presence: true
   validates :status, inclusion: { in: STATUSES }
 
-  SPEECH_STEPS = %w[transcribe_placement_speaking transcribe_conversation_turn synthesize_character_turn].freeze
+  # Speech models run without a prompt, so they carry no prompt hash.
+  SPEECH_STEPS = %w[transcribe_placement_speaking transcribe_conversation_turn synthesize_character_turn
+                    score_pronunciation].freeze
 
   with_options if: :prompted_model_call? do
     validates :prompt_path, presence: true
