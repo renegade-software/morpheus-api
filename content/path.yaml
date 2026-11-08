@@ -1,0 +1,16 @@
+# Each stage's six activities in path order, mirroring STAGE_SCENARIOS in morpheus-ui src/path/path.ts: two
+# conversations and a written message, then the review, then the same again, then the quiz. The API uses it to refuse
+# activities the learner hasn't reached; change both files together.
+
+firstSteps: [joiningGym, marketStall, coffeeTomorrow, onThePlane, atTheDoctors, whereAreYou]
+onFoot: [atTheMuseum, swimmingPool, runningClub, newNeighbour, lostAndFound, birthdayPhoto]
+path: [ferryTicket, sundayCousin, yourNotes, missedRehearsal, atThePizzeria, beachCleanup]
+crossing: [atTheZoo, whereBuilding, potteryClass, borrowTent, runningShoes, cartagenaWeekend]
+bridge: [noHotWater, bookingApp, concertTickets, sofaDelivery, bigNews, newJob]
+firmFooting: [mumsBirthday, breakdown, whatDidIMiss, chargedTwice, bookClub, bikeForSale]
+lookout: [warehouseHeatVoice, weddingVenue, conferenceTalk, carFreeStreet, podcastInterview, fourDayWeeks]
+bend: [reunion, repairShop, audition, healthPlans, spareRoom, closedClaim]
+longRoad: [libraryHours, creditDue, careHome, quizNight, exchangeStudent, reference]
+goodPace: [filmFestival, scholarshipInterview, cafeTerrace, phonesAtSchool, twentyRejections, openPlan]
+summit: [exhibition, onTheRadio, professorRetires, letterToPaper, singaporeOffer, angryTenant]
+beyond: [lostInTranslation, familyCottage, trailAdvice, sundayLunch, stormWarning, languageExchangeChat]
