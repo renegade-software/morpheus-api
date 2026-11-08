@@ -7,6 +7,8 @@ module Agent
   class Rejected < Error; end
 
   READ_TIMEOUT = 120
+  # Feedback checks each voice note's pronunciation on the agent's CPU first, a few seconds per note (2026-11-08).
+  FEEDBACK_READ_TIMEOUT = 600
   TURN_READ_TIMEOUT = 20
   OPEN_TIMEOUT = 5
   NETWORK_ERRORS = [ Net::OpenTimeout, Net::ReadTimeout, SocketError, EOFError, SystemCallError ].freeze
@@ -20,7 +22,7 @@ module Agent
   end
 
   def self.feedback(payload)
-    post("/feedback", payload)
+    post("/feedback", payload, read_timeout: FEEDBACK_READ_TIMEOUT)
   end
 
   def self.take_turn(payload)

@@ -1,4 +1,7 @@
 class GenerateFeedbackJob < ApplicationJob
+  # Long enough for the agent to download and check every voice note before writing the feedback.
+  AUDIO_LINK_TTL = 30.minutes
+
   queue_as :scoring
   retry_on Agent::Unavailable, wait: :polynomially_longer, attempts: 5 do |job, _error|
     job.arguments.first.update!(status: "failed")
@@ -12,7 +15,7 @@ class GenerateFeedbackJob < ApplicationJob
     return unless feedback.pending?
 
     conversation = feedback.conversation
-    turns = conversation.turns.to_a
+    turns = conversation.turns.with_attached_audio.to_a
     response = Agent.feedback(payload(feedback, conversation, turns))
 
     Feedback.transaction do
@@ -29,9 +32,14 @@ class GenerateFeedbackJob < ApplicationJob
 
   def payload(feedback, conversation, turns)
     { scenario: conversation.scenario.content.fetch("scenario").merge("mode" => feedback.mode), mode: feedback.mode,
-      # A voice turn's words carry Scribe's confidence in each one, which feedback uses to judge intelligibility.
-      turns: turns.map { { speaker: _1.speaker, text: _1.text, words: _1.words }.compact },
+      # A voice turn's words carry Scribe's confidence in each one, and its audio lets the agent check the sounds.
+      turns: turns.map { turn_payload(_1) },
       goals: conversation.goals, display_language: feedback.display_language }
+  end
+
+  def turn_payload(turn)
+    audio_url = AudioLink.url(turn.audio, expires_in: AUDIO_LINK_TTL) if turn.speaker == "learner" && turn.audio.attached?
+    { speaker: turn.speaker, text: turn.text, words: turn.words, audio_url: audio_url }.compact
   end
 
   def store(feedback, response, turns, trace)
