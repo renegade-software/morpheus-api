@@ -10,11 +10,16 @@ module Placement
     has_one :recording, foreign_key: :placement_attempt_id, dependent: :destroy
     has_many :evaluation_traces, foreign_key: :placement_attempt_id, dependent: :destroy
 
-    validates :participant_id, uniqueness: true
+    validates :participant_id, uniqueness: { scope: :purpose }
+    validates :purpose, inclusion: { in: Form::PURPOSES }
     validates :status, inclusion: { in: STATUSES }
     validates :started_at, presence: true
     validates :reading_result, :listening_result, inclusion: { in: TIER_RESULTS }, allow_nil: true
     validates :writing_level, :speaking_level, :level_low, :level_high, inclusion: { in: CefrLevel::RANGE }, allow_nil: true
+
+    def final?
+      purpose == "final"
+    end
 
     def range_label
       return unless level_low && level_high

@@ -1,0 +1,92 @@
+# Placement test form B (the optional final test), speaking section. Mirrors form A: one 60 s task, prompt chosen by
+# the reading result (a: a familiar routine topic, b: a past problem or event, c: an abstract opinion), the same
+# scoring rules, scored by Claude from A1 = 0 to C2 = 5 against CEFR Table 3 (Range, Accuracy, Fluency, Coherence;
+# Interaction left out because the task is a monologue). Only the prompts and anchors are new. Anchors are written for
+# Morpheus (not real learner answers) and go into Claude's scoring prompt; only the anchors for the learner's prompt
+# are sent. Transcripts mark hesitation with "um"/"uh" and pauses over 1 s with "…". Replace with real, consented
+# recordings once there are any.
+
+seconds: 60
+prep_seconds: 15
+retakes: 1
+
+scoring_rules:
+  - "Judge only the learner's own language. Ignore words repeated from the prompt."
+  - "Fluency comes from the transcript plus the numbers given: speaking time, word count and pauses over 1 second."
+  - "Saying more is not the same as a higher level. Long, simple speech can still be A2."
+  - "The prompt does not limit the level. Judge the language the learner actually produces: a learner can show B2 or C1 on the easiest prompt."
+  - "Return a level for each criterion, one overall level, and a short quote from the transcript as evidence for each."
+
+prompts:
+  - id: a
+    for_reading_result: [0, 1]
+    text: "Tell me about what you usually do on weekends."
+    anchors:
+      - level: A1
+        note: "Isolated memorised phrases, very limited control, long searches for words, linked only with 'and'."
+        speaking_seconds: 36
+        transcript: "Um… Saturday… I sleep. And… I go… supermarket. Um… Sunday… my family. We eat… lunch. And… I watch… TV."
+      - level: A2
+        note: "Basic sentence patterns and simple connectors ('and', 'then', 'because'), systematic basic errors, short utterances with evident pauses."
+        speaking_seconds: 50
+        transcript: "OK, um, on Saturday I wake up late, at ten, because I am tired of the week. Then I clean my apartment and I go to the supermarket with my girlfriend. In the night we go to a restaurant or, uh, we see a movie in home. On Sunday I visit my grandmother… she make a very good soup. I like weekends because I don't work."
+      - level: B1
+        note: "Enough language to get by on familiar topics, routines used fairly accurately, a linear sequence of points, keeps going despite clear pauses for planning; adds a related point of its own."
+        speaking_seconds: 58
+        transcript: "Well, it depends on the weekend, but usually on Saturday morning I play football with some friends from university. We've played together for about three years, so, um, it's more for fun than for competition. In the afternoon I do the things I don't have time for during the week, like washing clothes or going to the bank. Saturday night I sometimes go out, but not always, because it's expensive. And Sunday is more quiet, I stay at home and, um… I try to prepare my food for the week, because if I don't, I eat really badly from Monday to Friday."
+      - level: B2
+        note: "Clear description with some complex sentences, relatively high grammatical control with self-correction, fairly even tempo with few long pauses, moves from description to a viewpoint unprompted."
+        speaking_seconds: 60
+        transcript: "So I've actually been trying to change my weekends recently. I used to spend most of Saturday catching up on work emails, which meant I never really felt rested by Monday. Now I've made a rule that the laptop stays closed until Sunday evening. On Saturdays I usually go hiking with a couple of friends, there are some great trails about an hour from the city, and on Sundays I, um, I take it easy, cook something a bit more ambitious than usual and call my family. Honestly, I think having a proper break makes me more productive, not less, even though it felt, uh, feels strange at first."
+      - level: C1
+        note: "Broad range with precise, idiomatic choices, consistently high accuracy, fluent and almost effortless, well-structured with controlled connectors; goes beyond the routine to a reflective point of its own."
+        speaking_seconds: 60
+        transcript: "I'd love to say my weekends follow some carefully planned rhythm, but they're mostly a negotiation between what I ought to do and what I actually feel like doing. Saturday mornings are fairly sacred: a long breakfast, the market, and an hour or so of reading before anything else gets a look in. After that it's anyone's guess. Sometimes I'm out with friends until late; other times I barely leave the house. What I've noticed, though, is that the weekends I remember are rarely the busy ones. It's the unplanned afternoons, when nothing in particular was supposed to happen, that tend to stick with me."
+  - id: b
+    for_reading_result: [2]
+    text: "Tell me about a time you had to change your plans at the last minute."
+    anchors:
+      - level: A1
+        note: "Isolated words and pre-packaged phrases, communication depends on the listener filling gaps, almost no linking."
+        speaking_seconds: 34
+        transcript: "Um… I go… beach. Rain. Um… very rain. No beach. I stay… home. Is… sad. OK."
+      - level: A2
+        note: "Simple structures with systematic errors, short utterances, simple connectors, the story is understandable but thin."
+        speaking_seconds: 50
+        transcript: "Um, last year I have a flight to Cartagena for visit my friend. But in the airport they say the flight is cancelled. I don't know what to do. So, uh, I call my friend and he say come tomorrow. I sleep in my house and the next day I take other flight. Is not a big problem but I lose one day."
+      - level: B1
+        note: "Can narrate a sequence of events with reasonable accuracy in past tenses, some hesitation and circumlocution, clear but simple structure."
+        speaking_seconds: 58
+        transcript: "OK, so a few months ago I organized a surprise party for my sister's birthday in a park. Everything was ready, the food, the decorations, and, um, about twenty people were coming. But two hours before, it started raining really heavily. At first I didn't know what to do, but then I called a friend who has a big apartment, and she said we could use it. So we sent a message to everyone with the new address and moved everything in two cars. In the end the party was great, maybe even better, and my sister didn't suspect anything."
+      - level: B2
+        note: "Clear account with explanation of causes and choices, good control with occasional slips, some complex sentences, cohesive though slightly 'jumpy' in places."
+        speaking_seconds: 60
+        transcript: "Right, so last year I was supposed to give a presentation to a client, and about an hour before, the person who'd prepared the financial part called in sick. I had two options: postpone the meeting, which would've looked unprofessional, or present her section myself without really knowing the numbers. What I did was call the client, explain the situation honestly, and suggest we do the general part that day and send the financial details in writing the next morning. They were actually fine with it, and, um, I think being upfront made a better impression than pretending everything was under control."
+      - level: C1
+        note: "Wide range, precise and natural expression, errors rare and self-corrected, smooth flow, well-structured account that weighs the decision rather than just reporting it."
+        speaking_seconds: 60
+        transcript: "The one that springs to mind was a hiking trip I'd been planning for months with three friends. The night before we were due to set off, the forecast changed dramatically, with storms expected right across the route. Two of us were inclined to go anyway, on the grounds that forecasts are often wrong, but in the end we settled on a shorter trail further south. It turned out to be a perfectly pleasant weekend, if not the one we'd dreamt of. What struck me afterwards was how hard it had been to let go of the original plan, not because it was better, but simply because we'd invested so much in it."
+  - id: c
+    for_reading_result: [3]
+    text: "Do you think social media brings people closer together or pushes them apart? Why?"
+    anchors:
+      - level: A1
+        note: "Very basic repertoire, isolated phrases, cannot express an opinion beyond single words."
+        speaking_seconds: 30
+        transcript: "Um… social media… I like. Is… friends. Um… good. And… bad. Yes."
+      - level: A2
+        note: "Memorised phrases and simple patterns, opinion stated with 'because' but no development, basic errors."
+        speaking_seconds: 45
+        transcript: "I think social media is good because I can talk with my cousins in Spain, um, every day. But also people is always with the phone and they don't talk in the dinner. So, uh, is good for the family far, but is bad for the family near."
+      - level: B1
+        note: "Can give a simple opinion with reasons and an example, linear structure, noticeable pauses for planning, reasonable accuracy on familiar language."
+        speaking_seconds: 58
+        transcript: "Um, I think it does both things. For example, when I lived in another city, I used Instagram to see what my friends were doing, and I felt less alone. So in that way it brings people together. But on the other hand, um, I think people compare their lives with other people's photos and they feel bad, and sometimes there are a lot of fights in the comments about politics. In my opinion it's good for keeping contact, but it's not the same as seeing people in real life."
+      - level: B2
+        note: "Expresses a viewpoint with clear supporting reasons and contrast, some complex forms, good control, fairly even tempo, limited cohesive devices with some jumpiness."
+        speaking_seconds: 60
+        transcript: "I'd say it's done more to connect people than to divide them, at least on a personal level. I can keep in touch with friends from school who now live on three different continents, which would've been almost impossible twenty years ago. That said, I think the way these platforms are designed tends to reward anger, so public conversations, especially about politics, have become a lot more polarized. And, um, even with friends, liking someone's post isn't really the same as having a conversation. So it connects us, but maybe in a more superficial way."
+      - level: C1
+        note: "Broad, precise range, nuanced argument with concession and a clear conclusion, consistently accurate, fluent and spontaneous, well-organized discourse."
+        speaking_seconds: 60
+        transcript: "I think the honest answer is that it does both, but to different relationships. It's remarkably good at sustaining ties that would otherwise fade, like old classmates or relatives abroad, and I wouldn't want to lose that. Where it seems to do harm is in how we relate to people we don't know: algorithms that thrive on outrage make strangers look far more extreme than they usually are. So I'd put it this way: social media has brought us closer to the people we already had, while making it harder to extend any goodwill to everyone else. Whether that trade-off is worth it is, I suspect, the more interesting question."

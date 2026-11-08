@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :placement do
+    get "attempts" => "attempts#index"
     resource :attempt, only: %i[create show] do
       post :start
       post :play

@@ -1,9 +1,11 @@
 module Placement
   class ResponsesController < ApplicationController
+    include PlacementPurpose
+
     before_action :require_eligible_consent!
 
     def create
-      attempt = current_participant.placement_attempt
+      attempt = placement_attempt
       return head :not_found unless attempt
       return head :conflict unless params.expect(:step) == attempt.current_step
 

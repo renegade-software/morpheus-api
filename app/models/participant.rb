@@ -3,7 +3,10 @@ class Participant < ApplicationRecord
 
   before_validation :assign_pseudonym, on: :create
 
-  has_one :placement_attempt, class_name: "Placement::Attempt", dependent: :destroy
+  # The intake test, which sets the level, the first stage and the rank points. The final test only reports a result.
+  has_one :placement_attempt, -> { where(purpose: "intake") }, class_name: "Placement::Attempt", dependent: :destroy
+  has_one :final_placement_attempt, -> { where(purpose: "final") }, class_name: "Placement::Attempt",
+                                                                     dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :evaluation_traces, dependent: :destroy
   has_many :stage_reviews, dependent: :destroy

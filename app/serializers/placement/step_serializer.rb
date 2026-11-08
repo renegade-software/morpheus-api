@@ -53,6 +53,7 @@ module Placement
         section: "listening",
         tier: passage.tier,
         audio_path: rails_blob_path(passage.audio, only_path: true),
+        display: passage.display,
         plays: passage.plays,
         plays_left: passage.plays - @attempt.plays_used,
         answer_seconds: passage.seconds,

@@ -1,0 +1,62 @@
+# Placement test form B (the optional final test), writing section. Mirrors form A: one task, 5 minutes, bullets
+# aimed at A2, B1 and B2–C1, the same scoring rules, scored by Claude from A1 = 0 to C2 = 5 against the same rubrics.
+# Only the situation, the bullets' topics and the anchors are new.
+# Scales from the CEFR Companion Volume (Council of Europe, 2018): Overall written production (p. 75),
+# General linguistic range (p. 131), Grammatical accuracy (p. 133), Coherence and cohesion (p. 142).
+# The anchors are written for Morpheus (not real learner answers) and go into Claude's scoring prompt.
+# Replace them with real, consented answers once there are any.
+
+task:
+  seconds: 300
+  situation: "You have just moved to a new home or a new city. Write a message to an English-speaking friend about it."
+  bullets:
+    - aims_at: A2
+      text: "say where it is and what it is like"
+    - aims_at: B1
+      text: "describe something that went wrong when you moved and what you did about it"
+    - aims_at: B2–C1
+      text: "say whether you think it's better to live in a big city or a small town, and why"
+
+scoring_rules:
+  - "Judge only the learner's own language. Ignore words and phrases copied from the task or the bullets."
+  - "How far down the bullets the learner gets is evidence, but the quality of the language decides the level."
+  - "Bullet 1 is aimed at A2: simple sentences about a familiar topic, linked with 'and', 'but' or 'because'. Isolated phrases without linking are A1."
+  - "Bullet 2 is aimed at B1: a short connected account of what happened and what the learner did, in a clear order, with past tenses mostly under control. A list of events with frequent tense errors is A2."
+  - "Bullet 3 is aimed at B2–C1: a viewpoint developed with reasons, ideally weighing both sides. Stating an opinion with a simple reason is B1 at most."
+  - "Return a level for each scale, one overall level, and a short quote from the answer as evidence for each."
+
+anchors:
+  - level: A1
+    note: "Isolated simple sentences about personal matters, basic errors (missing subject, 'the neighbors is'), bullet 1 only."
+    text: |
+      Hi Leo! I have new apartment. Is in a street near the park. Have two rooms. The neighbors is nice. I like very much. Bye
+
+  - level: A2
+    note: "Simple sentences linked with 'and' and 'because', systematic basic errors (tenses, 'more cheap'), bullets 1 and 2 in simple form, no opinion."
+    text: |
+      Hi Leo,
+      I moved to a new apartment in the north of the city. It is small but it has a big window and I can see the mountains. The day of the move was bad because the truck arrive very late and we wait four hours. I called the company and they give me a discount. Now everything is OK. I like my new home because it is more cheap and quiet.
+
+  - level: B1
+    note: "Connected text in a linear sequence, all three bullets, good control of routine past tenses; the opinion is stated with simple reasons but not developed; some awkward phrasing."
+    text: |
+      Hi Leo,
+      How are you? I have news: last month I moved to Medellín for my new job. I live in a small apartment near the metro, so it is very easy to go everywhere.
+      When I moved, I had a problem with the internet. The company said they would install it in two days, but after one week nothing happened. I was worried because I work from home sometimes, so I went to their office and I explained the situation. They finally came the next day.
+      About big cities and small towns, I think big cities are better for young people because there are more jobs and things to do, but they are also noisy and expensive. Maybe when I am older I will live in a small town.
+
+  - level: B2
+    note: "Clear, detailed text covering every bullet, a good range of everyday idiom ('the last straw', 'on the bright side'), an argument with contrast that is not deeply developed, few errors."
+    text: |
+      Hi Leo,
+      Big news: I've finally moved out of my parents' place! I'm renting a one-bedroom apartment in an old building downtown. It's a bit noisy at night, but on the bright side, I can walk to work in ten minutes.
+      The move itself was a disaster. The landlord had promised to paint the apartment before I arrived, but when I got there, nothing had been done and the kitchen tap was leaking. That was the last straw, so I sent him photos and a list of everything that needed fixing, and he agreed to take it off my first month's rent.
+      As for big cities versus small towns, I'd still choose the city. Although small towns are calmer and cheaper, I think the opportunities you get in a city, both professional and social, are worth the stress, at least at this point in my life.
+
+  - level: C1
+    note: "Well-structured and flexible in style, natural idiom ('a far cry from', 'make the most of'), complex sentences under control, an argument developed with concession and a clear conclusion, virtually no errors."
+    text: |
+      Hi Leo,
+      I've just moved to a coastal town of barely twenty thousand people, which is a far cry from the city I grew up in. The house is tiny and the heating is temperamental, but I wake up to the sound of the sea, so I'm not complaining.
+      Not that the move went smoothly. The removal company, having confirmed everything twice, simply failed to turn up, and I found out only when I phoned to ask where they were. Rather than wait for an apology, I rang round a few local firms and found a man with a van who could do it the same afternoon, for half the price, as it turned out.
+      As for whether cities beat small towns, I'm less sure than I used to be. Cities undeniably offer more work and more variety, and I'll miss that. But I've started to suspect that much of what I valued there was simply having options I rarely used. Here, there's less to choose from, and I find I make the most of what there is.

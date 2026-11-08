@@ -1,0 +1,87 @@
+# Placement test form B (the optional final test), listening section. Mirrors form A item by item: 3 clips, easiest
+# first, 1 question each, 3 options per question, the same level, CEFR scale, descriptor, delivery, plays and time per
+# tier, and the same material type (a voicemail, a call between two colleagues, a radio interview). Only the clips and
+# questions are new. Descriptors are quoted from the CEFR Companion Volume (Council of Europe, 2018). `answer` is the
+# 0-based index of the key. The clips are in content/placement/form-b/audio/listening-<tier>.mp3, generated once
+# (2026-11-08) with ElevenLabs eleven_v4_turbo, one call per line with audio tags for delivery, joined with short
+# pauses. Voices from content/characters.yaml: Tom → tom, Lucía → monica (Carmen), Host → richard (James),
+# Dr Hale → anne (Helen). Tier a was read one sentence per call so it stays slow without a speed setting.
+# `display` is what the listening screen shows: tier a's caller, and tier b's speakers with the second each turn ends
+# in the clip (null for the last), measured from the generated audio.
+
+- tier: a
+  level: A2
+  scale: "Listening to announcements and instructions"
+  descriptor: "Can catch the main point in short, clear, simple messages and announcements."
+  delivery: "One speaker, slow and clear (about 100 words a minute)"
+  plays: 2
+  seconds: 30
+  display:
+    caller: "Oak Street Garage"
+  lines:
+    - speaker: Tom
+      text: "Hi, this is Tom from Oak Street Garage. Your car is ready. We also changed a broken light at the back, so it's fifteen dollars more. We close at five today, so you can pick it up before five, or tomorrow morning. Thanks, bye."
+  question:
+    targets: "The main point of the message"
+    prompt: "Why is Tom calling?"
+    options:
+      - "To tell you your car is ready to pick up"
+      - "To tell you the garage is closed tomorrow"
+      - "To ask you to bring your car in before five"
+    answer: 0
+
+- tier: b
+  level: B2
+  scale: "Understanding conversation between other speakers"
+  descriptor: "Can identify the main reasons for and against an argument or idea in a discussion conducted in clear standard speech."
+  delivery: "Two speakers, clear standard speech at normal speed (about 150 words a minute)"
+  plays: 2
+  seconds: 30
+  display:
+    turns:
+      - { speaker: "Lucía", until: 6.4 }
+      - { speaker: "Tom", until: 21.47 }
+      - { speaker: "Lucía", until: 27.74 }
+      - { speaker: "Tom", until: null }
+  lines:
+    - speaker: Lucía
+      text: "For the new software training, I was going to book the online course. People can do it whenever they like."
+    - speaker: Tom
+      text: "It's flexible, I know, but last time hardly anyone finished it. Half the team gave up after the first module. I'd rather bring in a trainer for a one-day workshop. It costs more, but everyone does it together and can ask questions on the spot."
+    - speaker: Lucía
+      text: "Maybe. Although losing a whole day of work in March won't be popular."
+    - speaker: Tom
+      text: "True, but we could split the team over two days. Getting people to actually finish it is what matters."
+  question:
+    targets: "The main reason one speaker gives"
+    prompt: "Why does Tom prefer the workshop?"
+    options:
+      - "It's cheaper than the online course"
+      - "People are more likely to complete it"
+      - "People can do it whenever they like"
+    answer: 1
+
+- tier: c
+  level: C1
+  scale: "Listening to audio media and recordings"
+  descriptor: "Can understand a wide range of recorded and broadcast audio material, including some non-standard usage, and identify finer points of detail including implicit attitudes and relationships between speakers."
+  delivery: "Two speakers, radio interview at natural speed (about 160 words a minute)"
+  plays: 2
+  seconds: 30
+  lines:
+    - speaker: Host
+      text: "Several companies in the city have just finished a trial of the four-day week, and they're calling it a triumph. Dr Hale, you've looked at the results. Are they right?"
+    - speaker: Dr Hale
+      text: "Well, staff certainly seem happier, and I'd never argue with that. Sick days are down, and almost nobody wants to go back. But the companies that volunteered were, by and large, the ones already confident it would work. So when they tell us productivity held up, I'm inclined to say: in those companies, under those conditions, perhaps it did. Whether a hospital or a factory could do the same is a rather different question, and not one this trial was designed to answer."
+    - speaker: Host
+      text: "So you'd advise against it?"
+    - speaker: Dr Hale
+      text: "Not at all. I'd just like the next trial to include a few people who expected it to fail."
+  question:
+    targets: "A speaker's implicit attitude"
+    prompt: "How does Dr Hale feel about the trial's results?"
+    options:
+      - "She thinks the four-day week should be stopped"
+      - "She thinks they're positive, but prove less than the companies claim"
+      - "She agrees it would work in any kind of workplace"
+    answer: 1

@@ -1,0 +1,87 @@
+# Placement test form B (the optional final test), reading section. Mirrors form A item by item: 3 texts, one per
+# tier, 2 questions each, 3 options per question, the same level, CEFR scale, descriptor, time and question targets
+# per tier, and the same material type (a notice, an email, an opinion column). Only the texts and questions are new.
+# Descriptors are quoted from the CEFR Companion Volume (Council of Europe, 2018). `answer` is the 0-based index
+# of the key; never send it to the browser.
+
+- tier: a
+  level: A2
+  seconds: 60
+  scale: "Reading for orientation"
+  descriptor: "Can find specific, predictable information in simple everyday material such as advertisements, prospectuses, menus, reference lists and timetables."
+  text: |
+    GREEN LEAF CAFÉ: LUNCH SPECIALS
+    Monday to Friday, 12:00 to 3:00. Soup and a sandwich: $9. Pasta of the day: $12.
+    Students get 10% off with a student card. Order online and pick up your lunch in 15 minutes.
+  questions:
+    - targets: "A specific fact (a price)"
+      prompt: "How much is soup and a sandwich?"
+      options:
+        - "$12"
+        - "10% less than the pasta"
+        - "$9"
+      answer: 2
+    - targets: "The main message"
+      prompt: "What is the notice mainly about?"
+      options:
+        - "Lunch offers at a café"
+        - "A new café for students"
+        - "Changes to the café's opening hours"
+      answer: 0
+
+- tier: b
+  level: B2
+  seconds: 90
+  scale: "Reading correspondence"
+  descriptor: "Can read correspondence relating to his/her field of interest and readily grasp the essential meaning."
+  text: |
+    Subject: Essay deadline and Wednesday's sessions
+
+    Hi everyone,
+
+    Because the library's online system will be down for maintenance next week, we've decided to push the deadline for your research essay back to Monday the 23rd. That said, I'd strongly encourage you not to treat the extra days as a holiday: Wednesday's feedback sessions will go ahead as planned, and they're only useful if you bring a complete draft rather than an outline. If you can't make it on Wednesday, let me know by Tuesday evening and I'll arrange a short call instead.
+
+    Best,
+    Helen
+  questions:
+    - targets: "The purpose of the email"
+      prompt: "Why is Helen writing to the students?"
+      options:
+        - "To cancel Wednesday's feedback sessions"
+        - "To ask them to send her an outline by Monday"
+        - "To tell them the deadline is later, and what she still expects from them"
+      answer: 2
+    - targets: "A detail the reader must act on"
+      prompt: "What should students do if they can't go on Wednesday?"
+      options:
+        - "Send Helen a complete draft by Monday"
+        - "Tell Helen by Tuesday evening"
+        - "Book a call with the library"
+      answer: 1
+
+- tier: c
+  level: C1
+  seconds: 120
+  scale: "Reading for information and argument"
+  descriptor: "Can understand in detail a wide range of lengthy, complex texts likely to be encountered in social, professional or academic life, identifying finer points of detail including attitudes and implied as well as stated opinions."
+  text: |
+    Before I book a restaurant, a hotel or even a plumber, I now consult the opinions of several hundred strangers. This is supposed to make me a better-informed customer, and in a narrow sense it does: I have not eaten a truly terrible meal in years. What I have also not had, I realize, is a surprising one.
+
+    Ratings are very good at telling us what most people disliked. They are much worse at telling us what we might love. A small, odd place that delights a few customers and baffles the rest will sit stubbornly at three and a half stars, while somewhere reliably pleasant and forgettable floats comfortably above four. Over time, businesses learn the lesson. Why risk an unusual menu when a single bad review costs more than ten good ones earn?
+
+    I am not about to stop reading reviews; I like avoiding terrible meals as much as anyone. But I have started, now and then, to walk into places I know nothing about. Most of the time it is fine. Occasionally it is wonderful, and no number of stars would have sent me there.
+  questions:
+    - targets: "The writer's attitude"
+      prompt: "What is the writer's attitude towards online ratings?"
+      options:
+        - "Completely reliable, so worth checking before every decision"
+        - "Harmful, and the writer has decided to stop reading them"
+        - "Useful for avoiding bad experiences, but they make good surprises rarer"
+      answer: 2
+    - targets: "Something implied, not stated"
+      prompt: "What does the writer suggest with \"Over time, businesses learn the lesson\"?"
+      options:
+        - "Businesses may avoid trying anything unusual, to protect their ratings"
+        - "Businesses often write fake reviews to raise their ratings"
+        - "Businesses pay little attention to what customers write online"
+      answer: 0
