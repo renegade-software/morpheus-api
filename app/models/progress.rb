@@ -1,7 +1,6 @@
-# What Progreso shows, from the same counted conversations XP uses: the placement band, each skill's recent
+# What Progreso shows, from the same counted conversations XP uses: the placement band, each skill's all-time
 # average, and every step that earned XP or closed a stage, oldest first. Stage and XP totals come with GET /user.
 module Progress
-  RECENT = 3
   SKILLS = %w[goal grammar vocabulary tone pronunciation rhythm].freeze
 
   def self.summary(participant)
@@ -13,12 +12,11 @@ module Progress
       history: history(participant, conversations).sort_by { _1[:at] } }
   end
 
-  # The average of the last few scores for each skill; a skill with no evidence yet has no score.
+  # The average of every score for each skill; a skill with no evidence yet has no score.
   def self.skills(rated)
     SKILLS.map do |skill|
-      recent = rated.filter_map { |conversation| conversation.feedback.scores.find { _1.skill == skill }&.score }
-                    .last(RECENT)
-      { skill: skill, score: recent.empty? ? nil : recent.sum.fdiv(recent.size).round(1) }
+      scores = rated.filter_map { |conversation| conversation.feedback.scores.find { _1.skill == skill }&.score }
+      { skill: skill, score: scores.empty? ? nil : scores.sum.fdiv(scores.size).round(1) }
     end
   end
 
