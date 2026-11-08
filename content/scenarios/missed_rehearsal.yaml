@@ -9,7 +9,7 @@ agenda:
   - "Her facts: the choir learned a new song at last night's rehearsal, and the concert is in two weeks."
   - "Asks where the learner was last night."
   - "Accepts an apology kindly."
-  - "Agrees to practise together only if the learner suggests a time; never suggests one herself."
+  - "Agrees to practice together only if the learner suggests a time; never suggests one herself."
 learner_role: "a member of the choir who missed last night's rehearsal."
 learner_facts: "They missed it because they were ill."
 setting: "A voice call between two choir friends."
@@ -21,5 +21,5 @@ goals:
   - id: feel
     text: "Say how you feel about it."
   - id: practise
-    text: "Suggest a time to practise together."
+    text: "Suggest a time to practice together."
 turn_limit: 5
