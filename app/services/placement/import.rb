@@ -1,25 +1,31 @@
+# Each form's YAML and clips live in their own folder under content/placement: form A at the top (the intake test),
+# form B in form-b/ (the final test). The rubrics are shared, so every form is graded the same way.
 module Placement::Import
-  DIR = Rails.root.join("content", "placement")
-  AUDIO_DIR = DIR.join("audio")
+  ROOT = Rails.root.join("content", "placement")
   RUBRIC_SOURCES = {
     "speaking" => "CEFR Table 3, Qualitative aspects of spoken language use (Council of Europe)",
     "writing" => "CEFR Companion Volume with New Descriptors (Council of Europe, 2018)"
   }.freeze
 
-  def self.call(name:)
+  def self.call(name:, folder: nil, purpose: "intake")
+    dir = folder ? ROOT.join(folder) : ROOT
     Placement::Form.transaction do
-      form = Placement::Form.create!(name: name)
-      import_reading(form)
-      import_listening(form)
-      import_writing(form)
-      import_speaking(form)
+      form = Placement::Form.create!(name: name, purpose: purpose)
+      import_reading(form, dir)
+      import_listening(form, dir)
+      import_writing(form, dir)
+      import_speaking(form, dir)
       import_rubrics(form)
       form
     end
   end
 
-  def self.import_reading(form)
-    read("reading.yaml").each do |text|
+  def self.audio_dir(folder)
+    (folder ? ROOT.join(folder) : ROOT).join("audio")
+  end
+
+  def self.import_reading(form, dir)
+    read(dir, "reading.yaml").each do |text|
       passage = form.passages.create!(
         section: "reading",
         tier: text["tier"],
@@ -36,8 +42,8 @@ module Placement::Import
     end
   end
 
-  def self.import_listening(form)
-    read("listening.yaml").each do |clip|
+  def self.import_listening(form, dir)
+    read(dir, "listening.yaml").each do |clip|
       passage = form.passages.create!(
         section: "listening",
         tier: clip["tier"],
@@ -49,12 +55,13 @@ module Placement::Import
         seconds: clip["seconds"],
         transcript: clip["lines"].map do |line|
           "#{line['speaker']}: #{line['text']}"
-        end.join("\n")
+        end.join("\n"),
+        display: clip.fetch("display", {})
       )
 
       create_question(passage, clip["question"], 1)
 
-      audio = AUDIO_DIR.join("listening-#{clip['tier']}.mp3")
+      audio = dir.join("audio", "listening-#{clip['tier']}.mp3")
 
       if audio.exist?
         passage.audio.attach(
@@ -66,8 +73,8 @@ module Placement::Import
     end
   end
 
-  def self.import_writing(form)
-    writing = read("writing.yaml")
+  def self.import_writing(form, dir)
+    writing = read(dir, "writing.yaml")
 
     task = form.create_writing_task!(
       prompt: writing.dig("task", "situation"),
@@ -85,8 +92,8 @@ module Placement::Import
     end
   end
 
-  def self.import_speaking(form)
-    speaking = read("speaking.yaml")
+  def self.import_speaking(form, dir)
+    speaking = read(dir, "speaking.yaml")
 
     speaking["prompts"].each do |prompt|
       task = form.speaking_tasks.create!(
@@ -113,7 +120,7 @@ module Placement::Import
   end
 
   def self.import_rubrics(form)
-    read("rubrics.yaml").each do |skill, criteria|
+    read(ROOT, "rubrics.yaml").each do |skill, criteria|
       criteria.each do |criterion, levels|
         levels.each do |label, text|
           form.rubric_descriptors.create!(
@@ -142,8 +149,8 @@ module Placement::Import
     CefrLevel::LABELS.index(label) || raise(ArgumentError, "unknown CEFR level #{label.inspect}")
   end
 
-  def self.read(file)
-    YAML.safe_load_file(DIR.join(file))
+  def self.read(dir, file)
+    YAML.safe_load_file(dir.join(file))
   end
 
   private_class_method :import_reading,

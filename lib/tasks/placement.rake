@@ -1,8 +1,10 @@
 namespace :placement do
-  desc "Import content/placement/*.yaml as a new draft form: bin/rails 'placement:import[2026-10 study]'"
-  task :import, [ :name ] => :environment do |_task, args|
+  desc "Import a folder's YAML as a new draft form: bin/rails 'placement:import[2026-10 study]' for form A, " \
+       "bin/rails 'placement:import[2026-11 final,form-b,final]' for form B"
+  task :import, [ :name, :folder, :purpose ] => :environment do |_task, args|
     name = args.fetch(:name)
-    form = Placement::Import.call(name: name)
+    folder = args[:folder].presence
+    form = Placement::Import.call(name: name, folder: folder, purpose: args[:purpose].presence || "intake")
     missing = form.passages.where(section: "listening").reject { _1.audio.attached? }.map(&:tier)
 
     puts "Draft form ##{form.id} \"#{form.name}\": #{form.questions.count} questions, " \
@@ -13,13 +15,13 @@ namespace :placement do
     if missing.any?
       puts "\n⚠️  Listening audio missing for tiers: #{missing.join(', ')}"
       puts "To fix this without deleting the draft:"
-      puts "  1. Add the files to: content/placement/audio/listening-<tier>.mp3"
-      puts "  2. Run: bin/rails 'placement:attach_audio[#{name}]'"
+      puts "  1. Add the files to: #{Placement::Import.audio_dir(folder).join('listening-<tier>.mp3')}"
+      puts "  2. Run: bin/rails 'placement:attach_audio[#{[ name, folder ].compact.join(',')}]'"
     end
   end
 
   desc "Retroactively attach missing audio files to an existing draft form"
-  task :attach_audio, [ :name ] => :environment do |_task, args|
+  task :attach_audio, [ :name, :folder ] => :environment do |_task, args|
     form = Placement::Form.find_by!(name: args.fetch(:name))
     missing_passages = form.passages.where(section: "listening").reject { _1.audio.attached? }
 
@@ -28,7 +30,7 @@ namespace :placement do
       next
     end
 
-    audio_dir = Rails.root.join("content", "placement", "audio")
+    audio_dir = Placement::Import.audio_dir(args[:folder].presence)
 
     missing_passages.each do |passage|
       audio_file = audio_dir.join("listening-#{passage.tier}.mp3")

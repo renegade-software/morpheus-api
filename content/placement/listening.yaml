@@ -11,6 +11,8 @@
   delivery: "One speaker, slow and clear (about 100 words a minute)"
   plays: 2
   seconds: 30
+  display:
+    caller: "Riverside Dental"
   lines:
     - speaker: Tom
       text: "Hi, this is Tom from Riverside Dental. I'm calling about your appointment tomorrow. The dentist is ill, so we need to move it to Thursday at ten. If that time is OK for you, you don't need to call back. Thanks, bye."
@@ -30,6 +32,12 @@
   delivery: "Two speakers, clear standard speech at normal speed (about 150 words a minute)"
   plays: 2
   seconds: 30
+  display:
+    turns:
+      - { speaker: "Priya", until: 7.65 }
+      - { speaker: "Tom", until: 22.85 }
+      - { speaker: "Priya", until: 28.6 }
+      - { speaker: "Tom", until: null }
   lines:
     - speaker: Priya
       text: "So, for the end-of-year dinner, I was thinking of the Italian place by the river. Everyone loved it last time."
@@ -68,7 +76,7 @@
     targets: "A speaker's implicit attitude"
     prompt: "How does Dr Marsh feel about the council's claims?"
     options:
-      - "She thinks they go further than the evidence, although the lanes have some value"
-      - "She agrees that the lanes have been a great success"
-      - "She thinks the lanes have been a waste of money"
+      - "He thinks they go further than the evidence, although the lanes have some value"
+      - "He agrees that the lanes have been a great success"
+      - "He thinks the lanes have been a waste of money"
     answer: 0

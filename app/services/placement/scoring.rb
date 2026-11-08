@@ -14,6 +14,8 @@ module Placement::Scoring
                                     writing: attempt.writing.overall_level, speaking: speaking)
       attempt.update!(level_low: low, level_high: high, score: score, writing_level: attempt.writing.overall_level,
                       speaking_level: speaking, status: "completed", completed_at: Time.current)
+      next if attempt.final?
+
       attempt.participant.update!(current_level: low, rank_points: RankPoints.from_placement(score))
     end
   end

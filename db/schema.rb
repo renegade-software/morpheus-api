@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_05_220000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_08_190000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -187,7 +187,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_220000) do
     t.datetime "step_started_at"
     t.integer "plays_used", default: 0, null: false
     t.integer "retakes_used", default: 0, null: false
-    t.index ["participant_id"], name: "index_placement_attempts_on_participant_id", unique: true
+    t.string "purpose", default: "intake", null: false
+    t.index ["participant_id", "purpose"], name: "index_placement_attempts_on_participant_id_and_purpose", unique: true
     t.index ["placement_form_id"], name: "index_placement_attempts_on_placement_form_id"
   end
 
@@ -196,8 +197,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_220000) do
     t.string "status", default: "draft", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "purpose", default: "intake", null: false
     t.index ["name"], name: "index_placement_forms_on_name", unique: true
-    t.index ["status"], name: "index_placement_forms_one_active", unique: true, where: "((status)::text = 'active'::text)"
+    t.index ["purpose"], name: "index_placement_forms_one_active", unique: true, where: "((status)::text = 'active'::text)"
   end
 
   create_table "placement_passages", force: :cascade do |t|
@@ -214,6 +216,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_220000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "plays"
+    t.jsonb "display", default: {}, null: false
     t.index ["placement_form_id", "section", "tier"], name: "idx_on_placement_form_id_section_tier_8b7a795014", unique: true
     t.index ["placement_form_id"], name: "index_placement_passages_on_placement_form_id"
   end
