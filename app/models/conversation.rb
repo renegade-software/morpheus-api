@@ -69,11 +69,13 @@ class Conversation < ApplicationRecord
     goals.count { _1.fetch("met") }.fdiv(goals.size)
   end
 
-  # Whether this counts as the stop done on the path. A conversation needs every goal; a written task is one
-  # reply where the goal check can miss something the learner did cover, so half its goals are enough.
-  # Mirrors advancesPath in morpheus-ui src/path/xp.ts.
+  # Whether this counts as the stop done on the path, for a conversation already in `counted`. Finishing a
+  # conversation is enough: goals shape the XP, not whether the learner moves on. A written task still needs half
+  # its goals. Mirrors advancesPath in morpheus-ui src/path/xp.ts.
   def advances_path?
-    writing? ? goals_met_share >= WRITING_SHARE_TO_ADVANCE : all_goals_met?
+    return true unless writing?
+
+    goals_met_share >= WRITING_SHARE_TO_ADVANCE
   end
 
   def idle_limit
