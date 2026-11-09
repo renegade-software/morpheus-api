@@ -36,6 +36,9 @@ plugin :tmp_restart
 
 # Run the Solid Queue supervisor inside of Puma for single-server deployments.
 plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
+# Threads instead of forks: each forked process loaded its own copy of Rails, and together they
+# ran the 2 GB Render instance out of memory (2026-11-09).
+solid_queue_mode :async if ENV["SOLID_QUEUE_IN_PUMA"]
 
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
