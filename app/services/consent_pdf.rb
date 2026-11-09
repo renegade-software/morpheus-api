@@ -1,6 +1,6 @@
 # The participant's copy of the consent they signed: the document text of their version, then their answers.
-# Built on request from the stored row, so there's no file to keep or delete. The text comes from
-# content/consent/v<version>.json, exported from morpheus-ui src/consent/document*.ts.
+# Built from the stored row, on request for the participant and once by ArchiveConsentJob for the copy kept in storage.
+# The text comes from content/consent/v<version>.json, exported from morpheus-ui src/consent/document*.ts.
 class ConsentPdf
   DIR = Rails.root.join("content", "consent")
   TIME_ZONE = "America/Bogota".freeze
@@ -8,7 +8,7 @@ class ConsentPdf
 
   MISSING = "No disponible".freeze
 
-  # The email comes from Clerk at download time; the consents row keeps only the pseudonym.
+  # The email comes from Clerk when the copy is made; the consents row keeps only the pseudonym.
   def self.render(consent, email:)
     new(consent, email).render
   end
