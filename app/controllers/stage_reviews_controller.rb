@@ -15,9 +15,15 @@ class StageReviewsController < ApplicationController
     }
   end
 
-  # POST /stage_reviews/:stage/acknowledge
+  # POST /stage_reviews/:stage/acknowledge  { perception: { robotic: 1..5, friendly: 1..5, ... } }
   def acknowledge
-    review = StageReview.acknowledge!(current_participant, stage)
+    perception = new_perception
+    return render json: { errors: perception.errors }, status: :unprocessable_content if perception&.invalid?
+
+    review = StageReview.transaction do
+      perception&.save!
+      StageReview.acknowledge!(current_participant, stage)
+    end
     # A second press (double click, retry) finds the existing row and earns nothing more.
     earned = review.previously_new_record? ? StageReview::POINTS : 0
     total = Xp.summary(current_participant).fetch(:total)
@@ -25,6 +31,13 @@ class StageReviewsController < ApplicationController
   end
 
   private
+
+  # The questionnaire comes with the first acknowledgement only, so a retry after that needs no answers.
+  def new_perception
+    return if current_participant.stage_reviews.exists?(stage: stage)
+
+    current_participant.perception_responses.new(params.expect(perception: PerceptionResponse::ITEMS).merge(stage: stage))
+  end
 
   def stage
     params.expect(:stage)

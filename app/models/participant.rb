@@ -10,6 +10,7 @@ class Participant < ApplicationRecord
   has_many :conversations, dependent: :destroy
   has_many :evaluation_traces, dependent: :destroy
   has_many :stage_reviews, dependent: :destroy
+  has_many :perception_responses, dependent: :destroy
   has_many :stage_quiz_attempts, dependent: :destroy
 
   validates :clerk_user_id, presence: true, uniqueness: true
