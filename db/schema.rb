@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_020000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_030000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -166,6 +166,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_020000) do
     t.string "current_stage"
     t.index ["clerk_user_id"], name: "index_participants_on_clerk_user_id", unique: true
     t.index ["pseudonym"], name: "index_participants_on_pseudonym", unique: true
+  end
+
+  create_table "perception_responses", force: :cascade do |t|
+    t.bigint "participant_id", null: false
+    t.string "stage", null: false
+    t.integer "robotic", limit: 2, null: false
+    t.integer "friendly", limit: 2, null: false
+    t.integer "easy_to_use", limit: 2, null: false
+    t.integer "complex_to_use", limit: 2, null: false
+    t.integer "good_solutions", limit: 2, null: false
+    t.integer "could_not_help", limit: 2, null: false
+    t.integer "useful_responses", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participant_id", "stage"], name: "index_perception_responses_on_participant_id_and_stage", unique: true
+    t.index ["participant_id"], name: "index_perception_responses_on_participant_id"
   end
 
   create_table "placement_attempts", force: :cascade do |t|
@@ -553,6 +569,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_020000) do
   add_foreign_key "feedback_scores", "feedbacks"
   add_foreign_key "feedbacks", "conversations"
   add_foreign_key "feedbacks", "evaluation_traces"
+  add_foreign_key "perception_responses", "participants"
   add_foreign_key "placement_attempts", "participants"
   add_foreign_key "placement_attempts", "placement_forms"
   add_foreign_key "placement_passages", "placement_forms"
