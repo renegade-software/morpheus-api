@@ -1,6 +1,6 @@
 class Consent < ApplicationRecord
-  QUESTIONS = %i[adult participate personal_data sensitive_data audio_recording transcription receive_results].freeze
-  CURRENT_VERSION = "1.1".freeze
+  QUESTIONS = %i[adult participate personal_data sensitive_data audio_recording transcription].freeze
+  CURRENT_VERSION = "1.2".freeze
 
   # The signed copy is an ethics record, kept after the study's data is deleted, so destroying the row leaves it in
   # storage. Deleting one is done by hand.

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   resource :consent, only: %i[create show]
   get "progress" => "progress#show"
+  get "progress/pdf" => "progress#pdf"
 
   resources :conversations, only: %i[create show] do
     post :finish, on: :member
