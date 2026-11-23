@@ -55,6 +55,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "clerk-sdk-ruby", "~> 8.0", require: "clerk"
+gem "clerk-sdk-ruby", "~> 9.0", require: "clerk"
 
 gem "prawn", "~> 2.5"
